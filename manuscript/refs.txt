@@ -1,0 +1,160 @@
+Alofs KM, Liverpool EA, Taphorn DC, Bernard CR, López-Fernández H (2014) Mind the (information) gap: the importance of exploration and discovery for assessing conservation priorities for freshwater fish. Diversity and Distributions 20 (1): 107-113. DOI: 10.1111/ddi.12127
+
+Aquino AE, Schaefer SA (2010) Systematics of the Genus Hypoptopoma Günther, 1868 (Siluriformes, Loricariidae). Bulletin of the American Museum of Natural History 336: 1-110. DOI: 10.1206/336.1
+
+Arce MH, Reis RE, Geneva AJ, Sabaj Pérez MH (2013) Molecular phylogeny of thorny catfishes (Siluriformes: Doradidae). Molecular Phylogenetics and Evolution 67 (3): 560-577. DOI: 10.1016/j.ympev.2013.02.021
+
+Armbruster JW (2003) Peckoltia sabaji, a new species from the Guyana Shield (Siluriformes: Loricariidae). Zootaxa 344: 1-12.
+
+Armbruster JW (2004) Phylogenetic relationships of the suckermouth armoured catfishes (Loricariidae) with emphasis on the Hypostominae and the Ancistrinae. Zoological Journal of the Linnean Society 141 (1): 1-80. DOI: 10.1111/j.1096-3642.2004.00109.x
+
+Armbruster JW (2005) The loricariid catfish genus Lasiancistrus (Siluriformes) with descriptions of two new species. Neotropical Ichthyology 3 (4): 549-569. DOI: 10.1590/s1679-62252005000400013
+
+Armbruster JW (2008) The genus Peckoltia with the description of two new species and a reanalysis of the phylogeny of the genera of the Hypostominae (Siluriformes: Loricariidae). Zootaxa 1822: 1-76.
+
+Armbruster JW, Provenzano F (2000) Four new species of the suckermouth armored catfish genus Lasiancistrus (Loricariidae: Ancistrinae). Ichthyological Exploration of Freshwaters 11 (3): 241-254.
+
+Armbruster JW, Lujan NK, Taphorn DC (2007) Four new Hypancistrus (Siluriformes: Loricariidae) from Amazonas, Venezuela. Copeia 2007 (1): 62-79. DOI: 10.1643/0045-8511(2007)7[62:fnhslf]2.0.co;2
+
+Biomatters (2014) Geneious version 7.1 created by Biomatters. URL: http://www.geneious.com/
+
+Birindelli JLO, Sabaj Pérez MH (2011) Ossancora, new genus of thorny catfish (Teleostei: Siluriformes: Doradidae) with description of one new species. Proceedings of the Academy of Natural Sciences of Philadelphia 161 (1):117-152. DOI: 10.1635/053.161.0109
+
+Birindelli JLO, Fayal DF, Wosiacki WB (2011) Taxonomic revision of thorny catfish genus Hassar (Siluriformes: Doradidae). Neotropical Ichthyology 9 (3): 515-542. DOI: 10.1590/s1679-62252011000300006
+
+Bleher H (2006) Bleher's Discus Volume 1. Aquapress, Italy, 671 pp.
+
+Boettiger C, Lang DT, Wainwright PC (2012) rfishbase: exploring, manipulating and visualizing FishBase data from R. Journal of Fish Biology 81 (6): 2030-2039. DOI: 10.1111/j.1095-8649.2012.03464.x
+
+Britski HA, Akama A (2011) New species of Trachycorystes Bleeker, with comments on other species of the genus (Ostariophysi: Siluriformes: Auchenipteridae). Neotropical Ichthyology 9 (2): 273-279. DOI:
+10.1590/S1679-62252011000200004
+
+Buitrago-Suárez UA, Burr BM (2007) Taxonomy of the catfish genus Pseudoplatystoma Bleeker (Siluriformes:
+Pimelodidae) with recognition of eight species. Zootaxa 1512: 1-38.
+
+Carvalho-Costa LF, Piorski NM, Willis SC, Galetti PM, Ortí G (2011) Molecular systematics of the neotropical shovelnose catfish genus Pseudoplatystoma Bleeker 1862 based on nuclear and mtDNA markers. Molecular Phylogenetics and Evolution 59 (1): 177-194. DOI: 10.1016/j.ympev.2011.02.005
+
+Carvalho de Lima Á, Araujo-Lima CRM (2004) The distributions of larval and juvenile fishes in Amazonian rivers of
+different nutrient status. Freshwater Biology 49 (6): 787-800. DOI: 10.1111/j.1365-2427.2004.01228.x
+
+Castello L, McGrath DG, Hess LL, Coe MT, Lefebvre PA, Petry P, Macedo MN, Renó VF, Arantes CC (2013) The vulnerability of Amazon freshwater ecosystems. Conservation Letters 6 (4): 217-229. DOI: 10.1111/conl.12008
+
+Chakrabarty P, Warren M, Page LM, Baldwin CC (2013) GenSeq: An updated nomenclature and ranking for genetic sequences from type and non-type sources. ZooKeys 346: 29-41. DOI: 10.3897/zookeys.346.5753
+
+Chamberlain S, Boettiger C, Ram K, Barve V, Mcglinn D (2014) rgbif: Interface to the Global Biodiversity Information Facility API. R package version 0.5.0. URL: https://github.com/ropensci/rgbif
+
+Colatreli OP, Meliciano NV, Toffoli D, Farias IP (2012) Deep phylogenetic divergence and lack of taxonomic concordance in species of Astronotus (Cichlidae). International Journal of Evolutionary Biology 2012: 1-8. DOI: 10.1155/2012/915265
+
+Covain R, Fisch-Muller S (2007) The genera of the Neotropical armored catfish subfamily Loricariinae (Siluriformes: Loricariidae): a practical key and synopsis. Zootaxa 1462: 1-40.
+
+Covain R, Fisch-Muller S (2012) Molecular evidence for the paraphyly of Pseudancistrus sensu lato (Siluriformes, Loricariidae), with revalidation of several genera. Cybium 36 (1): 229-246.
+
+Crampton WGR (2011) An Ecological Perspective on Diversity and Distributions. In: Albert JS, Reis RE (Eds) Historical Biogeography of Neotropical Freshwater Fishes. University of California Press, Berkeley, California, 390 pp. DOI: 10.1525/california/9780520268685.003.0010
+
+de Pinna MCC, Kirovsky AL (2011) A new species of sand-dwelling catfish, with a phylogenetic diagnosis of Pygidianops Myers (Siluriformes: Trichomycteridae: Glanapteryginae). Neotropical Ichthyology 9 (3): 493-504. DOI: 10.1590/s1679-62252011000300004
+
+Eigenmann CH (1912) The freshwater fishes of British Guiana, including a study of the ecological grouping of species and the relation of the fauna of the plateau to that of the lowlands. Memoirs of the Carnegie Museum 5: 1-578. DOI: 10.5962/bhl.title.2174
+
+Eigenmann CH (1917) Pimelodella and Typholobagrus. Memoirs of the Carnegie Museum 7 (4): 229-258. DOI: 10.5962/bhl.title.12518
+
+Eigenmann CH, Eigenmann RS (1890) A revision of the South American Nematognathi or cat-fishes. Occasional Papers California Academy of Sciences 1: 1-508. DOI: 10.5962/bhl.title.30137
+
+Eigenmann CH, Norris AA (1900) Sobre alguns peixes de S. Paulo, Brazil. Revista do Museu Paulista 4: 349-362. URL: http://biodiversitylibrary.org/page/11187529
+
+Eschmeyer WN (2014) Catalog of Fishes. URL: http://research.calacademy.org/research/ichthyology/catalog
+/fishcatmain.asp
+
+Ferraris CJ (2007) Checklist of catfishes, recent and fossil (Osteichthyes: Siluriformes), and catalogue of siluriform primary types. Zootaxa 1418: 1-628.
+
+Ferraris CJ, Vari RP, Raredon SJ (2005) Catfishes of the genus Auchenipterichthys (Osteichthyes: Siluriformes: Auchenipteridae); a revisionary study. Neotropical Ichthyology 3 (1): 89-106. DOI:
+10.1590/s1679-62252005000100005
+
+Ferreira EJG (1993) Composição, distribuição e aspectos ecológicos da ictiofauna de um trecho do Rio Trombetas, na área de influência da futura uhe Cachoeira Porteira, Estado do Pará, Brasil. Acta Amazonica 23: 1-89.
+
+Fichberg I, Chamon CC (2008) Rineloricaria osvaldoi (Siluriformes: Loricariidae): a new species of armored catfish from rio Vermelho, Araguaia basin, Brazil. Neotropical Ichthyology 6 (3): 347-354. DOI:
+10.1590/s1679-62252008000300008
+
+Froese R, Pauly D (2014) FishBase. URL: http://www.fishbase.org
+
+Günther A (1864) Catalogue of the Physostomi, containing the families Siluridae, Characinidae, Haplochitonidae, Sternoptychidae, Scopelidae, Stomiatidae in the collection of the British Museum. Catalogue of the fishes in the British Museum Volume 5. Taylor and Francis, London, 455 pp. DOI: 10.5962/bhl.title.8315
+
+Isbrücker IJH (1981) Revision of Loricaria Linnaeus, 1758 (Pisces, Siluriformes, Loricariidae). Beaufortia 31 (3):
+51-96.
+
+Isbrücker IJH, Nijssen H (1976) The South American mailed catfishes of the genus Pseudoloricaria Bleeker, 1862 (Pisces, Siluriformes, Loricariidae). Beaufortia 25 (325): 107-129.
+
+Isbrücker IJH, Nijssen H (1989) Diagnose dreier neuer Harnischwelsgattungen mit fünf neuen Arten aus Brasilien. DATZ 42 (9): 541-547.
+
+Isbrücker IJH, Seidel I, Michels JP, Schraml E, Werner A (2001) Diagnose vierzehn neuer Gattungen der Familie Loricariidae Rafinesque, 1815 (Teleostei, Ostariophysi). Datz-Sonderheft "Harnischwelse" Special issue no. 2: 17-24.
+
+Kahle D, Wickham H (2013) ggmap: spatial visualization with ggplot2. The R Journal 5 (1): 144-161.
+
+Kner R (1854) Die Hypostomiden: zweite Hauptgruppe der Familie der Panzerfische (Loricata v. Goniodontes). Kaiserlich-Königlichen Hof- und Staatsdruckerei, Wien, 54 pp. DOI: 10.5962/bhl.title.12573
+
+Kottelat M, Freyhof J (2007) Handbook of European Freshwater Fishes. Publications Kottelat, Cornol, Switzerland, 646 pp.
+
+La Monte F (1929) Two new fishes from Mt. Duida, Venezuela. American Museum Novitates 373: 1-4. DOI: 2246/4040
+
+Lujan NK, Armbruster JW (2011) The Guiana Shield. In: Albert JS, Reis RE (Eds) Historical Biogeography of Neotropical Freshwater Fishes. University of California Press, Berkeley, California, 390 pp. DOI: 10.1525/california/9780520268685.003.0013
+
+Lujan NK, Birindelli JLO (2011) A new distinctively banded species of Pseudolithoxus (Siluriformes: Loricariidae) from the upper Orinoco River. Zootaxa 2941: 38-46.
+
+Lundberg JG, Aguilera O (2003) The late Miocene Phractocephalus catfish (Siluriformes: Pimelodidae) from Urumaco, Venezuela: additional specimens and reinterpretation as a distinct species. Neotropical Ichthyology 1 (2): 97-109. DOI: 10.1590/s1679-62252003000200004
+
+Mees GF (1974) The Auchenipteridae and Pimelodidae of Suriname (Pisces, Nematognathi). Zoologische Verhandelingen 132: 1-256.
+
+Mol JHA (2012) The Freshwater Fishes of Suriname. Brill, Leiden, 890 pp. DOI: 10.1163/9789004207653
+
+Muller S, Rapp Py-Daniel LH, Zuanon J (1994) Ancistrus ranunculus, a new species of loricariid fish (Siluriformes: Loricariidae) from the Xingú and Tocantins rivers, Brazil. Ichthyological Exploration of Freshwaters 5 (4): 289-296.
+
+Nogueira C, Buckup PA, Menezes NA, Oyakawa OT, Kasecker TP, Ramos Neto MB, da Silva JMC (2010) Restricted-range fishes and the conservation of Brazilian freshwaters. PLoS ONE 5 (6): e11390. DOI:
+10.1371/journal.pone.0011390
+
+Pellegrin J (1912) Description d'un poisson nouveau de l'Orénoque appartenant au genre Xenocara. Bulletin de la Société Zoologique de France 37: 271-272. URL: http://biodiversitylibrary.org/page/3047257
+
+Rapp Py-Daniel LH (1985) Dekeyseria amazonica, novo gênero e nova espécie na região Amazônica, Brasil, e Dekeyseria scaphirhyncha (Kner, 1854) nova combinação (Loricariidae: Siluriformes). Amazoniana 9 (2): 177-191.
+
+Rapp Py-Daniel LH (1988) Hypostomus hoplonites sp. n. da bacia amazônica, Brasil (Pisces, Siluroidea,
+Loricariidae). Iheringia Série Zoologia 68: 13-23. URL: http://biodiversitylibrary.org/page/34136926
+
+R Core Team (2014) R: A language and environment for statistical computing. R version 3.0.3. R Foundation for Statistical Computing, Vienna, Austria. URL: http://www.R-project.org/
+
+Reis RE, Kullander SO, Ferraris CJ (Eds) (2003) Check List of the Freshwater Fishes of South and Central
+America. Edipucrs, Porto Alegre, 742 pp.
+
+Retzer ME (2006) A new species of Farlowella Eigenmann and Eigenmann (Siluriformes: Loricariidae), a stickcatfish from Bolivia. Zootaxa 1282: 59-68.
+
+Retzer ME, Page LM (1997) Systematics of the stick catfishes, Farlowella Eigenmann & Eigenmann (Pisces, Loricariidae). Proceedings of the Academy of Natural Sciences, Philadelphia 147: 33-88.
+
+Royero R (1992) Tatia musaica, una nueva especie de bagre auchenipterido (Siluriformes-Auchenipteridae) de la cuenca del Rio Orinoco, Territo Rio Federal Amazonas, Venezuela. Acta Científica Venezolana 43 (5): 300-306.
+
+Sabaj Pérez MH (2013) Standard symbolic codes for institutional resource collections in herpetology and ichthyology: an online reference. Verson 4.0. American Society of Ichthyologists and Herpetologists. URL: http://www.asih.org/
+
+Sarmento-Soares LM, Martins-Pinheiro RF (2008) A systematic revision of Tatia (Siluriformes: Auchenipteridae: Centromochlinae). Neotropical Ichthyology 6 (3): 495-542. DOI: 10.1590/s1679-62252008000300022
+
+Sarmento-Soares LM, Cabeceira FG, Nobre Carvalho L, Zuanon J, Akama A (2013) Centromochlus meridionalis, a new catfish species from theAmazonian limits, Mato Grosso State, Brazil (Siluriformes: Auchenipteridae). Neotropical Ichthyology 11 (4): 797-808. DOI: 10.1590/S1679-62252013000400007
+
+Schaefer SA (1997) The Neotropical cascudinhos: systematics and biogeography of the Otocinclus catfishes (Siluriformes: Loricariidae). Proceedings of the Academy of Natural Sciences of Philadelphia 148: 1-120.
+
+Seidel I, Evers HG (2005) Wels Atlas Band 2: Hypostominen, Lithogeneinen und Neoplecostominen. Mergus Verlag, Melle, Germany, 1359 pp.
+
+Shibatta OA, Pavanelli CS (2005) Description of a new Batrochoglanis species (Siluriformes, Pseudopimelodidae) from the rio Paraguai basin, State of Mato Grosso, Brazil. Zootaxa 1092: 21-30.
+
+Sousa LM (2010) Revisão taxonômica e filogenia de Astrodoradinae (Siluriformes, Doradidae). Instituto de Biociências da Universidade de São Paulo, 276 pp.
+
+Thomas MR, Rapp Py-Daniel LH (2008) Three new species of the armored catfish genus Loricaria (Siluriformes: Loricariidae) from river channels of the Amazon basin. Neotropical Ichthyology 6 (3): 379-394. DOI: 10.1590/s1679-62252008000300011
+
+Thomas MR, Sabaj Pérez MH (2010) A new species of whiptail catfish, genus Loricaria (Siluriformes: Loricariidae), from the Rio Curuá (Xingu Basin), Brazil. Copeia 2010 (2): 274-283. DOI: 10.1643/ci-09-097
+
+Vari RP, Ferraris CJ (2013) Two new species of the catfish genus Tatia (Siluriformes: Auchenipteridae) from the Guiana Shield and a reevaluation of the limits of the genus. Copeia 2013 (3): 396-402. DOI: 10.1643/ci-12-115
+
+Vera-Alcaraz HS, Pavanelli CS, Zawadzki CH (2012) Taxonomic revision of the Rineloricaria species (Siluriformes: Loricariidae) from the Paraguay River basin. Neotropical Ichthyology 10 (2): 285-311. DOI:
+10.1590/s1679-62252012000200006
+
+Villar Amado M, Farias IP, Hrbek T (2011) A molecular perspective on systematics, taxonomy and classification Amazonian discus fishes of the genus Symphysodon. International Journal of Evolutionary Biology 2011: 1-16. DOI: 10.4061/2011/360654
+
+Winemiller KO, López-Fernández H, Taphorn DC, Nico LG, Duque AB (2008) Fish assemblages of the Casiquiare River, a corridor and zoogeographical filter for dispersal between the Orinoco and Amazon basins. Journal of Biogeography 35 (9): 1551-1563. DOI: 10.1111/j.1365-2699.2008.01917.x
+
+Wright JJ (2009) Diversity, phylogenetic distribution, and origins of venomous catfishes. BMC Evolutionary Biology 9 (1): 282. DOI: 10.1186/1471-2148-9-282
+
+Zawadzki CH, de Oliveira RR, Debona T (2013) A new species of Hypostomus Lacépède, 1803 (Siluriformes: Loricariidae) from the rio Tocantins-Araguaia basin, Brazil. Neotropical Ichthyology 11 (1): 73-80. DOI: 10.1590/S1679-62252013000100008
