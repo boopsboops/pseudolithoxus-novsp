@@ -7,6 +7,7 @@ date: "`r format(Sys.time(), '%d %B, %Y')`"
 output:
  html_document:
   theme: readable
+  fig_caption: yes
 ---
 
 ^1^Laboratório de Evolução e Genética Animal, Departamento de Biologia, Universidade Federal do Amazonas, Av. Rodrigo Otávio, 3000, Manaus, AM, Brazil
@@ -41,7 +42,7 @@ DNA barcodes were generated for three individuals for the *Pseudolithoxus* parat
 
 *Pseudolithoxus* sp. n., Figure 1.
 
-![alt text](../figures/inpa43888_holotype.jpg)
+![**Fig. 1.** *Pseudolithoxus* sp. n., INPA 43888, holotype, male,  147.4  mm SL, Brazil, Pará State, Lower Rio Nhamundá.](../figures/inpa43888_holotype.jpg)
 
 #### Holotype
 
@@ -64,62 +65,11 @@ Morphometric measurements are presented in Table 1. Largest specimen collected w
 ##### Table 1
 Morphometric measurements for *Pseudolithoxus* sp. n. Except for SL, all values are in percentage of SL or HL. Landmark numbering scheme follows @Armbruster2003.
 
-```{r eval=TRUE, echo=FALSE}
-# load knitr lib 
-require(knitr)
+```{r echo=FALSE}
+read_chunk("../analyses/morphometrics.R")
+```
 
-# load raw data
-tab1 <- read.table("../analyses/morphometrics_raw.csv", header = TRUE, sep = ",", stringsAsFactors = FALSE, row.names="Measurement")
-
-# remove landmark number, keep abbreviations and convert to matrix
-tab <- subset(tab1, select=-Landmarks)
-
-# subset body measurements, remove percents, and convert to matrix
-body <- na.omit(tab[tab$Percents=="body",])
-body2 <- as.matrix(subset(body, select=-Percents))
-
-# get SL for all 
-sl <- as.matrix(subset(tab["Standard_length",], select=-Percents))
-
-# perform a 'sweep' over the columns to get the % of SL for each
-slp <- sweep(body2, 2, sl, FUN="/") *100
-
-# for head lengths
-head <- na.omit(tab[tab$Percents=="head",])
-head2 <- as.matrix(subset(head, select=-Percents))
-hl <- as.matrix(subset(tab["Head_length",], select=-Percents))
-hlp <- sweep(head2, 2, hl, FUN="/") *100
-
-# bind columns for all measurements
-com <- rbind(sl, slp, hlp)
-
-# run the summary functions over the rows
-me <- apply(com, 1, mean)
-sv <- apply(com, 1, sd)
-mn <- apply(com, 1, min)
-mx <- apply(com, 1, max)
-
-# subset for the holotype only
-slh <- sl[,"PN11"]
-names(slh) <- rownames(sl)
-holo <- c(slh, slp[,"PN11"], hlp[,"PN11"])
-
-# make a vector for the percentage in column
-pof <- c(NA, rep("SL", dim(slp)[1]), rep("HL", dim(hlp)[1]))
-
-# create data frame of all 
-fintab <- cbind(cbind(as.vector(na.omit(tab1$"Landmarks")), rownames(com)), pof, round(data.frame(cbind(as.numeric(holo), as.numeric(me), as.numeric(sv), as.numeric(mn), as.numeric(mx))), digits=1))
-
-# label the column names
-colnames(fintab) <- c("Landmarks", "Measurement", "Percentage in", "Holotype", "Mean", "SD", "Min.", "Max.")
-
-# tidy up the entries
-fintab$Landmarks <- as.factor(gsub("--", "‒", fintab$Landmarks))
-fintab$Measurement <- gsub("--", "-", fintab$Measurement)
-fintab$Measurement <- as.factor(gsub("_", " ", fintab$Measurement))
-
-# print the table
-kable(fintab, format = "markdown")
+```{r morphometrics, echo=FALSE}
 ```
 
 Sucking disk large, approximately as wide as is long, lacking fimbriae, and with the ventral surface bearing small buccal papillae. Maxillary barbels short. Teeth villiform and bicuspid. Lateral cusp of teeth roughly one-half to two-thirds the length of the medial cusp. Premaxillary teeth 42-81 (median 56, holotype 55). Dentary teeth 33-85 (median 65, holotype 69).
@@ -150,6 +100,13 @@ A similar species has been reported in the aquarium trade literature under the t
 
 GenBank accession numbers are listed as follows for the three *Pseudolithoxus* sp. n. paratypes sequenced for COI: UFAM:CTGA:14422 (accession TBC); UFAM:CTGA:14483 (accession TBC); and UFAM:CTGA:14485 (accession TBC). Following the 'GenSeq' nomenclature of @Chakrabarty2013 these specimens bear the 'genseq-2 COI' annotation. The sequence data are also presented in Suppl. Material 3.
 
+
+```{r echo=FALSE}
+read_chunk("../analyses/tree.R")
+```
+
+```{r treecode, echo=FALSE, fig.width=7, fig.height=14, fig.cap="**Fig. 3.** Phylogenetic tree of DNA"}
+```
 
 
 ### Discussion
