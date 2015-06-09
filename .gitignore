@@ -23,4 +23,6 @@
 *.synctex.gz
 *.pdf
 *.mas
+manuscript-master.md
+manuscript-master.html
 temp/
