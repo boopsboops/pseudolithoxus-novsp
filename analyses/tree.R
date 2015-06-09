@@ -9,7 +9,7 @@ require("phytools")
 
 # search entrez
 # note: there are other Cramer seqs available. Need to refine search if we want these
-rs <- entrez_search(db="nuccore", term="(Pseudolithoxus[Organism] OR Soromonichthys[Organism] OR Lasiancistrus[Organism]) AND (cytb[Gene Name] OR RAG1[Gene Name])", retmax=100)
+rs <- entrez_search(db="nuccore", term="(Pseudolithoxus[Organism] OR Soromonichthys[Organism] OR Lasiancistrus[Organism]) AND (cytb[Gene Name] OR RAG1[Gene Name] OR 16S[All Fields] OR RAG2[Gene Name] OR MyH6[Gene Name])", retmax=100)
 # run to check all is okay
 es <- entrez_summary(db="nuccore", id=rs$ids)
 sapply(es, "[[", "title")
@@ -18,44 +18,94 @@ ess <- sapply(es, "[[", "title")
 # download the seqs and write to disk
 cytb <- entrez_fetch(db="nuccore", rettype='fasta', id=rs$ids[grep("cytb", ess)])
 rag1 <- entrez_fetch(db="nuccore", rettype='fasta', id=rs$ids[grep("RAG1", ess)])
+r16S <- entrez_fetch(db="nuccore", rettype='fasta', id=rs$ids[grep("16S", ess)])
+rag2 <- entrez_fetch(db="nuccore", rettype='fasta', id=rs$ids[grep("RAG2", ess)])
+myh6 <- entrez_fetch(db="nuccore", rettype='fasta', id=rs$ids[grep("MyH6", ess)])
 write(cytb, "../temp/cytb_raw.fasta")
 write(rag1, "../temp/rag1_raw.fasta")
+write(r16S, "../temp/16S_raw.fasta")
+write(rag2, "../temp/rag2_raw.fasta")
+write(myh6, "../temp/myh6_raw.fasta")
+
 
 # load up from disk
 cytbrw <- read.dna("../temp/cytb_raw.fasta", format="fasta", as.matrix=FALSE)
 rag1rw <- read.dna("../temp/rag1_raw.fasta", format="fasta", as.matrix=FALSE)
 rag1rw <- rag1rw[-grep("guapore", names(rag1rw))]#remove 'guapore'
+r16Srw <- read.dna("../temp/16S_raw.fasta", format="fasta", as.matrix=FALSE)
+r16Srw <- r16Srw[-grep("12S", names(r16Srw))]#remove MHNG specimens
+rag2rw <- read.dna("../temp/rag2_raw.fasta", format="fasta", as.matrix=FALSE)
+rag2rw <- rag2rw[-grep("guapore", names(rag2rw))]#remove 'guapore'
+myh6rw <- read.dna("../temp/myh6_raw.fasta", format="fasta", as.matrix=FALSE)
+myh6rw <- myh6rw[-grep("guapore", names(myh6rw))]#remove 'guapore'
+
 
 # clean names
 names(cytbrw) <- paste(sapply(strsplit(names(cytbrw), split="\\|"), function(x) x[4]), sapply(strsplit(names(cytbrw), split=" "), function(x) paste(x[2:3], collapse="_")), sep="_")
 names(rag1rw) <- paste(sapply(strsplit(names(rag1rw), split="\\|"), function(x) x[4]), sapply(strsplit(names(rag1rw), split=" "), function(x) paste(x[2:3], collapse="_")), sep="_")
+names(r16Srw) <- paste(sapply(strsplit(names(r16Srw), split="\\|"), function(x) x[4]), sapply(strsplit(names(r16Srw), split=" "), function(x) paste(x[2:3], collapse="_")), sep="_")
+names(rag2rw) <- paste(sapply(strsplit(names(rag2rw), split="\\|"), function(x) x[4]), sapply(strsplit(names(rag2rw), split=" "), function(x) paste(x[2:3], collapse="_")), sep="_")
+names(myh6rw) <- paste(sapply(strsplit(names(myh6rw), split="\\|"), function(x) x[4]), sapply(strsplit(names(myh6rw), split=" "), function(x) paste(x[2:3], collapse="_")), sep="_")
 
 # align the seqs
 cytbAl <- mafft(x=cytbrw, path="mafft")
 rag1Al <- mafft(x=rag1rw, path="mafft")
+r16SAl <- mafft(x=r16Srw, path="mafft")
+rag2Al <- mafft(x=rag2rw, path="mafft")
+myh6Al <- mafft(x=myh6rw, path="mafft")
 
 dat <- cytbAl
 dat <- rag1Al
+dat <- r16SAl
+dat <- rag2Al
+dat <- myh6Al
 
 # make a tree
 prat <- pratchet(as.phyDat(dat), rearrangements="SPR")
 pars <- acctran(prat, as.phyDat(dat))
-mlm <- pml(pars, as.phyDat(dat), k=4, inv=0, model="GTR") 
-mlik <- optim.pml(mlm, optNni=TRUE, optGamma=TRUE, optEdge=TRUE, optBf=TRUE, optQ=TRUE, optInv=FALSE)
+mlm <- pml(pars, as.phyDat(dat), k=4, inv=0, model="HKY") 
+mlik <- optim.pml(mlm, optNni=TRUE, optGamma=TRUE, optEdge=TRUE, optBf=TRUE, optQ=TRUE, optInv=FALSE, model="HKY")
 tr <- mlik$tree# rename tree
 outgr <- grep("Lasiancistrus", tr$tip.label, value=TRUE)
 rnod <- fastMRCA(tr, outgr[1], outgr[2])
 rtr <- reroot(tr, node.number=rnod, position=0.5*tr$edge.length[which(tr$edge[,2]==rnod)])
 
+plot(rtr)
+
 cytbtr <- rtr
 rag1tr <- rtr
+r16Str <- rtr
+rag2tr <- rtr
+myh6tr <- rtr
 
 # plot and take a look
-par(mfrow=c(1,2))
-plot.phylo(ladderize(cytbtr), direction="rightwards")
-plot.phylo(ladderize(rag1tr), direction="leftwards")
+par(mfrow=c(3,2))
+plot.phylo(ladderize(cytbtr), direction="rightwards", main="cytb", cex=1)
+plot.phylo(ladderize(rag1tr), direction="rightwards", main="rag1", cex=1)
+plot.phylo(ladderize(r16Str), direction="rightwards", main="16S", cex=1)
+plot.phylo(ladderize(rag2tr), direction="rightwards", main="rag2", cex=1)
+plot.phylo(ladderize(myh6tr), direction="rightwards", main="myh6", cex=1)
 
+# load up Nathan's data and split it
 
+nmat <- as.matrix(as.DNAbin(read.nexus.data(file="../temp/nathan_concat.nex")))
+ncytb <- nmat[,516:1663]
+n16S <- nmat[,1:515]
+nrag1 <- nmat[,1664:2682]
+nrag2 <- nmat[,2683:3629]
+nmyh <- nmat[,3630:4293]
+
+dat <- nmyh
+
+write.dna(ncytb, file="../temp/ncytb.fas", format="fasta", colw=9999)
+write.nexus.data(acytb, file="../temp/ncytb.nex", interleaved=FALSE)
+acytb <- read.dna(file="../temp/ncytb.fas", format="fasta")
+
+nmat <- as.DNAbin(read.nexus.data(file="../temp/ncytb_sm.nex"))
+
+dat <- nmat
+tr <- midpoint(tr)
+plot(tr)
 
 ### old
 # grab data from GenBank
