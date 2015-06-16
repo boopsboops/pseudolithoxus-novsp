@@ -31,21 +31,37 @@ write(myh6, "../temp/myh6_raw.fasta")
 # load up from disk
 cytbrw <- read.dna("../temp/cytb_raw.fasta", format="fasta", as.matrix=FALSE)
 rag1rw <- read.dna("../temp/rag1_raw.fasta", format="fasta", as.matrix=FALSE)
-rag1rw <- rag1rw[-grep("guapore", names(rag1rw))]#remove 'guapore'
-r16Srw <- read.dna("../temp/16S_raw.fasta", format="fasta", as.matrix=FALSE)
-r16Srw <- r16Srw[-grep("12S", names(r16Srw))]#remove MHNG specimens
-rag2rw <- read.dna("../temp/rag2_raw.fasta", format="fasta", as.matrix=FALSE)
-rag2rw <- rag2rw[-grep("guapore", names(rag2rw))]#remove 'guapore'
-myh6rw <- read.dna("../temp/myh6_raw.fasta", format="fasta", as.matrix=FALSE)
-myh6rw <- myh6rw[-grep("guapore", names(myh6rw))]#remove 'guapore'
+#rag1rw <- rag1rw[-grep("guapore", names(rag1rw))]#remove 'guapore'
+#r16Srw <- read.dna("../temp/16S_raw.fasta", format="fasta", as.matrix=FALSE)
+#r16Srw <- r16Srw[-grep("12S", names(r16Srw))]#remove MHNG specimens
+#rag2rw <- read.dna("../temp/rag2_raw.fasta", format="fasta", as.matrix=FALSE)
+#rag2rw <- rag2rw[-grep("guapore", names(rag2rw))]#remove 'guapore'
+#myh6rw <- read.dna("../temp/myh6_raw.fasta", format="fasta", as.matrix=FALSE)
+#myh6rw <- myh6rw[-grep("guapore", names(myh6rw))]#remove 'guapore'
+
+tab <- read.table(file="mol_samples.csv", header=TRUE, stringsAsFactors=FALSE, sep=",")
+
+nomscytb <- match(tab$code, labels(cytbrw))[!is.na(match(tab$code, labels(cytbrw)))]
+
+names(cytbrw) <- paste(tab$genus[nomscytb], tab$species[nomscytb], tab$locality[nomscytb], sep="_")
 
 
-# clean names
-names(cytbrw) <- paste(sapply(strsplit(names(cytbrw), split="\\|"), function(x) x[4]), sapply(strsplit(names(cytbrw), split=" "), function(x) paste(x[2:3], collapse="_")), sep="_")
-names(rag1rw) <- paste(sapply(strsplit(names(rag1rw), split="\\|"), function(x) x[4]), sapply(strsplit(names(rag1rw), split=" "), function(x) paste(x[2:3], collapse="_")), sep="_")
-names(r16Srw) <- paste(sapply(strsplit(names(r16Srw), split="\\|"), function(x) x[4]), sapply(strsplit(names(r16Srw), split=" "), function(x) paste(x[2:3], collapse="_")), sep="_")
-names(rag2rw) <- paste(sapply(strsplit(names(rag2rw), split="\\|"), function(x) x[4]), sapply(strsplit(names(rag2rw), split=" "), function(x) paste(x[2:3], collapse="_")), sep="_")
-names(myh6rw) <- paste(sapply(strsplit(names(myh6rw), split="\\|"), function(x) x[4]), sapply(strsplit(names(myh6rw), split=" "), function(x) paste(x[2:3], collapse="_")), sep="_")
+
+
+?na.omit
+names(rag1rw) %in% tab$code
+# clean names and create a names list
+
+cytbdf <- paste(sapply(strsplit(names(cytbrw), split=" "), function(x) paste(x[c(5,2,3)], collapse=",")), gsub("\\.1", "", sapply(strsplit(names(cytbrw), split="\\|"), function(x) x[4])), sep=",")
+write(cytbdf, file="../temp/cytb.csv", sep=",")
+rag1df <- paste(sapply(strsplit(names(rag1rw), split=" "), function(x) paste(x[c(5,2,3)], collapse=",")), gsub("\\.1", "", sapply(strsplit(names(rag1rw), split="\\|"), function(x) x[4])), sep=",")
+write(rag1df, file="../temp/rag1.csv", sep=",")
+#names(r16Srw) <- paste(sapply(strsplit(names(r16Srw), split="\\|"), function(x) x[4]), sapply(strsplit(names(r16Srw), split=" "), function(x) paste(x[2:5], collapse="_")), sep="_")
+#names(rag2rw) <- paste(sapply(strsplit(names(rag2rw), split="\\|"), function(x) x[4]), sapply(strsplit(names(rag2rw), split=" "), function(x) paste(x[2:5], collapse="_")), sep="_")
+#names(myh6rw) <- paste(sapply(strsplit(names(myh6rw), split="\\|"), function(x) x[4]), sapply(strsplit(names(myh6rw), split=" "), function(x) paste(x[2:5], collapse="_")), sep="_")
+
+names(cytbrw) <- 
+names(rag1rw) <- 
 
 # align the seqs
 cytbAl <- mafft(x=cytbrw, path="mafft")
@@ -100,6 +116,12 @@ dat <- nmyh
 write.dna(ncytb, file="../temp/ncytb.fas", format="fasta", colw=9999)
 write.nexus.data(acytb, file="../temp/ncytb.nex", interleaved=FALSE)
 acytb <- read.dna(file="../temp/ncytb.fas", format="fasta")
+write(gsub("_", ",", labels(acytb)), file="../temp/cytb.csv", append=TRUE)
+
+write.dna(nrag1, file="../temp/nrag1.fas", format="fasta", colw=9999)
+nrag1 <- read.dna("../temp/nrag1.fas", format="fasta", as.matrix=FALSE)
+
+labels(nrag1)[which(labels(nrag1) %in% labels(rag1rw))]
 
 nmat <- as.DNAbin(read.nexus.data(file="../temp/ncytb_sm.nex"))
 
