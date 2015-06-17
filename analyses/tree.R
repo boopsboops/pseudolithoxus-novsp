@@ -41,7 +41,7 @@ rag1rw <- read.dna("../temp/rag1_raw.fasta", format="fasta", as.matrix=FALSE)
 
 tab <- read.table(file="mol_samples.csv", header=TRUE, stringsAsFactors=FALSE, sep=",")
 
-nomscytb <- match(tab$code, labels(cytbrw))[!is.na(match(tab$code, labels(cytbrw)))]
+nomscytb <- match(labels(cytbrw), tab$code)[!is.na(match(labels(cytbrw), tab$code))]
 
 names(cytbrw) <- paste(tab$genus[nomscytb], tab$species[nomscytb], tab$locality[nomscytb], sep="_")
 
@@ -76,12 +76,28 @@ dat <- r16SAl
 dat <- rag2Al
 dat <- myh6Al
 
+
+cytb <- read.dna("../temp/cytb_aligned_trimmed.fasta", format="fasta", as.matrix=FALSE)
+rag1 <- read.dna("../temp/rag1_aligned_trimmed.fasta", format="fasta", as.matrix=FALSE)
+
+concat <- c.genes(as.matrix(cytb), as.matrix(rag1))
+
+dat <- cytb
+dat <- rag1
+dat <- concat
+
+write.dna(concat, file="../temp/concat.phy", format="interleaved", colw=9999)
+
 # make a tree
 prat <- pratchet(as.phyDat(dat), rearrangements="SPR")
 pars <- acctran(prat, as.phyDat(dat))
 mlm <- pml(pars, as.phyDat(dat), k=4, inv=0, model="HKY") 
 mlik <- optim.pml(mlm, optNni=TRUE, optGamma=TRUE, optEdge=TRUE, optBf=TRUE, optQ=TRUE, optInv=FALSE, model="HKY")
 tr <- mlik$tree# rename tree
+
+noms <- match(tr$tip.label, tab$code)[!is.na(match(tr$tip.label, tab$code))]
+tr$tip.label <- paste(tab$code[noms], tab$genus[noms], tab$species[noms], tab$locality[noms], sep="_")
+
 outgr <- grep("Lasiancistrus", tr$tip.label, value=TRUE)
 rnod <- fastMRCA(tr, outgr[1], outgr[2])
 rtr <- reroot(tr, node.number=rnod, position=0.5*tr$edge.length[which(tr$edge[,2]==rnod)])
