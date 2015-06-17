@@ -80,7 +80,7 @@ dat <- myh6Al
 cytb <- read.dna("../temp/cytb_aligned_trimmed.fasta", format="fasta", as.matrix=FALSE)
 rag1 <- read.dna("../temp/rag1_aligned_trimmed.fasta", format="fasta", as.matrix=FALSE)
 
-concat <- c.genes(as.matrix(cytb), as.matrix(rag1))
+concat <- c.genes(as.matrix(cytb), as.matrix(rag1), match=FALSE)#?c.genes
 
 dat <- cytb
 dat <- rag1
@@ -102,7 +102,23 @@ outgr <- grep("Lasiancistrus", tr$tip.label, value=TRUE)
 rnod <- fastMRCA(tr, outgr[1], outgr[2])
 rtr <- reroot(tr, node.number=rnod, position=0.5*tr$edge.length[which(tr$edge[,2]==rnod)])
 
-plot(rtr)
+ltr <- ladderize(rtr)
+
+
+code <- sapply(strsplit(ltr$tip.label, split="_"), function(x) x[1])
+genus <- sapply(strsplit(ltr$tip.label, split="_"), function(x) x[2])
+species <- sapply(strsplit(ltr$tip.label, split="_"), function(x) x[3])
+locality <- sapply(strsplit(ltr$tip.label, split="_"), function(x) x[4])
+locality <- gsub("NA", "", locality)
+
+
+ltr$tip.label <- mixedFontLabel(code, genus, species, locality, sep = " ", italic=2:3, bold=2:3, always.upright=NULL)
+
+pdf(file="../temp/pseudolithoxus_tree.pdf", width=11, height=9, useDingbats=FALSE, useKerning=FALSE)
+plot.phylo(ltr, edge.color="dodgerblue", edge.width=4, tip.color="gray20", label.offset=0.001, cex=0.9, no.margin=TRUE)
+add.scale.bar(length=0.01, lwd=2, lcol="dodgerblue")
+dev.off()
+
 
 cytbtr <- rtr
 rag1tr <- rtr
