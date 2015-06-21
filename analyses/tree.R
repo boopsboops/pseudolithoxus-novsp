@@ -9,7 +9,7 @@ require("phytools")
 
 # search entrez
 # note: there are other Cramer seqs available. Need to refine search if we want these
-rs <- entrez_search(db="nuccore", term="(Pseudolithoxus[Organism] OR Soromonichthys[Organism] OR Lasiancistrus[Organism]) AND (cytb[Gene Name] OR RAG1[Gene Name] OR 16S[All Fields] OR RAG2[Gene Name] OR MyH6[Gene Name])", retmax=100)
+rs <- entrez_search(db="nuccore", term="(Pseudolithoxus[Organism] OR Ancistrus[Organism] OR Soromonichthys[Organism] OR Lasiancistrus[Organism]) AND (cytb[Gene Name] OR RAG1[Gene Name] OR 16S[All Fields] OR RAG2[Gene Name] OR MyH6[Gene Name])", retmax=100)
 # run to check all is okay
 es <- entrez_summary(db="nuccore", id=rs$ids)
 sapply(es, "[[", "title")
@@ -39,7 +39,6 @@ rag1rw <- read.dna("../temp/rag1_raw.fasta", format="fasta", as.matrix=FALSE)
 #myh6rw <- read.dna("../temp/myh6_raw.fasta", format="fasta", as.matrix=FALSE)
 #myh6rw <- myh6rw[-grep("guapore", names(myh6rw))]#remove 'guapore'
 
-tab <- read.table(file="mol_samples.csv", header=TRUE, stringsAsFactors=FALSE, sep=",")
 
 nomscytb <- match(labels(cytbrw), tab$code)[!is.na(match(labels(cytbrw), tab$code))]
 
@@ -95,15 +94,47 @@ mlm <- pml(pars, as.phyDat(dat), k=4, inv=0, model="HKY")
 mlik <- optim.pml(mlm, optNni=TRUE, optGamma=TRUE, optEdge=TRUE, optBf=TRUE, optQ=TRUE, optInv=FALSE, model="HKY")
 tr <- mlik$tree# rename tree
 
+tab <- read.table(file="mol_samples.csv", header=TRUE, stringsAsFactors=FALSE, sep=",")
 noms <- match(tr$tip.label, tab$code)[!is.na(match(tr$tip.label, tab$code))]
 tr$tip.label <- paste(tab$code[noms], tab$genus[noms], tab$species[noms], tab$locality[noms], sep="_")
 
-outgr <- grep("Lasiancistrus", tr$tip.label, value=TRUE)
-rnod <- fastMRCA(tr, outgr[1], outgr[2])
+outgr <- grep("ncistrus", tr$tip.label, value=TRUE)
+rnod <- fastMRCA(unroot(tr), outgr[3], outgr[9])
 rtr <- reroot(tr, node.number=rnod, position=0.5*tr$edge.length[which(tr$edge[,2]==rnod)])
 
 ltr <- ladderize(rtr)
 
+
+plot(ltr)
+
+# make a starting tree for starbeast
+tr2 <- mlik$tree
+rnod <- fastMRCA(unroot(tr2), "T09686", "T10383")
+rtr <- reroot(tr2, node.number=rnod, position=0.5*tr2$edge.length[which(tr2$edge[,2]==rnod)])
+# make a list of the nodes that we want to calibrate
+cnod <- fastMRCA(unroot(tr2), "T13829", "T10383")
+# set the ages for these nodes and make a dataframe for chronos (penalised likelihood)
+ccal <- makeChronosCalib(rtr, node=cnod, age.min=12, soft.bounds=TRUE)
+# run chronos using a strict clock (rate cat of 1)
+ctr <- chronos(rtr, calibration=ccal, model="discrete", control=chronos.control(nb.rate.cat=1))
+plot(ladderize(ctr))
+# reclass the tree so it writes correctly
+class(ctr) <- "phylo"
+write.tree(ladderize(ctr), file="../temp/pseudolithoxus_st_tr.nwk")
+
+keep <- c("CTGA14485", "T09934",  "T09949", "P18073", "V5533", "T09938", "T09898", "T09686", "P6125", "T13829", "B1500", "T08143", "T09397", "B1988", "T10092", "T12872", "T10383")
+
+
+
+# reduce to a species tree with correct tips
+dtr <- drop.tip(ctr, tip=ctr$tip.label[!ctr$tip.label %in% keep])
+
+noms <- match(dtr$tip.label, tab$code)[!is.na(match(dtr$tip.label, tab$code))]
+dtr$tip.label <- tab$species[noms]
+plot(dtr)
+write.tree(ladderize(dtr), file="../temp/pseudolithoxus_species_tr.nwk")
+
+###
 
 code <- sapply(strsplit(ltr$tip.label, split="_"), function(x) x[1])
 genus <- sapply(strsplit(ltr$tip.label, split="_"), function(x) x[2])
