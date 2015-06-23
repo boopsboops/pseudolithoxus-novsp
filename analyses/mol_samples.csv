@@ -1,50 +1,50 @@
-code,genus,species,genbank_cytb,genbank_rag1,notes,locality_drainage,locality_precise,gps,museum
-T12872,Ancistrus,bolivianus,KP960081,KP959931,genbank,NA,San Pedrito River at bridge on Cochabamba-Villa Tunari road,,ROM 90368
-T12871,Ancistrus,bolivianus,NA,NA,nathan extra,NA,NA,,NA
-T13829,Ancistrus,clementinae,KP960085,KP959929,genbank,Ecuador (Pacific Coast drainage),Clara R. at La Clara around bridge and downstream,,ROM 93737
-T13826,Ancistrus,clementinae,NA,NA,nathan extra,NA,NA,,NA
-T13832,Ancistrus,clementinae,NA,NA,nathan extra,NA,NA,,NA
-T08143,Ancistrus,leucostictus,KP960079,KP959933,genbank,NA,"Berbice R, 1 km downstream of Cat Crk",,ROM 88561
-T09397,Ancistrus,macrophthalmus,KP960083,KP959934,genbank,NA,,,AUM 54994
-T09471,Ancistrus,macrophthalmus,NA,NA,nathan extra,NA,NA,,NA
-T10092,Ancistrus,megalostomus,KP960080,KP959930,genbank,NA,,,AUM 51165
-B1500,Ancistrus,ranunculus,KP960078,KP959936,genbank,NA,,,ANSP 199525
-B1499,Ancistrus,ranunculus,NA,NA,nathan extra,NA,NA,,NA
-T10383,Ancistrus,sp.Inambari,KP960082,KP959932,genbank,NA,,,AUM 57510
-T10364,Ancistrus,sp.Inambari,NA,NA,nathan extra,NA,NA,,NA
-B1988,Ancistrus,sp.Xingu,KP960084,KP959935,genbank,NA,,,ANSP 199611
-B2049,Ancistrus,sp.Xingu,NA,NA,nathan extra,NA,NA,,NA
-P6125,Lasiancistrus,schomburgkii,KP960091,KP960030,genbank,Maranon (Peru),,,AUM 45548
-P6123,Lasiancistrus,schomburgkii,NA,NA,nathan extra,Maranon (Peru),NA,,
-B1471,Lasiancistrus,schomburgkii,NA,NA,nathan extra,Xingu,NA,,
-B1470,Lasiancistrus,schomburgkii,NA,NA,nathan extra,Xingu,NA,,
-T09686,Lasiancistrus,tentaculatus,KP960092,KP960028,genbank,NA,,,AUM 53895
-T09687,Lasiancistrus,tentaculatus,NA,NA,nathan extra,NA,,,
-T09282,Pseudolithoxus,anthrax,KP960099,KP960041,genbank,Orinoco,,,AUM 53520
-T09399,Pseudolithoxus,anthrax,NA,NA,nathan extra,Orinoco,,,NA
-T09841,Pseudolithoxus,anthrax,NA,NA,this study,Orinoco,,,ANSP
-T09842,Pseudolithoxus,anthrax,NA,NA,this study,Orinoco,,,ANSP
-T09934,Pseudolithoxus,anthrax,KP960098,KP960040,genbank,Caura,,,AUM 53557
-V055,Pseudolithoxus,anthrax,KP960100,KP960039,genbank,Ventuari,,,AUM 39246
-T09512,Pseudolithoxus,dumus,KP960097,KP960042,genbank,NA,,,ANSP 190757
-T09536,Pseudolithoxus,dumus,NA,NA,nathan extra,NA,,,NA
-T09949,Pseudolithoxus,dumus,NA,NA,this study,Orinoco,,,ANSP
-T09951,Pseudolithoxus,dumus,NA,NA,this study,Orinoco,,,ANSP
-T09895,Pseudolithoxus,kelsorum,KP960096,KP960036,genbank,NA,,,AUM 51644
-T09898,Pseudolithoxus,kelsorum,NA,NA,nathan extra,NA,,,NA
-CTGA14422,Pseudolithoxus,n.sp.,NA,NA,this study,Nhamundá,,,INPA
-CTGA14483,Pseudolithoxus,n.sp.,NA,NA,this study,Nhamundá,,,INPA
-CTGA14485,Pseudolithoxus,n.sp.,NA,NA,this study,Nhamundá,,,INPA
-P161,Pseudolithoxus,n.sp.,NA,NA,this study,Uatumã,,,INPA
-P162,Pseudolithoxus,n.sp.,NA,NA,this study,Uatumã,,,INPA
-P18038,Pseudolithoxus,nicoi,NA,NA,this study,Alto Negro,,,INPA
-P18043,Pseudolithoxus,nicoi,NA,NA,this study,Alto Negro,,,INPA
-P18071,Pseudolithoxus,nicoi,NA,NA,NOT A PSEUDOLITHOXUS,Alto Negro,,,INPA
-P18073,Pseudolithoxus,nicoi,NA,NA,this study,Alto Negro,,,INPA
-P4647,Pseudolithoxus,nicoi,KP960101,KP960037,genbank,NA,,,AUM 43726
-T07157,Pseudolithoxus,tigris,NA,NA,nathan extra,NA,,,NA
-T09376,Pseudolithoxus,tigris,KP960095,KP960035,genbank,NA,,,AUM 57674
-T09870,Pseudolithoxus,tigris,NA,NA,this study,Orinoco,,,ANSP
-T09938,Pseudolithoxus,tigris,NA,NA,this study,Orinoco,,,ANSP
-V5293,Pseudolithoxus,tigris,NA,NA,nathan extra,NA,,,NA
-V5533,Soromonichthys,stearleyi,KP960102,KP960038,genbank,NA,,,AUM 43872
+"code","genus","species","genbank_cytb","genbank_rag1","notes","locality_drainage","locality_precise","lat","long","museum"
+"T12871","Ancistrus","bolivianus","NA","NA","nathan extra","Mamoré","San Pedrito River, bridge on Cochabamba-Villa Tunari road, Bolivia",-17.01623,-65.65195,"NA"
+"T12872","Ancistrus","bolivianus","KP960081","KP959931","genbank","Mamoré","San Pedrito River, bridge on Cochabamba-Villa Tunari road, Bolivia",-17.01623,-65.65195,"ROM 90368"
+"T13826","Ancistrus","clementinae","NA","NA","nathan extra","Ecuador (Pacific Coast drainage)","Clara River, La Clara, around bridge and downstream",-1.680472,-79.38992,"NA"
+"T13829","Ancistrus","clementinae","KP960085","KP959929","genbank","Ecuador (Pacific Coast drainage)","Clara River, La Clara, around bridge and downstream",-1.680472,-79.38992,"ROM 93737"
+"T13832","Ancistrus","clementinae","NA","NA","nathan extra","Ecuador (Pacific Coast drainage)","Clara River, La Clara, around bridge and downstream",-1.680472,-79.38992,"NA"
+"T08143","Ancistrus","leucostictus","KP960079","KP959933","genbank","Guyana","Berbice River, 1 km downstream of Cat Creek, Guyana",4.965582,-58.24321,"ROM 88561"
+"T09397","Ancistrus","macrophthalmus","KP960083","KP959934","genbank","Orinoco","Río Orinoco, rock outcropping upstream of Isla Moya, 79 km E of San Fernando de Atabapo",3.88218,-67.01362,"AUM 54994"
+"T09471","Ancistrus","macrophthalmus","NA","NA","nathan extra","Orinoco","NA","NA","NA","NA"
+"T10092","Ancistrus","megalostomus","KP960080","KP959930","genbank","Madre de Dios","Río Araza, orilla derecha, justo encima del puente pasando Quincemil, Peru",-13.26338,-70.78007,"AUM 51165"
+"B1499","Ancistrus","ranunculus","NA","NA","nathan extra","Xingu","Rio Xingu, small rocky outcrop in main channel, ca. 15 km south of Altamira",-3.331944,-52.17683,"NA"
+"B1500","Ancistrus","ranunculus","KP960078","KP959936","genbank","Xingu","Rio Xingu, small rocky outcrop in main channel, ca. 15 km south of Altamira",-3.331944,-52.17683,"ANSP 199525"
+"T10364","Ancistrus","sp.Inambari","NA","NA","nathan extra","Madre de Dios","Río Inambari, Peru","NA","NA","NA"
+"T10383","Ancistrus","sp.Inambari","KP960082","KP959932","genbank","Madre de Dios","Río Inambari, Peru",-12.78514,-70.00994,"AUM 57510"
+"B1988","Ancistrus","sp.Xingu","KP960084","KP959935","genbank","Xingu","Rio Xingu, Cachoeira do Espelho, ca. 50 km south-southwest Altamira",-3.651111,-52.37861,"ANSP 199611"
+"B2049","Ancistrus","sp.Xingu","NA","NA","nathan extra","Xingu","NA","NA","NA","NA"
+"B1470","Lasiancistrus","schomburgkii","NA","NA","nathan extra","Xingu","NA","NA","NA","NA"
+"B1471","Lasiancistrus","schomburgkii","NA","NA","nathan extra","Xingu","NA","NA","NA","NA"
+"P6123","Lasiancistrus","schomburgkii","NA","NA","nathan extra","Marañón","Río Marañón, 1.57 km ENE of Juan Velasco (Sta Maria de Nieva)",-4.58957,-77.85283,"NA"
+"P6125","Lasiancistrus","schomburgkii","KP960091","KP960030","genbank","Marañón","Río Marañón, 1.57 km ENE of Juan Velasco (Sta Maria de Nieva)",-4.58957,-77.85283,"AUM 45548"
+"T09686","Lasiancistrus","tentaculatus","KP960092","KP960028","genbank","Ventuari","Río Parucito, Raudales Solomon",5.34648,-66.03328,"AUM 53895"
+"T09687","Lasiancistrus","tentaculatus","NA","NA","nathan extra","Ventuari","Río Parucito, Raudales Solomon",5.34648,-66.03328,"NA"
+"T09282","Pseudolithoxus","anthrax","KP960099","KP960041","genbank","Orinoco","Río Orinoco, Paso Ganado, 38 km NNW of San Fernando de Atabapo",4.38418,-67.77473,"AUM 53520"
+"T09399","Pseudolithoxus","anthrax","NA","NA","nathan extra","Orinoco","Río Orinoco, rock outcropping upstream of Isla Moya, 79 km E of San Fernando de Atabapo",3.88218,-67.01362,"NA"
+"T09841","Pseudolithoxus","anthrax","NA","NA","this study","Orinoco","Purchased from ornamental fisherman at site on R. Orinoco 60 km E of San Fernando de Atabapo (collected in vicinity)",3.973889,-67.16278,"ANSP 182278"
+"T09842","Pseudolithoxus","anthrax","NA","NA","this study","Orinoco","Purchased from ornamental fisherman at site on R. Orinoco 60 km E of San Fernando de Atabapo (collected in vicinity)",3.973889,-67.16278,"ANSP 182278"
+"T09934","Pseudolithoxus","anthrax","KP960098","KP960040","genbank","Caura","Río Caura, Las Trincheras",7.07277,-64.99646,"AUM 53557"
+"V055","Pseudolithoxus","anthrax","KP960100","KP960039","genbank","Ventuari","Río Ventuari, 23 km NE of Macuruco, 94 km E of San Fernando de Atabapo",4.08042,-66.86513,"AUM 39246"
+"T09512","Pseudolithoxus","dumus","KP960097","KP960042","genbank","Ventuari","Río Ventuari, Raudales Chipirito, 88.5 km E of San Fernando de Atabapo",4.06825,-66.90369,"ANSP 190757"
+"T09536","Pseudolithoxus","dumus","NA","NA","nathan extra","Ventuari","Caño Marujeta, 159 km E of San Fernando de Atabapo",4.29481,-66.28888,"AUM 54311"
+"T09949","Pseudolithoxus","dumus","NA","NA","this study","Orinoco","Río Orinoco, 147 km southeast of San Fernando de Atabapo",3.306667,-66.60333,"ANSP 185255"
+"T09951","Pseudolithoxus","dumus","NA","NA","this study","Orinoco","Río Orinoco, 147 km southeast of San Fernando de Atabapo",3.306667,-66.60333,"AUM 43267"
+"T09895","Pseudolithoxus","kelsorum","KP960096","KP960036","genbank","Orinoco","Río Orinoco at Merey, 97.6 km N of San Fernando de Atabapo",4.9178,-67.83294,"AUM 51644"
+"T09898","Pseudolithoxus","kelsorum","NA","NA","nathan extra","Orinoco","Río Orinoco at Merey, 97.6 km N of San Fernando de Atabapo",4.9178,-67.83294,"NA"
+"CTGA14422","Pseudolithoxus","n.sp.","NA","NA","this study","Nhamundá","Lower Rio Nhamundá",-1.71782,-57.36856,"INPA 43888"
+"CTGA14483","Pseudolithoxus","n.sp.","NA","NA","this study","Nhamundá","Lower Rio Nhamundá",-1.71782,-57.36856,"INPA 43888"
+"CTGA14485","Pseudolithoxus","n.sp.","NA","NA","this study","Nhamundá","Lower Rio Nhamundá",-1.71782,-57.36856,"INPA 43888"
+"P161","Pseudolithoxus","n.sp.","NA","NA","this study","Uatumã","NA","NA","NA","INPA"
+"P162","Pseudolithoxus","n.sp.","NA","NA","this study","Uatumã","NA","NA","NA","INPA"
+"P18038","Pseudolithoxus","nicoi","NA","NA","this study","Alto Negro","NA","NA","NA","INPA"
+"P18043","Pseudolithoxus","nicoi","NA","NA","this study","Alto Negro","NA","NA","NA","INPA"
+"P18071","Pseudolithoxus","nicoi","NA","NA","NOT A PSEUDOLITHOXUS","Alto Negro","NA","NA","NA","INPA"
+"P18073","Pseudolithoxus","nicoi","NA","NA","this study","Alto Negro","NA","NA","NA","INPA"
+"P4647","Pseudolithoxus","nicoi","KP960101","KP960037","genbank","Casiquiare","Casiquiare Canal, left bank upstream from mouth of Siapa",2.15095,-66.45229,"AUM 43726"
+"T07157","Pseudolithoxus","tigris","NA","NA","nathan extra","NA","Aquarium trade specimen","NA","NA","NA"
+"T09376","Pseudolithoxus","tigris","KP960095","KP960035","genbank","Orinoco","Río Orinoco, rock outcropping upstream of Isla Moya, 79 km E of San Fernando de Atabapo",3.88218,-67.01362,"AUM 57674"
+"T09870","Pseudolithoxus","tigris","NA","NA","this study","Orinoco","Río Orinoco, 50 km east of San Fernando de Atabapo",3.967222,-67.25333,"ANSP 185263"
+"T09938","Pseudolithoxus","tigris","NA","NA","this study","Orinoco","Río Orinoco, 50 km east of San Fernando de Atabapo",3.967222,-67.25333,"ANSP 185263"
+"V5293","Pseudolithoxus","tigris","NA","NA","nathan extra","Ventuari","Río Ventuari",4.07565,-66.89285,"NA"
+"V5533","Soromonichthys","stearleyi","KP960102","KP960038","genbank","Orinoco","Caño Soromoni, 11.78km E of Esmeraldas, 30 min. from mouth by bongo, first raudales",3.1938,-65.65197,"AUM 43872"
