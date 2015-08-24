@@ -7,6 +7,38 @@ require("phangorn")
 require("phyloch")
 require("phytools")
 
+# load up nathan extras
+
+nmat <- as.matrix(as.DNAbin(read.nexus.data(file="lujan_extras.nex")))
+ncytb <- nmat[,516:1663]
+write.dna(del.gaps(ncytb), file="../temp/cytb_lujan.fas", format="fasta", colw=9999)
+
+# 
+ncytb <- read.dna(file="../temp/cytb_lujan.fasta", format="fasta")
+lcytb <- read.dna(file="../temp/cytb_legal.fasta", format="fasta")
+
+catcytb <- c(ncytb, lcytb)
+
+catcytbal <- mafft(x=catcytb, path="mafft")
+
+dat <- as.phyDat(catcytbal)
+
+# make a tree
+prat <- pratchet(dat, rearrangements="SPR")
+pars <- acctran(prat, dat)
+mlm <- pml(pars, dat, k=4, inv=0, model="HKY") 
+mlik <- optim.pml(mlm, optNni=TRUE, optGamma=TRUE, optEdge=TRUE, optBf=TRUE, optInv=FALSE, model="HKY")
+tr <- mlik$tree# rename tree
+rtr <- root(tr, outgroup="B1500")
+ltr <- ladderize(rtr)
+
+ttab <- read.table(file="mol_samples.csv", header=TRUE, sep=",", stringsAsFactors=FALSE)
+ltr$tip.label <- mixedFontLabel(ttab$code[match(ltr$tip.label, ttab$code)], ttab$genus[match(ltr$tip.label, ttab$code)], ttab$species[match(ltr$tip.label, ttab$code)], italic=2:3)
+
+plot(ltr)
+
+
+
 # search entrez
 # note: there are other Cramer seqs available. Need to refine search if we want these
 rs <- entrez_search(db="nuccore", term="(Pseudolithoxus[Organism] OR Ancistrus[Organism] OR Soromonichthys[Organism] OR Lasiancistrus[Organism]) AND (cytb[Gene Name] OR RAG1[Gene Name] OR 16S[All Fields] OR RAG2[Gene Name] OR MyH6[Gene Name])", retmax=100)
