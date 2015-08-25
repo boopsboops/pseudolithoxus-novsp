@@ -1,44 +1,85 @@
 # start the chunk
 ## @knitr treecode
 
-require("rentrez")
+#require("rentrez")
 require("ape")
 require("phangorn")
 require("phyloch")
 require("phytools")
 
-# load up nathan extras
-
+## load and process data
+# load up nathan extras and extract cytb
 nmat <- as.matrix(as.DNAbin(read.nexus.data(file="lujan_extras.nex")))
 ncytb <- nmat[,516:1663]
-write.dna(del.gaps(ncytb), file="../temp/cytb_lujan.fas", format="fasta", colw=9999)
+nrag <- nmat[,1664:2682]
+#write.dna(del.gaps(ncytb), file="../temp/cytb_lujan.fas", format="fasta", colw=9999)
+# remove missing seq
+#nrag <- nrag[-which(labels(nrag) == "T13832"),]
+#write.dna(del.gaps(nrag), file="../temp/rag1_lujan.fasta", format="fasta", colw=9999)
 
-# 
-ncytb <- read.dna(file="../temp/cytb_lujan.fasta", format="fasta")
-lcytb <- read.dna(file="../temp/cytb_legal.fasta", format="fasta")
+# load up extracted cytb from this study and nathan's
+ncytb <- read.dna(file="../temp/cytb_lujan.fasta", format="fasta", as.matrix=FALSE)
+lcytb <- read.dna(file="../temp/cytb_legal.fasta", format="fasta", as.matrix=FALSE)
+nrag <- read.dna(file="../temp/rag1_lujan.fasta", format="fasta", as.matrix=FALSE)
+lrag <- read.dna(file="../temp/rag1_legal.fasta", format="fasta", as.matrix=FALSE)
 
+# cat the two lists
 catcytb <- c(ncytb, lcytb)
-
+catrag <- c(nrag, lrag)
+# align
 catcytbal <- mafft(x=catcytb, path="mafft")
+catragal <- mafft(x=catrag, path="mafft")
 
+# concatenate
+li <- list(catcytbal, catragal)
+all <- c.genes(single.list=li, match=FALSE)# ?c.genes
+
+# convert to phydat
 dat <- as.phyDat(catcytbal)
+dat <- as.phyDat(catragal)
+dat <- as.phyDat(all)
 
-# make a tree
+## run a modeltest (and make parsimony tree first)
 prat <- pratchet(dat, rearrangements="SPR")
 pars <- acctran(prat, dat)
-mlm <- pml(pars, dat, k=4, inv=0, model="HKY") 
-mlik <- optim.pml(mlm, optNni=TRUE, optGamma=TRUE, optEdge=TRUE, optBf=TRUE, optInv=FALSE, model="HKY")
+mt <- modelTest(dat, tree=pars, G=TRUE, I=FALSE, multicore=TRUE)
+# sort by AICc
+mts <- mt[with(mt, order(AICc)), ]
+# get the AIC delta values (GTR+G is best)
+cbind(mts$Model, mts$AICc- mts$AICc[1])
+
+
+## make a tree
+mlm <- pml(pars, dat, k=4, inv=0, model="GTR") 
+mlik <- optim.pml(mlm, optNni=TRUE, optGamma=TRUE, optQ=TRUE, optEdge=TRUE, optBf=TRUE, optInv=FALSE, model="GTR")
 tr <- mlik$tree# rename tree
-rtr <- root(tr, outgroup="B1500")
-ltr <- ladderize(rtr)
+#reroot
+rnod <- fastMRCA(tr, "B1470", "T13826")
+rtr <- ladderize((reroot(tr, node.number=rnod, position=0.75*tr$edge.length[which(tr$edge[,2]==rnod)])))
 
+plot.phylo(rtr, no.margin=TRUE)
+nodelabels(pc)
+
+ttab$code
+names(catcytb)
+
+# check missing
+#ttab$code[which(!ttab$code %in% names(catcytb))]
+#names(catcytb)[which(!names(catcytb) %in% ttab$code)]
+
+# bootstaps
+btrs <- bootstrap.pml(mlik, bs=100, trees=TRUE, multicore=TRUE, mc.cores=8, optNni=TRUE, optGamma=TRUE, optQ=TRUE, optBf=TRUE, optInv=FALSE, model="GTR")
+pp <- prop.part(btrs, check.labels=TRUE)
+pc <- prop.clades(rtr, part=pp)
+
+
+# add taxon names
 ttab <- read.table(file="mol_samples.csv", header=TRUE, sep=",", stringsAsFactors=FALSE)
-ltr$tip.label <- mixedFontLabel(ttab$code[match(ltr$tip.label, ttab$code)], ttab$genus[match(ltr$tip.label, ttab$code)], ttab$species[match(ltr$tip.label, ttab$code)], italic=2:3)
-
-plot(ltr)
+rtr$tip.label <- mixedFontLabel(ttab$code[match(rtr$tip.label, ttab$code)], ttab$genus[match(rtr$tip.label, ttab$code)], ttab$species[match(rtr$tip.label, ttab$code)], italic=2:3)
 
 
 
+#################### 
 # search entrez
 # note: there are other Cramer seqs available. Need to refine search if we want these
 rs <- entrez_search(db="nuccore", term="(Pseudolithoxus[Organism] OR Ancistrus[Organism] OR Soromonichthys[Organism] OR Lasiancistrus[Organism]) AND (cytb[Gene Name] OR RAG1[Gene Name] OR 16S[All Fields] OR RAG2[Gene Name] OR MyH6[Gene Name])", retmax=100)
