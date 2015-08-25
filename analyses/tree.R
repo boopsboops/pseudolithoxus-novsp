@@ -6,20 +6,23 @@ require("ape")
 require("phangorn")
 require("phyloch")
 require("phytools")
+rm(list=ls())
 
 ## load and process data
 # load up nathan extras and extract cytb
 nmat <- as.matrix(as.DNAbin(read.nexus.data(file="lujan_extras.nex")))
-ncytb <- nmat[,516:1663]
+ncytb <- nmat[,532:1662]# includes trim off the non-cytb parts at the start (originally 516:1663)
+#
 nrag <- nmat[,1664:2682]
-#write.dna(del.gaps(ncytb), file="../temp/cytb_lujan.fas", format="fasta", colw=9999)
+#write.dna(del.gaps(ncytb), file="../temp/cytb_lujan.fasta", format="fasta", colw=9999)
 # remove missing seq
 #nrag <- nrag[-which(labels(nrag) == "T13832"),]
 #write.dna(del.gaps(nrag), file="../temp/rag1_lujan.fasta", format="fasta", colw=9999)
 
 # load up extracted cytb from this study and nathan's
 ncytb <- read.dna(file="../temp/cytb_lujan.fasta", format="fasta", as.matrix=FALSE)
-lcytb <- read.dna(file="../temp/cytb_legal.fasta", format="fasta", as.matrix=FALSE)
+lcytb <- read.dna(file="cytb.fasta", format="fasta", as.matrix=FALSE)
+# remove ?s from alignment
 nrag <- read.dna(file="../temp/rag1_lujan.fasta", format="fasta", as.matrix=FALSE)
 lrag <- read.dna(file="../temp/rag1_legal.fasta", format="fasta", as.matrix=FALSE)
 
@@ -29,6 +32,11 @@ catrag <- c(nrag, lrag)
 # align
 catcytbal <- mafft(x=catcytb, path="mafft")
 catragal <- mafft(x=catrag, path="mafft")
+
+# write file to check alignments
+#ttab <- read.table(file="mol_samples.csv", header=TRUE, sep=",", stringsAsFactors=FALSE)
+#dimnames(catcytbal)[[1]] <- paste(ttab$genus[match(labels(catcytbal), ttab$code)], ttab$species[match(labels(catcytbal), ttab$code)], ttab$code[match(labels(catcytbal), ttab$code)], sep="_")
+#write.dna(catcytbal, file="../temp/cytb_all_names.fas", format="fasta", colw=9999)
 
 # concatenate
 li <- list(catcytbal, catragal)
@@ -53,11 +61,13 @@ cbind(mts$Model, mts$AICc- mts$AICc[1])
 mlm <- pml(pars, dat, k=4, inv=0, model="GTR") 
 mlik <- optim.pml(mlm, optNni=TRUE, optGamma=TRUE, optQ=TRUE, optEdge=TRUE, optBf=TRUE, optInv=FALSE, model="GTR")
 tr <- mlik$tree# rename tree
+#tr <- pars
 #reroot
 rnod <- fastMRCA(tr, "B1470", "T13826")
+#rnod <- fastMRCA(tr, "Lasiancistrus_schomburgkii_B1470", "Ancistrus_clementinae_T13826")
 rtr <- ladderize((reroot(tr, node.number=rnod, position=0.75*tr$edge.length[which(tr$edge[,2]==rnod)])))
 
-plot.phylo(rtr, no.margin=TRUE)
+plot.phylo(rtr, no.margin=TRUE, cex=0.8, font=1)
 nodelabels(pc)
 
 ttab$code
