@@ -8,13 +8,15 @@ require("phyloch")
 require("phytools")
 rm(list=ls())
 
+rag <- as.DNAbin(read.nexus.data(file="rag1.nex"))
+
 # concatenate
 li <- list(catcytbal, catragal)
 all <- c.genes(single.list=li, match=FALSE)# ?c.genes
 
 # convert to phydat
-dat <- as.phyDat(catcytbal)
-dat <- as.phyDat(catragal)
+dat <- as.phyDat(cytb)
+dat <- as.phyDat(rag)
 dat <- as.phyDat(all)
 
 ## run a modeltest (and make parsimony tree first)
@@ -27,9 +29,10 @@ mts <- mt[with(mt, order(AICc)), ]
 cbind(mts$Model, mts$AICc- mts$AICc[1])
 
 
+
 ## make a tree
-mlm <- pml(pars, dat, k=4, inv=0, model="GTR") 
-mlik <- optim.pml(mlm, optNni=TRUE, optGamma=TRUE, optQ=TRUE, optEdge=TRUE, optBf=TRUE, optInv=FALSE, model="GTR")
+mlm <- pml(pars, dat, k=4, inv=0, model="HKY") 
+mlik <- optim.pml(mlm, optNni=TRUE, optGamma=TRUE, optQ=TRUE, optEdge=TRUE, optBf=TRUE, optInv=FALSE, model="HKY")
 tr <- mlik$tree# rename tree
 #tr <- pars
 #reroot
