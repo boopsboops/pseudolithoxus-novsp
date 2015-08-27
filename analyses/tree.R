@@ -8,11 +8,12 @@ require("phyloch")
 require("phytools")
 rm(list=ls())
 
-rag <- as.DNAbin(read.nexus.data(file="rag1.nex"))
+cytb <- as.matrix(as.DNAbin(read.nexus.data(file="cytb.nex")))
+rag <- as.matrix(as.DNAbin(read.nexus.data(file="rag1.nex")))
 
 # concatenate
-li <- list(catcytbal, catragal)
-all <- c.genes(single.list=li, match=FALSE)# ?c.genes
+li <- list(cytb, rag)
+all <- c.genes(single.list=li, match=FALSE)
 
 # convert to phydat
 dat <- as.phyDat(cytb)
@@ -23,16 +24,15 @@ dat <- as.phyDat(all)
 prat <- pratchet(dat, rearrangements="SPR")
 pars <- acctran(prat, dat)
 mt <- modelTest(dat, tree=pars, G=TRUE, I=FALSE, multicore=TRUE)
-# sort by AICc
-mts <- mt[with(mt, order(AICc)), ]
-# get the AIC delta values (GTR+G is best)
-cbind(mts$Model, mts$AICc- mts$AICc[1])
+mts <- mt[with(mt, order(AICc)), ]# sort by AICc
+cbind(mts$Model, mts$AICc- mts$AICc[1])# get the AIC delta values (GTR+G is best)
+
 
 
 
 ## make a tree
-mlm <- pml(pars, dat, k=4, inv=0, model="HKY") 
-mlik <- optim.pml(mlm, optNni=TRUE, optGamma=TRUE, optQ=TRUE, optEdge=TRUE, optBf=TRUE, optInv=FALSE, model="HKY")
+mlm <- pml(pars, dat, k=4, inv=0, model="GTR") 
+mlik <- optim.pml(mlm, optNni=TRUE, optGamma=TRUE, optQ=TRUE, optEdge=TRUE, optBf=TRUE, optInv=FALSE, model="GTR")
 tr <- mlik$tree# rename tree
 #tr <- pars
 #reroot
@@ -40,25 +40,71 @@ rnod <- fastMRCA(tr, "B1470", "T13826")
 #rnod <- fastMRCA(tr, "Lasiancistrus_schomburgkii_B1470", "Ancistrus_clementinae_T13826")
 rtr <- ladderize((reroot(tr, node.number=rnod, position=0.75*tr$edge.length[which(tr$edge[,2]==rnod)])))
 
-plot.phylo(rtr, no.margin=TRUE, cex=0.8, font=1)
-nodelabels(pc)
-
-ttab$code
-names(catcytb)
+#plot.phylo(rtr, no.margin=TRUE, cex=0.8, font=1)
+#nodelabels()
 
 # check missing
 #ttab$code[which(!ttab$code %in% names(catcytb))]
 #names(catcytb)[which(!names(catcytb) %in% ttab$code)]
 
 # bootstaps
-btrs <- bootstrap.pml(mlik, bs=100, trees=TRUE, multicore=TRUE, mc.cores=8, optNni=TRUE, optGamma=TRUE, optQ=TRUE, optBf=TRUE, optInv=FALSE, model="GTR")
+btrs <- bootstrap.pml(mlik, bs=80, trees=TRUE, multicore=TRUE, mc.cores=8, optNni=TRUE, optGamma=TRUE, optQ=TRUE, optBf=TRUE, optInv=FALSE)# make bs multiple of 8!
 pp <- prop.part(btrs, check.labels=TRUE)
 pc <- prop.clades(rtr, part=pp)
+bs <- round(pc/80, digits=2)
+p <- character(length(bs))
+co <- c("gray30", "gray", "white")
+p[bs >= 0.95] <- co[1]
+p[bs < 0.95 & bs >= 0.70] <- co[2]
+p[bs < 0.70] <- co[3]
 
+# copy tree
+ntr <- rtr
+ttab <- read.table(file="mol_samples.csv", header=TRUE, sep=",", stringsAsFactors=FALSE)
+ntr$tip.label <- ttab$species[match(ntr$tip.label, ttab$code)]
+
+# interspecies nodes
+insp <- c(#
+    fastMRCA(ntr, "tentaculatus", "schomburgkii"),
+    fastMRCA(ntr, "tentaculatus", "clementinae"),
+    fastMRCA(ntr, "ranunculus", "clementinae"),
+    fastMRCA(ntr, "ranunculus", "sp.Xingu"),
+    fastMRCA(ntr, "sp.Xingu", "macrophthalmus"),
+    fastMRCA(ntr, "macrophthalmus", "leucostictus"),
+    fastMRCA(ntr, "leucostictus", "megalostomus"),
+    fastMRCA(ntr, "megalostomus", "sp.Inambari"),
+    fastMRCA(ntr, "sp.Inambari", "bolivianus"),
+    fastMRCA(ntr, "kelsorum", "dumus"),
+    fastMRCA(ntr, "kelsorum", "tigris"),
+    fastMRCA(ntr, "dumus", "stearleyi"),
+    fastMRCA(ntr, "dumus", "anthrax"),
+    fastMRCA(ntr, "stearleyi", "nicoi.gr2"),
+    fastMRCA(ntr, "nicoi.gr2", "nicoi.gr1"),
+    fastMRCA(ntr, "nicoi.gr1", "n.sp.")
+)#
+
+#plot(ntr)
+#nodelabels()
+
+# intraspecies nodes 
+want <- c(insp, unlist(lapply(unique(ntr$tip.label), function(x) getMRCA(ntr, x))))
+# get numbers
+df <- data.frame(cbind(sort(unique(ntr$edge[,1])), p))
+names(df) <- c("node", "boot")
+wm <- match(want, df$node) 
 
 # add taxon names
-ttab <- read.table(file="mol_samples.csv", header=TRUE, sep=",", stringsAsFactors=FALSE)
 rtr$tip.label <- mixedFontLabel(ttab$code[match(rtr$tip.label, ttab$code)], ttab$genus[match(rtr$tip.label, ttab$code)], ttab$species[match(rtr$tip.label, ttab$code)], italic=2:3)
+
+# plot
+pdf(file="../temp/pseudolithoxus_tree.pdf", width=8, height=10, useDingbats=FALSE)
+plot.phylo(rtr, cex=0.8, edge.width=2, no.margin=TRUE, font=1, label.offset=0.001, edge.col="gray30", tip.color="grey50")
+nodelabels(node=want, pch=21, bg=p[wm], cex=1.25, col="gray30")
+nodelabels(bs, frame="none", col="red", cex=0.8, adj=c(1.2,1.5))
+legend("bottomleft", legend=c("BS > 0.95", "BS < 0.95", "BS < 0.70"), pch=21, cex=0.75, pt.bg=co, pt.cex=1.25, bty="n")
+dev.off()
+
+
 
 
 
