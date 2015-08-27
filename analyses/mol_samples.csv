@@ -1,7 +1,7 @@
 "code","genus","species","genbank_cytb","genbank_rag1","notes","cytb_fwd","cytb_rev","rag1_fwd","rag1_rev","locality_drainage","locality_precise","lat","long","museum"
 "B1500","Ancistrus","ranunculus","KP960078","KP959936","genbank","NA","NA","NA","NA","Xingu","Rio Xingu, small rocky outcrop in main channel, ca. 15 km south of Altamira",-3.331944,-52.17683,"ANSP 199525"
 "B1988","Ancistrus","sp.Xingu","KP960084","KP959935","genbank","NA","NA","NA","NA","Xingu","Rio Xingu, Cachoeira do Espelho, ca. 50 km south-southwest Altamira",-3.651111,-52.37861,"ANSP 199611"
-"P4647","Pseudolithoxus","nicoi","KP960101","KP960037","genbank","NA","NA","NA","NA","Casiquiare","Casiquiare Canal, left bank upstream from mouth of Siapa",2.15095,-66.45229,"AUM 43726"
+"P4647","Pseudolithoxus","nicoi.gr1","KP960101","KP960037","genbank","NA","NA","NA","NA","Casiquiare","Casiquiare Canal, left bank upstream from mouth of Siapa",2.15095,-66.45229,"AUM 43726"
 "P6125","Lasiancistrus","schomburgkii","KP960091","KP960030","genbank","NA","NA","NA","NA","Marañón","Río Marañón, 1.57 km ENE of Juan Velasco (Sta Maria de Nieva)",-4.58957,-77.85283,"AUM 45548"
 "T08143","Ancistrus","leucostictus","KP960079","KP959933","genbank","NA","NA","NA","NA","Guyana","Berbice River, 1 km downstream of Cat Creek, Guyana",4.965582,-58.24321,"ROM 88561"
 "T09282","Pseudolithoxus","anthrax","KP960099","KP960041","genbank","NA","NA","NA","NA","Orinoco","Río Orinoco, Paso Ganado, 38 km NNW of San Fernando de Atabapo",4.38418,-67.77473,"AUM 53520"
@@ -41,22 +41,22 @@
 14485,"Pseudolithoxus","n.sp.","NA","NA","this study","TRUE","TRUE","TRUE","TRUE","Nhamundá","Lower Rio Nhamundá",-1.71782,-57.36856,"INPA 43888"
 "P161","Pseudolithoxus","n.sp.","NA","NA","this study","TRUE","TRUE","TRUE","TRUE","Uatumã","NA","NA","NA","INPA"
 "P162","Pseudolithoxus","n.sp.","NA","NA","this study","TRUE","TRUE","TRUE","TRUE","Uatumã","NA","NA","NA","INPA"
-"P18038","Pseudolithoxus","nicoi","NA","NA","this study","TRUE","TRUE","TRUE","TRUE","Alto Negro","NA","NA","NA","INPA"
-"P18043","Pseudolithoxus","nicoi","NA","NA","this study","TRUE","TRUE","TRUE","TRUE","Alto Negro","NA","NA","NA","INPA"
-"P18073","Pseudolithoxus","nicoi","NA","NA","this study","TRUE","TRUE","TRUE","TRUE","Alto Negro","NA","NA","NA","INPA"
-"T027","Pseudolithoxus","nicoi","NA","NA","this study","TRUE","TRUE","TRUE","TRUE","Alto Negro",,,,
-"T078","Pseudolithoxus","nicoi","NA","NA","this study","TRUE","TRUE","TRUE","TRUE","Alto Negro",,,,
+"P18038","Pseudolithoxus","nicoi.gr1","NA","NA","this study","TRUE","TRUE","TRUE","TRUE","Alto Negro","NA","NA","NA","INPA"
+"P18043","Pseudolithoxus","nicoi.gr1","NA","NA","this study","TRUE","TRUE","TRUE","TRUE","Alto Negro","NA","NA","NA","INPA"
+"P18073","Pseudolithoxus","nicoi.gr1","NA","NA","this study","TRUE","TRUE","TRUE","TRUE","Alto Negro","NA","NA","NA","INPA"
+"T027","Pseudolithoxus","nicoi.gr1","NA","NA","this study","TRUE","TRUE","TRUE","TRUE","Alto Negro",,,,
+"T078","Pseudolithoxus","nicoi.gr1","NA","NA","this study","TRUE","TRUE","TRUE","TRUE","Alto Negro",,,,
 "T09841","Pseudolithoxus","anthrax","NA","NA","this study","TRUE","TRUE","TRUE","TRUE","Orinoco","Purchased from ornamental fisherman at site on R. Orinoco 60 km E of San Fernando de Atabapo (collected in vicinity)",3.973889,-67.16278,"ANSP 182278"
 "T09842","Pseudolithoxus","anthrax","NA","NA","this study","TRUE","TRUE","TRUE","TRUE","Orinoco","Purchased from ornamental fisherman at site on R. Orinoco 60 km E of San Fernando de Atabapo (collected in vicinity)",3.973889,-67.16278,"ANSP 182278"
 "T09870","Pseudolithoxus","tigris","NA","NA","this study","TRUE","TRUE","TRUE","TRUE","Orinoco","Río Orinoco, 50 km east of San Fernando de Atabapo",3.967222,-67.25333,"ANSP 185263"
 "T09938","Pseudolithoxus","tigris","NA","NA","this study","TRUE","TRUE","TRUE","TRUE","Orinoco","Río Orinoco, 50 km east of San Fernando de Atabapo",3.967222,-67.25333,"ANSP 185263"
 "T09949","Pseudolithoxus","dumus","NA","NA","this study","TRUE","TRUE","TRUE","TRUE","Orinoco","Río Orinoco, 147 km southeast of San Fernando de Atabapo",3.306667,-66.60333,"ANSP 185255"
 "T09951","Pseudolithoxus","dumus","NA","NA","this study","TRUE","TRUE","TRUE","TRUE","Orinoco","Río Orinoco, 147 km southeast of San Fernando de Atabapo",3.306667,-66.60333,"AUM 43267"
-"T148","Pseudolithoxus","nicoi","NA","NA","this study","TRUE","TRUE","TRUE","TRUE","Alto Negro",,,,
-"T149","Pseudolithoxus","nicoi","NA","NA","this study","TRUE","TRUE","TRUE","TRUE","Alto Negro",,,,
-"T151","Pseudolithoxus","nicoi","NA","NA","this study","TRUE","TRUE","TRUE","TRUE","Alto Negro",,,,
-"T152","Pseudolithoxus","nicoi","NA","NA","this study","TRUE","TRUE","TRUE","TRUE","Alto Negro",,,,
-"T153","Pseudolithoxus","nicoi","NA","NA","this study","TRUE","TRUE","TRUE","TRUE","Alto Negro",,,,
+"T148","Pseudolithoxus","nicoi.gr2","NA","NA","this study","TRUE","TRUE","TRUE","TRUE","Alto Negro",,,,
+"T149","Pseudolithoxus","nicoi.gr2","NA","NA","this study","TRUE","TRUE","TRUE","TRUE","Alto Negro",,,,
+"T151","Pseudolithoxus","nicoi.gr2","NA","NA","this study","TRUE","TRUE","TRUE","TRUE","Alto Negro",,,,
+"T152","Pseudolithoxus","nicoi.gr2","NA","NA","this study","TRUE","TRUE","TRUE","TRUE","Alto Negro",,,,
+"T153","Pseudolithoxus","nicoi.gr2","NA","NA","this study","TRUE","TRUE","TRUE","TRUE","Alto Negro",,,,
 14486,"Pseudolithoxus","n.sp.","NA","NA","WON'T SEQ","NA","NA","NA","NA","Nhamundá","Lower Rio Nhamundá",-1.71782,-57.36856,"INPA 43888"
 "T150","Pseudolithoxus","nicoi","NA","NA","WON'T SEQ","NA","NA","NA","NA","Alto Negro",,,,
 "T154","Pseudolithoxus","nicoi","NA","NA","WON'T SEQ","NA","NA","NA","NA","Alto Negro",,,,
