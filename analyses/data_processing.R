@@ -43,3 +43,14 @@ write.nexus.data(catragal, file="rag1.nex", format="dna", interleaved=FALSE, gap
 # write a test dataset with labels to check in geneious
 dimnames(catragal)[[1]] <- paste(ttab$genus[match(labels(catragal), ttab$code)], ttab$species[match(labels(catragal), ttab$code)], ttab$code[match(labels(catragal), ttab$code)], sep="_")
 write.dna(catragal, file="../temp/rag_all_names.fas", format="fasta", colw=9999)
+
+## pull out the pseudolithoxus
+cytb <- as.DNAbin(read.nexus.data(file="cytb.nex"))
+rag <- as.DNAbin(read.nexus.data(file="rag1.nex"))
+# remember to omit those NAs
+cytbpseud <- cytb[na.omit(match(ttab$code[ttab$genus == "Pseudolithoxus"], labels(cytb)))]
+ragpseud <- rag[na.omit(match(ttab$code[ttab$genus == "Pseudolithoxus"], labels(rag)))]
+# write out
+write.nexus.data(cytbpseud, file="../temp/cytb_pseudolithoxus.nex", format="dna", interleaved=FALSE, gap="-", missing="?")
+write.nexus.data(ragpseud, file="../temp/rag1_pseudolithoxus.nex", format="dna", interleaved=FALSE, gap="-", missing="?")
+
