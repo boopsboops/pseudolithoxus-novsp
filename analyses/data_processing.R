@@ -54,3 +54,39 @@ ragpseud <- rag[na.omit(match(ttab$code[ttab$genus == "Pseudolithoxus"], labels(
 write.nexus.data(cytbpseud, file="../temp/cytb_pseudolithoxus.nex", format="dna", interleaved=FALSE, gap="-", missing="?")
 write.nexus.data(ragpseud, file="../temp/rag1_pseudolithoxus.nex", format="dna", interleaved=FALSE, gap="-", missing="?")
 
+
+## make a concatenated matrix
+cytb <- as.matrix(as.DNAbin(read.nexus.data(file="cytb.nex")))
+rag <- as.matrix(as.DNAbin(read.nexus.data(file="rag1.nex")))
+
+# concatenate
+li <- list(cytb, rag)
+all <- c.genes(single.list=li, match=FALSE)
+
+# save concat matrix
+# convert Ns to ?s first
+all <- gsub("n", "?", all)
+write.nexus.data(all, file="../temp/concat.nex", format="dna", interleaved=FALSE, gap="-", missing="?")
+
+
+## export files as phylip for partitionfinder
+pcytb <- as.DNAbin(read.nexus.data(file="../temp/partitionfinder_datasets/cytb_pseudolithoxus.nex"))
+prag <- as.DNAbin(read.nexus.data(file="../temp/partitionfinder_datasets/rag1_pseudolithoxus.nex"))
+pall <- as.DNAbin(read.nexus.data(file="../temp/partitionfinder_datasets/concat.nex"))
+
+write.dna(pcytb, file="../temp/partitionfinder_datasets/cytb_pseudolithoxus.phy", format="sequential", colw=9999)
+write.dna(prag, file="../temp/partitionfinder_datasets/rag1_pseudolithoxus.phy", format="sequential", colw=9999)
+write.dna(pall, file="../temp/partitionfinder_datasets/concat.phy", format="sequential", colw=9999)
+
+## to extract codon positions
+#specify only third position i.e. 1119/3 = 373
+cyt.third <- 1:(length(cytb[1,])/3)*3
+cyt.third_char <- cytb[, cyt.third]
+cyt.12 <- cytb[, -cyt.third]
+
+li <- list(cyt.12, rag)
+all <- c.genes(single.list=li, match=FALSE)
+
+#convert "third" to fasta file 
+write.dna(all, "../temp/cytb12rag123.fas", format="fasta", colw=10000)
+write.dna(cyt.third_char, "../temp/cytb3.fas", format="fasta", colw=10000)
