@@ -104,63 +104,65 @@ legend("bottomleft", legend=c("BS > 0.95", "BS < 0.95", "BS < 0.70"), pch=21, ce
 dev.off()
 
 
-## read a beast tree
-mcc <- read.beast(file="../temp/partitionfinder_datasets/concat/beast/concat.tre", digits=2)
+
+
+
+
+
+
+################ read a beast tree
+# read the tree
+mcc <- read.beast(file="../temp/beast/3parts.tre", digits=2)
 lmcc <- ladderize(mcc)
-
-
 p <- character(length(lmcc$posterior))
-co <- c("gray30", "white")
+co <- c("dodgerblue", "white")
 p[lmcc$posterior >= 0.95] <- co[1]
 p[lmcc$posterior < 0.95] <- co[2]
-
-
-
 # copy tree
 ntr <- lmcc
 ttab <- read.table(file="mol_samples.csv", header=TRUE, sep=",", stringsAsFactors=FALSE)
 ntr$tip.label <- ttab$species[match(ntr$tip.label, ttab$code)]
-
 # interspecies nodes
 insp <- c(#
     fastMRCA(ntr, "tentaculatus", "schomburgkii"),
     fastMRCA(ntr, "tentaculatus", "clementinae"),
+    fastMRCA(ntr, "tentaculatus", "clementinae"),
     fastMRCA(ntr, "ranunculus", "clementinae"),
-    fastMRCA(ntr, "ranunculus", "sp.Xingu"),
-    fastMRCA(ntr, "sp.Xingu", "macrophthalmus"),
-    fastMRCA(ntr, "macrophthalmus", "leucostictus"),
-    fastMRCA(ntr, "leucostictus", "megalostomus"),
-    fastMRCA(ntr, "megalostomus", "sp.Inambari"),
-    fastMRCA(ntr, "sp.Inambari", "bolivianus"),
-    fastMRCA(ntr, "kelsorum", "dumus"),
+    fastMRCA(ntr, "ranunculus", "leucostictus"),
+    fastMRCA(ntr, "leucostictus", "sp. 'Xingu'"),
+    fastMRCA(ntr, "sp. 'Xingu'", "macrophthalmus"),
+    fastMRCA(ntr, "sp. 'Xingu'", "megalostomus"),
+    fastMRCA(ntr, "megalostomus", "sp. 'Inambari'"),
+    fastMRCA(ntr, "sp. 'Inambari'", "bolivianus"),
+    fastMRCA(ntr, "kelsorum", "tentaculatus"),
     fastMRCA(ntr, "kelsorum", "tigris"),
+    fastMRCA(ntr, "kelsorum", "dumus"),
     fastMRCA(ntr, "dumus", "stearleyi"),
     fastMRCA(ntr, "dumus", "anthrax"),
     fastMRCA(ntr, "stearleyi", "nicoi.gr2"),
     fastMRCA(ntr, "nicoi.gr2", "nicoi.gr1"),
-    fastMRCA(ntr, "nicoi.gr1", "n.sp.")
+    fastMRCA(ntr, "nicoi.gr1", "n. sp.")
 )#
 # intraspecies nodes 
 want <- c(insp, unlist(lapply(unique(ntr$tip.label), function(x) getMRCA(ntr, x))))
-
 # get numbers from edge matrix
 df <- data.frame(cbind(sort(unique(ntr$edge[,1])), p))
 names(df) <- c("node", "bpp")
 wm <- match(want, df$node) 
-
 # add taxon names
-lmcc$tip.label <- mixedFontLabel(ttab$code[match(lmcc$tip.label, ttab$code)], ttab$genus[match(lmcc$tip.label, ttab$code)], ttab$species[match(lmcc$tip.label, ttab$code)], italic=2:3)
-
-
-#plot.phylo(lmcc)
-#nodelabels(lmcc$posterior, frame="none", col="red")
-
+lmcc$tip.label <- mixedFontLabel(ttab$code[match(lmcc$tip.label, ttab$code)], ttab$genus[match(lmcc$tip.label, ttab$code)], #
+gsub("\\.gr1|\\.gr2", "", ttab$species[match(lmcc$tip.label, ttab$code)]), italic=2:3, always.upright=c("n. sp.", "sp. 'Inambari'", "sp. 'Xingu'"))
 # plot
-pdf(file="../temp/pseudolithoxus_beast_tree.pdf", width=8, height=10, useDingbats=FALSE)
-plot.phylo(lmcc, cex=0.8, edge.width=2, no.margin=TRUE, font=1, label.offset=0.001, edge.col="gray30", tip.color="grey50")
-nodelabels(node=want, pch=21, bg=p[wm], cex=1.25, col="gray30")
-legend("bottomleft", legend=c("BPP > 0.95", "BPP < 0.95"), pch=21, cex=0.75, pt.bg=co, pt.cex=1.25, bty="none")
+pdf(file="../temp/pseudolithoxus_beast_tree.pdf", width=8, height=12, useDingbats=FALSE)
+plot.phylo(lmcc, cex=0.8, edge.width=3, no.margin=TRUE, font=1, label.offset=0.005, edge.col="gray30", tip.color="grey50")
+nodelabels(node=want, pch=21, bg=p[wm], cex=1.1, col="dodgerblue")
+legend("bottomleft", legend=c("Bayesian posterior probability >= 0.95", "Bayesian posterior probability < 0.95"), pch=21, cex=0.75, pt.bg=co, pt.cex=1.25, bty="n", col="dodgerblue")
 dev.off()
+
+
+
+
+
 
 
 
