@@ -64,3 +64,8 @@ BEGIN DATA;
   ;
 END;
 
+BEGIN SETS;
+    charset rag1-1cp = 1-1015\3;
+    charset rag1-2cp = 2-1016\3;
+    charset rag1-3cp = 3-1017\3;
+END;
