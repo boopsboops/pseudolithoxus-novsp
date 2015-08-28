@@ -10,19 +10,18 @@ rm(list=ls())
 
 cytb <- as.matrix(as.DNAbin(read.nexus.data(file="cytb.nex")))
 rag <- as.matrix(as.DNAbin(read.nexus.data(file="rag1.nex")))
-
-# concatenate
-li <- list(cytb, rag)
-all <- c.genes(single.list=li, match=FALSE)
+all <- as.matrix(as.DNAbin(read.nexus.data(file="../temp/concat.nex")))
 
 # convert to phydat
 dat <- as.phyDat(cytb)
 dat <- as.phyDat(rag)
 dat <- as.phyDat(all)
 
-## run a modeltest (and make parsimony tree first)
+## make parsimony tree
 prat <- pratchet(dat, rearrangements="SPR")
 pars <- acctran(prat, dat)
+
+## run a modeltest 
 mt <- modelTest(dat, tree=pars, G=TRUE, I=FALSE, multicore=TRUE)
 mts <- mt[with(mt, order(AICc)), ]# sort by AICc
 cbind(mts$Model, mts$AICc- mts$AICc[1])# get the AIC delta values (GTR+G is best)
@@ -48,7 +47,7 @@ rtr <- ladderize((reroot(tr, node.number=rnod, position=0.75*tr$edge.length[whic
 #names(catcytb)[which(!names(catcytb) %in% ttab$code)]
 
 # bootstaps
-btrs <- bootstrap.pml(mlik, bs=80, trees=TRUE, multicore=TRUE, mc.cores=8, optNni=TRUE, optGamma=TRUE, optQ=TRUE, optBf=TRUE, optInv=FALSE)# make bs multiple of 8!
+btrs <- bootstrap.pml(mlik, bs=80, trees=TRUE, multicore=TRUE, mc.cores=8, optNni=TRUE, optGamma=TRUE, optQ=TRUE, optBf=TRUE, optInv=FALSE, model="GTR")# make bs multiple of 8!
 pp <- prop.part(btrs, check.labels=TRUE)
 pc <- prop.clades(rtr, part=pp)
 bs <- round(pc/80, digits=2)
@@ -104,6 +103,64 @@ nodelabels(bs, frame="none", col="red", cex=0.8, adj=c(1.2,1.5))
 legend("bottomleft", legend=c("BS > 0.95", "BS < 0.95", "BS < 0.70"), pch=21, cex=0.75, pt.bg=co, pt.cex=1.25, bty="n")
 dev.off()
 
+
+## read a beast tree
+mcc <- read.beast(file="../temp/partitionfinder_datasets/concat/beast/concat.tre", digits=2)
+lmcc <- ladderize(mcc)
+
+
+p <- character(length(lmcc$posterior))
+co <- c("gray30", "white")
+p[lmcc$posterior >= 0.95] <- co[1]
+p[lmcc$posterior < 0.95] <- co[2]
+
+
+
+# copy tree
+ntr <- lmcc
+ttab <- read.table(file="mol_samples.csv", header=TRUE, sep=",", stringsAsFactors=FALSE)
+ntr$tip.label <- ttab$species[match(ntr$tip.label, ttab$code)]
+
+# interspecies nodes
+insp <- c(#
+    fastMRCA(ntr, "tentaculatus", "schomburgkii"),
+    fastMRCA(ntr, "tentaculatus", "clementinae"),
+    fastMRCA(ntr, "ranunculus", "clementinae"),
+    fastMRCA(ntr, "ranunculus", "sp.Xingu"),
+    fastMRCA(ntr, "sp.Xingu", "macrophthalmus"),
+    fastMRCA(ntr, "macrophthalmus", "leucostictus"),
+    fastMRCA(ntr, "leucostictus", "megalostomus"),
+    fastMRCA(ntr, "megalostomus", "sp.Inambari"),
+    fastMRCA(ntr, "sp.Inambari", "bolivianus"),
+    fastMRCA(ntr, "kelsorum", "dumus"),
+    fastMRCA(ntr, "kelsorum", "tigris"),
+    fastMRCA(ntr, "dumus", "stearleyi"),
+    fastMRCA(ntr, "dumus", "anthrax"),
+    fastMRCA(ntr, "stearleyi", "nicoi.gr2"),
+    fastMRCA(ntr, "nicoi.gr2", "nicoi.gr1"),
+    fastMRCA(ntr, "nicoi.gr1", "n.sp.")
+)#
+# intraspecies nodes 
+want <- c(insp, unlist(lapply(unique(ntr$tip.label), function(x) getMRCA(ntr, x))))
+
+# get numbers from edge matrix
+df <- data.frame(cbind(sort(unique(ntr$edge[,1])), p))
+names(df) <- c("node", "bpp")
+wm <- match(want, df$node) 
+
+# add taxon names
+lmcc$tip.label <- mixedFontLabel(ttab$code[match(lmcc$tip.label, ttab$code)], ttab$genus[match(lmcc$tip.label, ttab$code)], ttab$species[match(lmcc$tip.label, ttab$code)], italic=2:3)
+
+
+#plot.phylo(lmcc)
+#nodelabels(lmcc$posterior, frame="none", col="red")
+
+# plot
+pdf(file="../temp/pseudolithoxus_beast_tree.pdf", width=8, height=10, useDingbats=FALSE)
+plot.phylo(lmcc, cex=0.8, edge.width=2, no.margin=TRUE, font=1, label.offset=0.001, edge.col="gray30", tip.color="grey50")
+nodelabels(node=want, pch=21, bg=p[wm], cex=1.25, col="gray30")
+legend("bottomleft", legend=c("BPP > 0.95", "BPP < 0.95"), pch=21, cex=0.75, pt.bg=co, pt.cex=1.25, bty="none")
+dev.off()
 
 
 
