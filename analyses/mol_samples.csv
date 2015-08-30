@@ -3,7 +3,6 @@
 "B1988","Ancistrus","sp. 'Xingu'","KP960084","KP959935","genbank","NA","NA","NA","NA","Xingu","Rio Xingu, Cachoeira do Espelho, ca. 50 km south-southwest Altamira",-3.651111,-52.37861,"ANSP 199611"
 "P4647","Pseudolithoxus","nicoi.gr1","KP960101","KP960037","genbank","NA","NA","NA","NA","Casiquiare","Casiquiare Canal, left bank upstream from mouth of Siapa",2.15095,-66.45229,"AUM 43726"
 "P6125","Lasiancistrus","schomburgkii","KP960091","KP960030","genbank","NA","NA","NA","NA","Marañón","Río Marañón, 1.57 km ENE of Juan Velasco (Sta Maria de Nieva)",-4.58957,-77.85283,"AUM 45548"
-"T08143","Ancistrus","leucostictus","KP960079","KP959933","genbank","NA","NA","NA","NA","Guyana","Berbice River, 1 km downstream of Cat Creek, Guyana",4.965582,-58.24321,"ROM 88561"
 "T09282","Pseudolithoxus","anthrax","KP960099","KP960041","genbank","NA","NA","NA","NA","Orinoco","Río Orinoco, Paso Ganado, 38 km NNW of San Fernando de Atabapo",4.38418,-67.77473,"AUM 53520"
 "T09376","Pseudolithoxus","tigris","KP960095","KP960035","genbank","NA","NA","NA","NA","Orinoco","Río Orinoco, rock outcropping upstream of Isla Moya, 79 km E of San Fernando de Atabapo",3.88218,-67.01362,"AUM 57674"
 "T09397","Ancistrus","macrophthalmus","KP960083","KP959934","genbank","NA","NA","NA","NA","Orinoco","Río Orinoco, rock outcropping upstream of Isla Moya, 79 km E of San Fernando de Atabapo",3.88218,-67.01362,"AUM 54994"
@@ -17,7 +16,6 @@
 "T12872","Ancistrus","bolivianus","KP960081","KP959931","genbank","NA","NA","NA","NA","Mamoré","San Pedrito River, bridge on Cochabamba-Villa Tunari road, Bolivia",-17.01623,-65.65195,"ROM 90368"
 "T13829","Ancistrus","clementinae","KP960085","KP959929","genbank","NA","NA","NA","NA","Ecuador (Pacific Coast drainage)","Clara River, La Clara, around bridge and downstream",-1.680472,-79.38992,"ROM 93737"
 "V055","Pseudolithoxus","anthrax","KP960100","KP960039","genbank","NA","NA","NA","NA","Ventuari","Río Ventuari, 23 km NE of Macuruco, 94 km E of San Fernando de Atabapo",4.08042,-66.86513,"AUM 39246"
-"V5533","Soromonichthys","stearleyi","KP960102","KP960038","genbank","NA","NA","NA","NA","Orinoco","Caño Soromoni, 11.78km E of Esmeraldas, 30 min. from mouth by bongo, first raudales",3.1938,-65.65197,"AUM 43872"
 "B1470","Lasiancistrus","schomburgkii","NA","NA","nathan extra","NA","NA","NA","NA","Xingu","NA","NA","NA","NA"
 "B1471","Lasiancistrus","schomburgkii","NA","NA","nathan extra","NA","NA","NA","NA","Xingu","NA","NA","NA","NA"
 "B1499","Ancistrus","ranunculus","NA","NA","nathan extra","NA","NA","NA","NA","Xingu","Rio Xingu, small rocky outcrop in main channel, ca. 15 km south of Altamira",-3.331944,-52.17683,"NA"
@@ -57,7 +55,3 @@
 "T151","Pseudolithoxus","nicoi.gr2","NA","NA","this study","TRUE","TRUE","TRUE","TRUE","Alto Negro",,,,
 "T152","Pseudolithoxus","nicoi.gr2","NA","NA","this study","TRUE","TRUE","TRUE","TRUE","Alto Negro",,,,
 "T153","Pseudolithoxus","nicoi.gr2","NA","NA","this study","TRUE","TRUE","TRUE","TRUE","Alto Negro",,,,
-14486,"Pseudolithoxus","n. sp.","NA","NA","WON'T SEQ","NA","NA","NA","NA","Nhamundá","Lower Rio Nhamundá",-1.71782,-57.36856,"INPA 43888"
-"T150","Pseudolithoxus","nicoi","NA","NA","WON'T SEQ","NA","NA","NA","NA","Alto Negro",,,,
-"T154","Pseudolithoxus","nicoi","NA","NA","WON'T SEQ","NA","NA","NA","NA","Alto Negro",,,,
-"P18071","Pseudolithoxus","nicoi","NA","NA","WON'T SEQ, NOT A PSEUDOLITHOXUS","NA","NA","NA","NA","Alto Negro","NA","NA","NA","INPA"
