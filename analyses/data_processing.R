@@ -31,34 +31,41 @@ catragal <- mafft(x=catrag, path="mafft")
 
 # write cytb file to disk
 catcytbal <- gsub("-", "?", catcytbal)
-write.nexus.data(catcytbal, file="cytb.nex", format="dna", interleaved=FALSE, gap="-", missing="?")
+write.nexus.data(catcytbal, file="../temp/final_alignments/cytb.nex", format="dna", interleaved=FALSE, gap="-", missing="?")
 # write a test dataset with labels to check in geneious
-ttab <- read.table(file="mol_samples.csv", header=TRUE, sep=",", stringsAsFactors=FALSE)
-dimnames(catcytbal)[[1]] <- paste(ttab$genus[match(labels(catcytbal), ttab$code)], ttab$species[match(labels(catcytbal), ttab$code)], ttab$code[match(labels(catcytbal), ttab$code)], sep="_")
-write.dna(catcytbal, file="../temp/cytb_all_names.fas", format="fasta", colw=9999)
+#ttab <- read.table(file="mol_samples.csv", header=TRUE, sep=",", stringsAsFactors=FALSE)
+#dimnames(catcytbal)[[1]] <- paste(ttab$genus[match(labels(catcytbal), ttab$code)], ttab$species[match(labels(catcytbal), ttab$code)], ttab$code[match(labels(catcytbal), ttab$code)], sep="_")
+#write.dna(catcytbal, file="../temp/cytb_all_names.fas", format="fasta", colw=9999)
 
 # write rag1 to disk
 catragal <- gsub("-", "?", catragal)
-write.nexus.data(catragal, file="rag1.nex", format="dna", interleaved=FALSE, gap="-", missing="?")
+write.nexus.data(catragal, file="../temp/final_alignments/rag1.nex", format="dna", interleaved=FALSE, gap="-", missing="?")
 # write a test dataset with labels to check in geneious
-dimnames(catragal)[[1]] <- paste(ttab$genus[match(labels(catragal), ttab$code)], ttab$species[match(labels(catragal), ttab$code)], ttab$code[match(labels(catragal), ttab$code)], sep="_")
-write.dna(catragal, file="../temp/rag_all_names.fas", format="fasta", colw=9999)
+#dimnames(catragal)[[1]] <- paste(ttab$genus[match(labels(catragal), ttab$code)], ttab$species[match(labels(catragal), ttab$code)], ttab$code[match(labels(catragal), ttab$code)], sep="_")
+#write.dna(catragal, file="../temp/rag_all_names.fas", format="fasta", colw=9999)
 
 
 ## pull out the pseudolithoxus
-cytb <- as.DNAbin(read.nexus.data(file="cytb.nex"))
-rag <- as.DNAbin(read.nexus.data(file="rag1.nex"))
-# remember to omit those NAs
-cytbpseud <- cytb[na.omit(match(ttab$code[ttab$genus == "Pseudolithoxus"], labels(cytb)))]
-ragpseud <- rag[na.omit(match(ttab$code[ttab$genus == "Pseudolithoxus"], labels(rag)))]
+cytb <- as.DNAbin(read.nexus.data(file="../temp/final_alignments/cytb.nex"))
+rag <- as.DNAbin(read.nexus.data(file="../temp/final_alignments/rag_phased.nex"))
+cytbpseud <- cytb[na.omit(match(ttab$code[grep("dumus|anthrax|nicoi.gr2|nicoi.gr1|n. sp.", ttab$species)], labels(cytb)))]
+rag2 <- rag
+names(rag2) <- gsub("a|b", "", names(rag2))
+ragpseud <- rag[na.omit(which(labels(rag2) %in% ttab$code[grep("dumus|anthrax|nicoi.gr2|nicoi.gr1|n. sp.", ttab$species)]))]
 # write out
-write.nexus.data(cytbpseud, file="../temp/cytb_pseudolithoxus.nex", format="dna", interleaved=FALSE, gap="-", missing="?")
-write.nexus.data(ragpseud, file="../temp/rag1_pseudolithoxus.nex", format="dna", interleaved=FALSE, gap="-", missing="?")
+write.nexus.data(ragpseud, file="../temp/final_alignments/rag1_pseudolithoxus_phased.nex", format="dna", interleaved=FALSE, gap="-", missing="?")
+# split codons
+third <- 1:(length(as.matrix(cytbpseud)[1,])/3)*3
+thirdchars <- as.matrix(cytbpseud)[, third]
+firsec <- as.matrix(cytbpseud)[, -third]
+# write out
+write.nexus.data(thirdchars, file="../temp/final_alignments/cytb_pseudolithoxus_cp3.nex", format="dna", interleaved=FALSE, gap="-", missing="?")
+write.nexus.data(firsec, file="../temp/final_alignments/cytb_pseudolithoxus_cp12.nex", format="dna", interleaved=FALSE, gap="-", missing="?")
 
 
 ## make a concatenated matrix
-cytb <- as.matrix(as.DNAbin(read.nexus.data(file="cytb.nex")))
-rag <- as.matrix(as.DNAbin(read.nexus.data(file="rag1.nex")))
+cytb <- as.matrix(as.DNAbin(read.nexus.data(file="../temp/final_alignments/cytb.nex")))
+rag <- as.matrix(as.DNAbin(read.nexus.data(file="../temp/final_alignments/rag1.nex")))
 
 # concatenate
 li <- list(cytb, rag)
@@ -85,29 +92,30 @@ write.dna(pall, file="../temp/partitionfinder_datasets/concat.phy", format="sequ
 cyt.third <- 1:(length(cytb[1,])/3)*3
 cyt.third_char <- cytb[, cyt.third]
 cyt.12 <- cytb[, -cyt.third]
-
 li <- list(cyt.12, rag)
 all <- c.genes(single.list=li, match=FALSE)
-
 # convert "third" to fasta file 
 write.dna(all, "../temp/cytb12rag123.fas", format="fasta", colw=10000)
 write.dna(cyt.third_char, "../temp/cytb3.fas", format="fasta", colw=10000)
 write.dna(cyt.12, "../temp/cytb12.fas", format="fasta", colw=10000)
-
 # write out to nex
 write.nexus.data(cyt.12, file="../temp/cytb12.nex", format="dna", interleaved=FALSE, gap="-", missing="?")
 write.nexus.data(cyt.third_char, file="../temp/cytb3.nex", format="dna", interleaved=FALSE, gap="-", missing="?")
 
 
 ## splitting into species
+# need to convert ? back to - otherwise phase will impute missing values
+rag <- as.DNAbin(gsub("\\?", "-", rag))
+
 #detect iupac codes
 lk <- lapply(as.list(rag), function(x) grep("r|y|s|w|k|m", x))
 tk <- lapply(lk, length)
 
 # get the poly and non-poly spp from the alignment
+ttab <- read.table(file="mol_samples.csv", header=TRUE, sep=",", stringsAsFactors=FALSE)
 poly <- rag[which(as.integer(tk) > 0), ]
 polyspp <- unique(ttab$species[match(labels(poly), ttab$code)])
-nonpolyspp <- allspp[which(!unique(ttab$species) %in% polyspp)]
+nonpolyspp <- unique(ttab$species)[which(!unique(ttab$species) %in% polyspp)]
 
 # polymorphic spp
 for (i in 1:length(polyspp)){#
@@ -120,9 +128,15 @@ for (i in 1:length(polyspp)){#
 #}#
    
 
-# create copies of indivs without polymorphisms
+# open up the phased file to check it
+pop <- read.dna(file="../temp/species_split/poly_phased_all.fas", format="fasta", as.matrix=TRUE)
+lapply(as.list(pop), function(x) grep("r|y|s|w|k|m|n", x))
+pop2 <- as.DNAbin(gsub("-", "?", pop))
+# create copies of indivs without polymorphisms to phase them
 nonpolyseqsA <- as.list(rag[na.omit(match(ttab$code[which(ttab$species %in% nonpolyspp)], labels(rag))), ])
 nonpolyseqsB <- nonpolyseqsA
 names(nonpolyseqsA) <- paste0(names(nonpolyseqsA), "a")
 names(nonpolyseqsB) <- paste0(names(nonpolyseqsB), "b")
-write.nexus.data(c(nonpolyseqsA, nonpolyseqsB), file="../temp/rag1_phased.nex", interleaved=FALSE, gap="-", missing="?")
+phased.all <- c(nonpolyseqsA, nonpolyseqsB, as.list(pop2))
+# write out
+write.nexus.data(phased.all, file="../temp/final_alignments/rag_phased.nex", format="dna", interleaved=FALSE, gap="-", missing="?")
