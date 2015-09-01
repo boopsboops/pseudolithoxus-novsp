@@ -32,6 +32,7 @@ catragal <- mafft(x=catrag, path="mafft")
 # write cytb file to disk
 catcytbal <- gsub("-", "?", catcytbal)
 write.nexus.data(catcytbal, file="../temp/final_alignments/cytb.nex", format="dna", interleaved=FALSE, gap="-", missing="?")
+write.dna(catcytbal, file="../temp/final_alignments/cytb.phy", format="sequential", colw=9999)
 # write a test dataset with labels to check in geneious
 #ttab <- read.table(file="mol_samples.csv", header=TRUE, sep=",", stringsAsFactors=FALSE)
 #dimnames(catcytbal)[[1]] <- paste(ttab$genus[match(labels(catcytbal), ttab$code)], ttab$species[match(labels(catcytbal), ttab$code)], ttab$code[match(labels(catcytbal), ttab$code)], sep="_")
@@ -48,6 +49,7 @@ write.nexus.data(catragal, file="../temp/final_alignments/rag1.nex", format="dna
 ## pull out the pseudolithoxus
 cytb <- as.DNAbin(read.nexus.data(file="../temp/final_alignments/cytb.nex"))
 rag <- as.DNAbin(read.nexus.data(file="../temp/final_alignments/rag_phased.nex"))
+ttab <- read.table(file="mol_samples.csv", header=TRUE, sep=",", stringsAsFactors=FALSE)
 cytbpseud <- cytb[na.omit(match(ttab$code[grep("dumus|anthrax|nicoi.gr2|nicoi.gr1|n. sp.", ttab$species)], labels(cytb)))]
 rag2 <- rag
 names(rag2) <- gsub("a|b", "", names(rag2))
@@ -61,7 +63,8 @@ firsec <- as.matrix(cytbpseud)[, -third]
 # write out
 write.nexus.data(thirdchars, file="../temp/final_alignments/cytb_pseudolithoxus_cp3.nex", format="dna", interleaved=FALSE, gap="-", missing="?")
 write.nexus.data(firsec, file="../temp/final_alignments/cytb_pseudolithoxus_cp12.nex", format="dna", interleaved=FALSE, gap="-", missing="?")
-
+write.nexus.data(cytbpseud, file="../temp/final_alignments/cytb_pseudolithoxus.nex", format="dna", interleaved=FALSE, gap="-", missing="?")
+write.dna(cytbpseud, file="../temp/final_alignments/cytb_pseudolithoxus.phy", format="sequential", colw=9999)
 
 ## make a concatenated matrix
 cytb <- as.matrix(as.DNAbin(read.nexus.data(file="../temp/final_alignments/cytb.nex")))
