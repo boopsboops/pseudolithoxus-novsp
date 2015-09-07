@@ -103,12 +103,38 @@ nodelabels(bs, frame="none", col="red", cex=0.8, adj=c(1.2,1.5))
 legend("bottomleft", legend=c("BS > 0.95", "BS < 0.95", "BS < 0.70"), pch=21, cex=0.75, pt.bg=co, pt.cex=1.25, bty="n")
 dev.off()
 
+############### *BEAST species tree
 
+mcc <- read.beast(file="../temp/beast_sptree/geocalib_comb.species.tre", digits=2)
+lmcc <- ladderize(mcc)
+p <- character(length(lmcc$posterior))
+co <- c("gray30", "white")
+p[lmcc$posterior >= 0.95] <- co[1]
+p[lmcc$posterior < 0.95] <- co[2]
 
+pdf(file="../temp/pseudolithoxus_beast_sptree.pdf", width=6, height=6, useDingbats=FALSE)
+plot.phylo(lmcc, cex=0.8, edge.width=3, no.margin=TRUE, font=1, label.offset=0.005, edge.col="gray30", tip.color="grey50")
+nodelabels(pch=21, bg=p, cex=1.1, col="dodgerblue")
+legend("bottomleft", legend=c("Bayesian posterior probability >= 0.95", "Bayesian posterior probability < 0.95"), pch=21, cex=0.75, pt.bg=co, pt.cex=1.25, bty="n", col="dodgerblue")
+dev.off()
 
+plot(lmcc, edge.color=0, tip.color=0)
+HPDbars(lmcc, col="skyblue", lwd=7)
 
+pdf(file="../temp/pseudolithoxus_beast_sptree.pdf", width=15, height=9, useDingbats=FALSE)
+plot(lmcc, edge.color=0, tip.color=0, x.lim=c(-3.40436, 25.61854))
+HPDbars(lmcc, col="skyblue", lwd=7)
+plot.phylo.upon(lmcc, cex=1, edge.width=2, no.margin=TRUE, font=1, label.offset=0.2, edge.col="gray30", tip.color="grey50")
+nodelabels(pch=21, bg=p, cex=0.9, col="gray30")
+data(gradstein04)
+data(strat2012)
+axisGeo(GTS=strat2012, unit=c("stage", "epoch"), col="yellow", texcol="gray20", ages=TRUE, cex=1, gridty=3, gridcol="gray50")
+dev.off()
 
+str(lmcc)
 
+lmcc$"height_95%_HPD_MAX"
+lmcc$"height_95%_HPD_MIN"
 
 ################ read a beast tree
 # read the tree
