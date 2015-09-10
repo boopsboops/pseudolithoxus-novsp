@@ -1,5 +1,6 @@
 require("spider")
 require("genealogicalSorting")
+rm(list=ls())
 
 ## load data
 cytb <- as.matrix(as.DNAbin(read.nexus.data(file="../temp/final_alignments/cytb.nex")))
@@ -7,19 +8,63 @@ rag1 <- as.matrix(as.DNAbin(read.nexus.data(file="../temp/final_alignments/rag1.
 ttab <- read.table(file="mol_samples.csv", header=TRUE, sep=",", stringsAsFactors=FALSE)
 
 
-## separate the P. nicoi group
-cytbpseud <- cytb[na.omit(match(ttab$code[grep("nicoi.gr2|nicoi.gr1|n. sp.", ttab$species)], labels(cytb))), ]
-cytbpseudspp <- ttab$species[match(labels(cytbpseud), ttab$code)]
-rag1pseud <- rag1[na.omit(match(ttab$code[grep("nicoi.gr2|nicoi.gr1|n. sp.", ttab$species)], labels(rag1))), ]
-rag1pseudspp <- ttab$species[match(labels(rag1pseud), ttab$code)]
+
+
+
+## set up alternative species delimitation scenarios
+# nicoi gr1+gr2
+nic12 <- ttab
+nic12$species <- gsub("nicoi.gr1|nicoi.gr2", "nicoi.gr1+gr2", nic12$species)
+# nicoi gr1+nsp
+nic1nsp <- ttab
+nic1nsp$species <- gsub("nicoi.gr1|n. sp.", "nicoi.gr1+n.sp.", nic1nsp$species)
+# nicoi gr1+gr2+nsp
+nic12nsp <- ttab
+nic12nsp$species <- gsub("nicoi.gr1|nicoi.gr2|n. sp.", "nicoi.gr1+gr2+n.sp.", nic12nsp$species)
 
 
 ## seg sites analysis
+# separate Pseudolithoxus genus and just the nicoi group
+cytbpseud <- cytb[na.omit(match(ttab$code[grep("Pseudolithoxus", ttab$genus)], labels(cytb))), ]
+rag1pseud <- rag1[na.omit(match(ttab$code[grep("Pseudolithoxus", ttab$genus)], labels(rag1))), ]
+cytbnic <- cytb[na.omit(match(ttab$code[grep("nicoi.gr2|nicoi.gr1|n. sp.", ttab$species)], labels(cytb))), ]
+rag1nic <- rag1[na.omit(match(ttab$code[grep("nicoi.gr2|nicoi.gr1|n. sp.", ttab$species)], labels(rag1))), ]
+
+# make the species vectors
+# note writes over prev objects! run one at a time
+cytbspp <- ttab$species[match(labels(cytbpseud), ttab$code)]# all pseudos: 3 spp. delim
+rag1spp <- ttab$species[match(labels(rag1pseud), ttab$code)]# all pseudos:3 spp. delim
+#
+cytbspp <- nic12$species[match(labels(cytbpseud), nic12$code)]# all pseudos: nicoi gr1+gr2
+rag1spp <- nic12$species[match(labels(rag1pseud), nic12$code)]# all pseudos: nicoi gr1+gr2
+#
+cytbspp <- nic1nsp$species[match(labels(cytbpseud), nic1nsp$code)]# all pseudos: nicoi gr1+n.sp.
+rag1spp <- nic1nsp$species[match(labels(rag1pseud), nic1nsp$code)]# all pseudos: nicoi gr1+n.sp.
+#
+cytbspp <- nic12nsp$species[match(labels(cytbpseud), nic12nsp$code)]# all pseudos: nicoi gr1+gr2+n.sp.
+rag1spp <- nic12nsp$species[match(labels(rag1pseud), nic12nsp$code)]# all pseudos: nicoi gr1+gr2+n.sp.
+#
+cytbspp <- ttab$species[match(labels(cytbnic), ttab$code)]# just nicoi: 3 spp. delim
+rag1spp <- ttab$species[match(labels(rag1nic), ttab$code)]# just nicoi: 3 spp. delim
+#
+cytbspp <- nic12$species[match(labels(cytbnic), nic12$code)]# just nicoi: nicoi gr1+gr2
+rag1spp <- nic12$species[match(labels(rag1nic), nic12$code)]# just nicoi: nicoi gr1+gr2
+#
+cytbspp <- nic1nsp$species[match(labels(cytbnic), nic1nsp$code)]# just nicoi: nicoi gr1+n.sp.
+rag1spp <- nic1nsp$species[match(labels(rag1nic), nic1nsp$code)]# just nicoi: nicoi gr1+n.sp.
+#
+
 #To view the nucleotide values 
-cytbseg <- nucDiag(cytbpseud, cytbpseudspp)
-lapply(cytbseg, length)
-rag1seg <- nucDiag(rag1pseud, rag1pseudspp)
-lapply(rag1seg, length)
+lapply(nucDiag(cytbpseud, cytbspp), length)
+lapply(nucDiag(rag1pseud, rag1spp), length)
+
+lapply(nucDiag(cytbnic, cytbspp), length)
+lapply(nucDiag(rag1nic, rag1spp), length)
+
+## networks
+nn <- neighborNet(dist.dna(cytbnic, model="raw", pairwise.deletion=TRUE, as.matrix=TRUE))
+nn <- neighborNet(dist.dna(rag1nic, model="raw", pairwise.deletion=TRUE, as.matrix=TRUE))
+plot.networx(nn, "2D", edge.color="black", edge.width=1)
 
 
 ## make some trees
