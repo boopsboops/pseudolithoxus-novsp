@@ -62,9 +62,9 @@ lapply(nucDiag(cytbnic, cytbspp), length)
 lapply(nucDiag(rag1nic, rag1spp), length)
 
 ## networks
-nn <- neighborNet(dist.dna(cytbnic, model="raw", pairwise.deletion=TRUE, as.matrix=TRUE))
-nn <- neighborNet(dist.dna(rag1nic, model="raw", pairwise.deletion=TRUE, as.matrix=TRUE))
-plot.networx(nn, "2D", edge.color="black", edge.width=1)
+#nn <- neighborNet(dist.dna(cytbnic, model="raw", pairwise.deletion=TRUE, as.matrix=TRUE))
+#nn <- neighborNet(dist.dna(rag1nic, model="raw", pairwise.deletion=TRUE, as.matrix=TRUE))
+#plot.networx(nn, "2D", edge.color="black", edge.width=1)
 
 
 ## make some trees
@@ -76,19 +76,53 @@ prat <- pratchet(dat, rearrangements="SPR")
 pars <- acctran(prat, dat)
 # make an ml tree
 mlm <- pml(pars, dat, k=4, inv=0, model="HKY") # cytb
-mlik <- optim.pml(mlm, optNni=TRUE, optGamma=TRUE, optEdge=TRUE, optBf=TRUE, optInv=FALSE, model="HKY") # cytb
+mlik <- optim.pml(mlm, optNni=TRUE, optGamma=TRUE, optInv=FALSE, model="HKY") # cytb
 mlm <- pml(pars, dat, k=4, inv=0, model="K80") # rag1
-mlik <- optim.pml(mlm, optNni=TRUE, optGamma=TRUE, optEdge=TRUE, optBf=FALSE, optInv=FALSE, model="K80") # rag1
+mlik <- optim.pml(mlm, optNni=TRUE, optGamma=TRUE, optInv=FALSE, model="K80") # rag1
+# copy trees
 cytbtr <- midpoint(mlik$tree)
+cytbtr.nic12 <- cytbtr
+cytbtr.nic12nsp <- cytbtr
+cytbtr.nic1nsp <- cytbtr
 rag1tr <- midpoint(mlik$tree)
+rag1tr.nic12 <- rag1tr
+rag1tr.nic12nsp <- rag1tr
+rag1tr.nic1nsp <- rag1tr
 
 
-## rosenberg analysis
+## rosenberg analysis (cytb)
 cytbros <- rosenberg(cytbtr)
+# create the different trees with sp delims
 cytbtr$tip.label <- ttab$species[match(cytbtr$tip.label, ttab$code)]
+cytbtr.nic12$tip.label <- nic12$species[match(cytbtr.nic12$tip.label, nic12$code)]
+cytbtr.nic12nsp$tip.label <- nic12nsp$species[match(cytbtr.nic12nsp$tip.label, nic12nsp$code)]
+cytbtr.nic1nsp$tip.label <- nic1nsp$species[match(cytbtr.nic1nsp$tip.label, nic1nsp$code)]
+# extract the rosenberg P values
 cytbros[names(cytbros) == getMRCA(cytbtr, tip="n. sp.")]
 cytbros[names(cytbros) == getMRCA(cytbtr, tip="nicoi.gr1")]
 cytbros[names(cytbros) == getMRCA(cytbtr, tip="nicoi.gr2")]
+cytbros[names(cytbros) == getMRCA(cytbtr.nic12, tip="nicoi.gr1+gr2")]
+cytbros[names(cytbros) == getMRCA(cytbtr.nic12nsp, tip="nicoi.gr1+gr2+n.sp.")]
+cytbros[names(cytbros) == getMRCA(cytbtr.nic1nsp, tip="nicoi.gr1+n.sp.")]
+
+## rosenberg analysis (rag1)
+rag1ros <- rosenberg(rag1tr)
+# create the different trees with sp delims
+rag1tr$tip.label <- ttab$species[match(rag1tr$tip.label, ttab$code)]
+rag1tr.nic12$tip.label <- nic12$species[match(rag1tr.nic12$tip.label, nic12$code)]
+rag1tr.nic12nsp$tip.label <- nic12nsp$species[match(rag1tr.nic12nsp$tip.label, nic12nsp$code)]
+rag1tr.nic1nsp$tip.label <- nic1nsp$species[match(rag1tr.nic1nsp$tip.label, nic1nsp$code)]
+# extract the rosenberg P values
+rag1ros[names(rag1ros) == getMRCA(rag1tr, tip="n. sp.")]
+#rag1ros[names(rag1ros) == getMRCA(rag1tr, tip="nicoi.gr1")] # not monophyletic
+#rag1ros[names(rag1ros) == getMRCA(rag1tr, tip="nicoi.gr2")] # not monophyletic
+#rag1ros[names(rag1ros) == getMRCA(rag1tr.nic12, tip="nicoi.gr1+gr2")] # not monophyletic
+rag1ros[names(rag1ros) == getMRCA(rag1tr.nic12nsp, tip="nicoi.gr1+gr2+n.sp.")]
+rag1ros[names(rag1ros) == getMRCA(rag1tr.nic1nsp, tip="nicoi.gr1+n.sp.")]
+
+
+
+plot(rag1tr)
 
 rag1ros <- rosenberg(rag1tr)
 rag1tr$tip.label <- ttab$species[match(rag1tr$tip.label, ttab$code)]
