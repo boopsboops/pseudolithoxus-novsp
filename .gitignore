@@ -25,5 +25,6 @@
 *.mas
 manuscript-master.md
 manuscript-master.html
-temp/
-sequences/
+temp
+sequences
+temp2
