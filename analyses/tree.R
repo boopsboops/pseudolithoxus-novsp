@@ -8,6 +8,35 @@ require("phyloch")
 require("phytools")
 rm(list=ls())
 
+
+### quick ML tree plot (Feb 16)
+cytb <- as.matrix(as.DNAbin(read.nexus.data(file="../temp/final_alignments/cytb.nex")))
+rag <- as.matrix(as.DNAbin(read.nexus.data(file="../temp/final_alignments/rag1.nex")))
+
+dat <- cytb
+dat <- rag
+
+prat <- pratchet(as.phyDat(dat), rearrangements="SPR")
+pars <- acctran(prat, as.phyDat(dat))
+mlm <- pml(pars, as.phyDat(dat), k=4, inv=0, model="HKY")
+mlik <- optim.pml(mlm, optNni=TRUE, optGamma=TRUE, optInv=FALSE, model="HKY")
+tr <- mlik$tree
+rtr <- ladderize(reorder(midpoint(tr)))
+
+
+ttab <- read.table(file="mol_samples.csv", header=TRUE, sep=",", stringsAsFactors=FALSE)
+rtr$tip.label <- paste(ttab$code[match(rtr$tip.label, ttab$code)], ttab$genus[match(rtr$tip.label, ttab$code)], ttab$species[match(rtr$tip.label, ttab$code)], ttab$locality_drainage[match(rtr$tip.label, ttab$code)], sep="_")
+rag.tr <- rtr
+cytb.tr <- rtr
+
+pdf(file="../temp/pseudolithoxus_rag1.pdf", width=12, height=15, useDingbats=FALSE)
+plot.phylo(rtr, cex=1, edge.width=2, no.margin=TRUE, font=1, label.offset=0.0001, edge.col="gray30", tip.color="grey50")
+dev.off()
+
+
+
+### 
+
 cytb <- as.matrix(as.DNAbin(read.nexus.data(file="cytb.nex")))
 rag <- as.matrix(as.DNAbin(read.nexus.data(file="rag1.nex")))
 all <- as.matrix(as.DNAbin(read.nexus.data(file="../temp/concat.nex")))
