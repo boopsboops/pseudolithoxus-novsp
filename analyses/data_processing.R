@@ -47,8 +47,8 @@ write.nexus.data(catragal, file="../temp/final_alignments/rag1.nex", format="dna
 
 
 ## pull out the pseudolithoxus
-cytb <- as.DNAbin(read.nexus.data(file="../temp/final_alignments/cytb.nex"))
-rag <- as.DNAbin(read.nexus.data(file="../temp/final_alignments/rag_phased.nex"))
+cytb <- as.DNAbin(read.nexus.data(file="../temp2/final_alignments/cytb.nex"))
+rag <- as.DNAbin(read.nexus.data(file="../temp2/final_alignments/rag_phased.nex"))
 ttab <- read.table(file="mol_samples.csv", header=TRUE, sep=",", stringsAsFactors=FALSE)
 cytbpseud <- cytb[na.omit(match(ttab$code[grep("dumus|anthrax|nicoi.gr2|nicoi.gr1|n. sp.", ttab$species)], labels(cytb)))]
 rag2 <- rag
@@ -67,8 +67,8 @@ write.nexus.data(cytbpseud, file="../temp/final_alignments/cytb_pseudolithoxus.n
 write.dna(cytbpseud, file="../temp/final_alignments/cytb_pseudolithoxus.phy", format="sequential", colw=9999)
 
 ## make a concatenated matrix
-cytb <- as.matrix(as.DNAbin(read.nexus.data(file="../temp/final_alignments/cytb.nex")))
-rag <- as.matrix(as.DNAbin(read.nexus.data(file="../temp/final_alignments/rag1.nex")))
+cytb <- as.matrix(as.DNAbin(read.nexus.data(file="../temp2/final_alignments/cytb.nex")))
+rag <- as.matrix(as.DNAbin(read.nexus.data(file="../temp2/final_alignments/rag1.nex")))
 
 # concatenate
 li <- list(cytb, rag)
@@ -81,31 +81,31 @@ write.nexus.data(all, file="../temp/concat.nex", format="dna", interleaved=FALSE
 
 
 ## export some files as phylip for partitionfinder
-#pcytb <- as.DNAbin(read.nexus.data(file="../temp/final_alignments/cytb_pseudolithoxus.nex"))
-#prag <- as.DNAbin(read.nexus.data(file="../temp/final_alignments/rag1_pseudolithoxus.nex"))
+pcytb <- as.DNAbin(read.nexus.data(file="../temp2/final_alignments/cytb_pseudolithoxus.nex"))
+prag <- as.DNAbin(read.nexus.data(file="../temp2/final_alignments/rag1_pseudolithoxus_phased.nex"))
 #pall <- as.DNAbin(read.nexus.data(file="../temp/final_alignments/concat.nex"))
 #phrag <- as.DNAbin(read.nexus.data(file="../temp/final_alignments/rag_phased.nex"))
 
-#write.dna(pcytb, file="../temp/final_alignments/cytb_pseudolithoxus.phy", format="sequential", colw=9999)
-#write.dna(prag, file="../temp/final_alignments/rag1_pseudolithoxus.phy", format="sequential", colw=9999)
+write.dna(pcytb, file="../temp2/final_alignments/cytb_pseudolithoxus.phy", format="sequential", colw=9999)
+write.dna(prag, file="../temp2/final_alignments/rag1_pseudolithoxus_phased.phy", format="sequential", colw=9999)
 #write.dna(pall, file="../temp/final_alignments/concat.phy", format="sequential", colw=9999)
 #write.dna(phrag, file="../temp/final_alignments/rag_phased.phy", format="sequential", colw=9999)
 
 
-## to extract codon positions
-# specify only third position i.e. 1119/3 = 373
-cytb3pos <- 1:(length(cytb[1,])/3)*3
-cytb3mat <- cytb[, cytb3pos]
-cytb12mat <- cytb[, -cytb3pos]
-li <- list(cytb12mat, rag)
-all <- c.genes(single.list=li, match=FALSE)
-# convert "third" to fasta file 
-#write.dna(all, "../temp/cytb12rag123.fas", format="fasta", colw=10000)
-#write.dna(cyt3mat, "../temp/cytb3.fas", format="fasta", colw=10000)
-#write.dna(cytb12mat, "../temp/cytb12.fas", format="fasta", colw=10000)
-# write out to nex
-write.nexus.data(cytb3mat, file="../temp/final_alignments/cytb3.nex", format="dna", interleaved=FALSE, gap="-", missing="?")
-write.nexus.data(cytb12mat, file="../temp/final_alignments/cytb12.nex", format="dna", interleaved=FALSE, gap="-", missing="?")
+## to extract codon positions for checking in jmodeltest
+cytb <- as.matrix(as.DNAbin(read.nexus.data(file="../temp2/final_alignments/cytb_pseudolithoxus.nex")))
+rag <- as.matrix(as.DNAbin(read.nexus.data(file="../temp2/final_alignments/rag1_pseudolithoxus_phased.nex")))
+dat <- rag
+dat <- cytb
+
+cp1 <- seq(from=1, to=(dim(dat)[2]-2), by=3)
+cp2 <- seq(from=2, to=(dim(dat)[2]-1), by=3)
+cp3 <- seq(from=3, to=(dim(dat)[2]-0), by=3)
+write.dna(dat[ ,cp1], file="../temp2/final_alignments/cytb_pseudolithoxus_CP1.fasta", format="fasta", colw=9999)
+write.dna(dat[ ,cp2], file="../temp2/final_alignments/cytb_pseudolithoxus_CP2.fasta", format="fasta", colw=9999)
+write.dna(dat[ ,cp3], file="../temp2/final_alignments/cytb_pseudolithoxus_CP3.fasta", format="fasta", colw=9999)
+write.dna(dat[ ,cp1], file="../temp2/final_alignments/rag1_pseudolithoxus_phased_CP1.fasta", format="fasta", colw=9999)
+write.dna(dat[ ,-cp1], file="../temp2/final_alignments/rag1_pseudolithoxus_phased_CP23.fasta", format="fasta", colw=9999)
 
 
 ## splitting into species
