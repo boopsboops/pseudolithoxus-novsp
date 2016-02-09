@@ -94,7 +94,7 @@ write.dna(prag, file="../temp2/final_alignments/rag1_pseudolithoxus_phased.phy",
 
 ## to extract codon positions for checking in jmodeltest
 cytb <- as.matrix(as.DNAbin(read.nexus.data(file="../temp2/final_alignments/cytb_pseudolithoxus.nex")))
-rag <- as.matrix(as.DNAbin(read.nexus.data(file="../temp2/final_alignments/rag1_pseudolithoxus_phased.nex")))
+rag <- as.matrix(as.DNAbin(read.nexus.data(file="../temp2/final_alignments/rag1_phased.nex")))
 dat <- rag
 dat <- cytb
 
@@ -104,7 +104,9 @@ cp3 <- seq(from=3, to=(dim(dat)[2]-0), by=3)
 write.dna(dat[ ,cp1], file="../temp2/final_alignments/cytb_pseudolithoxus_CP1.fasta", format="fasta", colw=9999)
 write.dna(dat[ ,cp2], file="../temp2/final_alignments/cytb_pseudolithoxus_CP2.fasta", format="fasta", colw=9999)
 write.dna(dat[ ,cp3], file="../temp2/final_alignments/cytb_pseudolithoxus_CP3.fasta", format="fasta", colw=9999)
-write.dna(dat[ ,cp1], file="../temp2/final_alignments/rag1_pseudolithoxus_phased_CP1.fasta", format="fasta", colw=9999)
+write.dna(dat[ ,cp1], file="../temp2/final_alignments/rag1_phased_CP1.fasta", format="fasta", colw=9999)
+write.dna(dat[ ,cp2], file="../temp2/final_alignments/rag1_phased_CP2.fasta", format="fasta", colw=9999)
+write.dna(dat[ ,cp3], file="../temp2/final_alignments/rag1_phased_CP3.fasta", format="fasta", colw=9999)
 write.dna(dat[ ,-cp1], file="../temp2/final_alignments/rag1_pseudolithoxus_phased_CP23.fasta", format="fasta", colw=9999)
 
 
