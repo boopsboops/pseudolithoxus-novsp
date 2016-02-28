@@ -1,0 +1,211 @@
+<?xml version="1.0" standalone="yes"?>
+
+<!-- beast bf_calculations.xml > bf_results.txt                -->
+
+<beast>
+	<!-- Path sampling estimator from collected samples                          -->
+	<pathSamplingAnalysis fileName="m0run1.mle.log">
+		<likelihoodColumn name="pathLikelihood.delta"/>
+		<thetaColumn name="pathLikelihood.theta"/>
+	</pathSamplingAnalysis>
+
+	<!-- Stepping-stone sampling estimator from collected samples                -->
+	<steppingStoneSamplingAnalysis fileName="m0run1.mle.log">
+		<likelihoodColumn name="pathLikelihood.delta"/>
+		<thetaColumn name="pathLikelihood.theta"/>
+	</steppingStoneSamplingAnalysis>
+
+	<!-- Path sampling estimator from collected samples                          -->
+	<pathSamplingAnalysis fileName="m0run2.mle.log">
+		<likelihoodColumn name="pathLikelihood.delta"/>
+		<thetaColumn name="pathLikelihood.theta"/>
+	</pathSamplingAnalysis>
+
+	<!-- Stepping-stone sampling estimator from collected samples                -->
+	<steppingStoneSamplingAnalysis fileName="m0run2.mle.log">
+		<likelihoodColumn name="pathLikelihood.delta"/>
+		<thetaColumn name="pathLikelihood.theta"/>
+	</steppingStoneSamplingAnalysis>
+	
+	<!-- Path sampling estimator from collected samples                          -->
+	<pathSamplingAnalysis fileName="m0run3.mle.log">
+		<likelihoodColumn name="pathLikelihood.delta"/>
+		<thetaColumn name="pathLikelihood.theta"/>
+	</pathSamplingAnalysis>
+
+	<!-- Stepping-stone sampling estimator from collected samples                -->
+	<steppingStoneSamplingAnalysis fileName="m0run3.mle.log">
+		<likelihoodColumn name="pathLikelihood.delta"/>
+		<thetaColumn name="pathLikelihood.theta"/>
+	</steppingStoneSamplingAnalysis>
+
+
+
+	<!-- Path sampling estimator from collected samples                          -->
+	<pathSamplingAnalysis fileName="m1run1.mle.log">
+		<likelihoodColumn name="pathLikelihood.delta"/>
+		<thetaColumn name="pathLikelihood.theta"/>
+	</pathSamplingAnalysis>
+
+	<!-- Stepping-stone sampling estimator from collected samples                -->
+	<steppingStoneSamplingAnalysis fileName="m1run1.mle.log">
+		<likelihoodColumn name="pathLikelihood.delta"/>
+		<thetaColumn name="pathLikelihood.theta"/>
+	</steppingStoneSamplingAnalysis>
+
+	<!-- Path sampling estimator from collected samples                          -->
+	<pathSamplingAnalysis fileName="m1run2.mle.log">
+		<likelihoodColumn name="pathLikelihood.delta"/>
+		<thetaColumn name="pathLikelihood.theta"/>
+	</pathSamplingAnalysis>
+
+	<!-- Stepping-stone sampling estimator from collected samples                -->
+	<steppingStoneSamplingAnalysis fileName="m1run2.mle.log">
+		<likelihoodColumn name="pathLikelihood.delta"/>
+		<thetaColumn name="pathLikelihood.theta"/>
+	</steppingStoneSamplingAnalysis>
+	
+	<!-- Path sampling estimator from collected samples                          -->
+	<pathSamplingAnalysis fileName="m1run3.mle.log">
+		<likelihoodColumn name="pathLikelihood.delta"/>
+		<thetaColumn name="pathLikelihood.theta"/>
+	</pathSamplingAnalysis>
+
+	<!-- Stepping-stone sampling estimator from collected samples                -->
+	<steppingStoneSamplingAnalysis fileName="m1run3.mle.log">
+		<likelihoodColumn name="pathLikelihood.delta"/>
+		<thetaColumn name="pathLikelihood.theta"/>
+	</steppingStoneSamplingAnalysis>
+
+
+
+	<!-- Path sampling estimator from collected samples                          -->
+	<pathSamplingAnalysis fileName="m2run1.mle.log">
+		<likelihoodColumn name="pathLikelihood.delta"/>
+		<thetaColumn name="pathLikelihood.theta"/>
+	</pathSamplingAnalysis>
+
+	<!-- Stepping-stone sampling estimator from collected samples                -->
+	<steppingStoneSamplingAnalysis fileName="m2run1.mle.log">
+		<likelihoodColumn name="pathLikelihood.delta"/>
+		<thetaColumn name="pathLikelihood.theta"/>
+	</steppingStoneSamplingAnalysis>
+
+	<!-- Path sampling estimator from collected samples                          -->
+	<pathSamplingAnalysis fileName="m2run2.mle.log">
+		<likelihoodColumn name="pathLikelihood.delta"/>
+		<thetaColumn name="pathLikelihood.theta"/>
+	</pathSamplingAnalysis>
+
+	<!-- Stepping-stone sampling estimator from collected samples                -->
+	<steppingStoneSamplingAnalysis fileName="m2run2.mle.log">
+		<likelihoodColumn name="pathLikelihood.delta"/>
+		<thetaColumn name="pathLikelihood.theta"/>
+	</steppingStoneSamplingAnalysis>
+	
+	<!-- Path sampling estimator from collected samples                          -->
+	<pathSamplingAnalysis fileName="m2run3.mle.log">
+		<likelihoodColumn name="pathLikelihood.delta"/>
+		<thetaColumn name="pathLikelihood.theta"/>
+	</pathSamplingAnalysis>
+
+	<!-- Stepping-stone sampling estimator from collected samples                -->
+	<steppingStoneSamplingAnalysis fileName="m2run3.mle.log">
+		<likelihoodColumn name="pathLikelihood.delta"/>
+		<thetaColumn name="pathLikelihood.theta"/>
+	</steppingStoneSamplingAnalysis>
+
+
+
+	<!-- Path sampling estimator from collected samples                          -->
+	<pathSamplingAnalysis fileName="m3run1.mle.log">
+		<likelihoodColumn name="pathLikelihood.delta"/>
+		<thetaColumn name="pathLikelihood.theta"/>
+	</pathSamplingAnalysis>
+
+	<!-- Stepping-stone sampling estimator from collected samples                -->
+	<steppingStoneSamplingAnalysis fileName="m3run1.mle.log">
+		<likelihoodColumn name="pathLikelihood.delta"/>
+		<thetaColumn name="pathLikelihood.theta"/>
+	</steppingStoneSamplingAnalysis>
+
+	<!-- Path sampling estimator from collected samples                          -->
+	<pathSamplingAnalysis fileName="m3run2.mle.log">
+		<likelihoodColumn name="pathLikelihood.delta"/>
+		<thetaColumn name="pathLikelihood.theta"/>
+	</pathSamplingAnalysis>
+
+	<!-- Stepping-stone sampling estimator from collected samples                -->
+	<steppingStoneSamplingAnalysis fileName="m3run2.mle.log">
+		<likelihoodColumn name="pathLikelihood.delta"/>
+		<thetaColumn name="pathLikelihood.theta"/>
+	</steppingStoneSamplingAnalysis>
+	
+	<!-- Path sampling estimator from collected samples                          -->
+	<pathSamplingAnalysis fileName="m3run3.mle.log">
+		<likelihoodColumn name="pathLikelihood.delta"/>
+		<thetaColumn name="pathLikelihood.theta"/>
+	</pathSamplingAnalysis>
+
+	<!-- Stepping-stone sampling estimator from collected samples                -->
+	<steppingStoneSamplingAnalysis fileName="m3run3.mle.log">
+		<likelihoodColumn name="pathLikelihood.delta"/>
+		<thetaColumn name="pathLikelihood.theta"/>
+	</steppingStoneSamplingAnalysis>
+
+
+
+	<!-- Path sampling estimator from collected samples                          -->
+	<pathSamplingAnalysis fileName="m0run1.mle.log m0run2.mle.log m0run3.mle.log">
+		<likelihoodColumn name="pathLikelihood.delta"/>
+		<thetaColumn name="pathLikelihood.theta"/>
+	</pathSamplingAnalysis>
+
+	<!-- Stepping-stone sampling estimator from collected samples                -->
+	<steppingStoneSamplingAnalysis fileName="m0run1.mle.log m0run2.mle.log m0run3.mle.log">
+		<likelihoodColumn name="pathLikelihood.delta"/>
+		<thetaColumn name="pathLikelihood.theta"/>
+	</steppingStoneSamplingAnalysis>
+
+
+	<!-- Path sampling estimator from collected samples                          -->
+	<pathSamplingAnalysis fileName="m1run1.mle.log m1run2.mle.log m1run3.mle.log">
+		<likelihoodColumn name="pathLikelihood.delta"/>
+		<thetaColumn name="pathLikelihood.theta"/>
+	</pathSamplingAnalysis>
+
+	<!-- Stepping-stone sampling estimator from collected samples                -->
+	<steppingStoneSamplingAnalysis fileName="m1run1.mle.log m1run2.mle.log m1run3.mle.log">
+		<likelihoodColumn name="pathLikelihood.delta"/>
+		<thetaColumn name="pathLikelihood.theta"/>
+	</steppingStoneSamplingAnalysis>
+
+
+
+	<!-- Path sampling estimator from collected samples                          -->
+	<pathSamplingAnalysis fileName="m2run1.mle.log m2run2.mle.log m2run3.mle.log">
+		<likelihoodColumn name="pathLikelihood.delta"/>
+		<thetaColumn name="pathLikelihood.theta"/>
+	</pathSamplingAnalysis>
+
+	<!-- Stepping-stone sampling estimator from collected samples                -->
+	<steppingStoneSamplingAnalysis fileName="m2run1.mle.log m2run2.mle.log m2run3.mle.log">
+		<likelihoodColumn name="pathLikelihood.delta"/>
+		<thetaColumn name="pathLikelihood.theta"/>
+	</steppingStoneSamplingAnalysis>
+
+
+
+	<!-- Path sampling estimator from collected samples                          -->
+	<pathSamplingAnalysis fileName="m3run1.mle.log m3run2.mle.log m3run3.mle.log">
+		<likelihoodColumn name="pathLikelihood.delta"/>
+		<thetaColumn name="pathLikelihood.theta"/>
+	</pathSamplingAnalysis>
+
+	<!-- Stepping-stone sampling estimator from collected samples                -->
+	<steppingStoneSamplingAnalysis fileName="m3run1.mle.log m3run2.mle.log m3run3.mle.log">
+		<likelihoodColumn name="pathLikelihood.delta"/>
+		<thetaColumn name="pathLikelihood.theta"/>
+	</steppingStoneSamplingAnalysis>
+
+</beast>
