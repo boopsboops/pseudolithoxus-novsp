@@ -134,88 +134,82 @@ dev.off()
 
 ############### *BEAST species tree
 
-mcc <- read.beast(file="../temp/beast_sptree/geocalib_comb.species.tre", digits=2)
+mcc <- read.beast(file="../data/COMBO.species.tre", digits=2)
 lmcc <- ladderize(mcc)
 p <- character(length(lmcc$posterior))
 co <- c("gray30", "white")
 p[lmcc$posterior >= 0.95] <- co[1]
 p[lmcc$posterior < 0.95] <- co[2]
 
-pdf(file="../temp/pseudolithoxus_beast_sptree.pdf", width=6, height=6, useDingbats=FALSE)
-plot.phylo(lmcc, cex=0.8, edge.width=3, no.margin=TRUE, font=1, label.offset=0.005, edge.col="gray30", tip.color="grey50")
-nodelabels(pch=21, bg=p, cex=1.1, col="dodgerblue")
-legend("bottomleft", legend=c("Bayesian posterior probability >= 0.95", "Bayesian posterior probability < 0.95"), pch=21, cex=0.75, pt.bg=co, pt.cex=1.25, bty="n", col="dodgerblue")
-dev.off()
-
+# get dims
 plot(lmcc, edge.color=0, tip.color=0)
 HPDbars(lmcc, col="skyblue", lwd=7)
-
-pdf(file="../temp/pseudolithoxus_beast_sptree.pdf", width=15, height=9, useDingbats=FALSE)
-plot(lmcc, edge.color=0, tip.color=0, x.lim=c(-3.40436, 25.61854))
+# plot
+pdf(file="../temp2/starbeast_spTree_27-02-16.pdf", width=14, height=10, useDingbats=FALSE)
+plot(lmcc, edge.color=0, tip.color=0, x.lim=c(-2.69241, 23.38284))
 HPDbars(lmcc, col="skyblue", lwd=7)
-plot.phylo.upon(lmcc, cex=1, edge.width=2, no.margin=TRUE, font=1, label.offset=0.2, edge.col="gray30", tip.color="grey50")
-nodelabels(pch=21, bg=p, cex=0.9, col="gray30")
+plot.phylo.upon(lmcc, cex=1, edge.width=2, font=1, label.offset=0.2, edge.col="gray30", tip.color="grey50")
+nodelabels(pch=21, bg=p, cex=1, col="gray30")
 data(gradstein04)
 data(strat2012)
 axisGeo(GTS=strat2012, unit=c("stage", "epoch"), col="yellow", texcol="gray20", ages=TRUE, cex=1, gridty=3, gridcol="gray50")
 dev.off()
 
 str(lmcc)
-
 lmcc$"height_95%_HPD_MAX"
 lmcc$"height_95%_HPD_MIN"
 
-################ read a beast tree
+################ Gene trees CYTB
 # read the tree
-mcc <- read.beast(file="../temp/beast/3parts.tre", digits=2)
-lmcc <- ladderize(mcc)
-p <- character(length(lmcc$posterior))
-co <- c("dodgerblue", "white")
-p[lmcc$posterior >= 0.95] <- co[1]
-p[lmcc$posterior < 0.95] <- co[2]
+cytb.mcc <- read.beast(file="../data/COMBO.cytb.tre", digits=2)
+cytb.lmcc <- ladderize(cytb.mcc)
+
+# make posterior probs
+p <- character(length(cytb.lmcc$posterior))
+co <- c("gray30", "white")
+p[cytb.lmcc$posterior >= 0.95] <- co[1]
+p[cytb.lmcc$posterior < 0.95] <- co[2]
 # copy tree
-ntr <- lmcc
-ttab <- read.table(file="mol_samples.csv", header=TRUE, sep=",", stringsAsFactors=FALSE)
-ntr$tip.label <- ttab$species[match(ntr$tip.label, ttab$code)]
-# interspecies nodes
-insp <- c(#
-    fastMRCA(ntr, "tentaculatus", "schomburgkii"),
-    fastMRCA(ntr, "tentaculatus", "clementinae"),
-    fastMRCA(ntr, "tentaculatus", "clementinae"),
-    fastMRCA(ntr, "ranunculus", "clementinae"),
-    fastMRCA(ntr, "ranunculus", "leucostictus"),
-    fastMRCA(ntr, "leucostictus", "sp. 'Xingu'"),
-    fastMRCA(ntr, "sp. 'Xingu'", "macrophthalmus"),
-    fastMRCA(ntr, "sp. 'Xingu'", "megalostomus"),
-    fastMRCA(ntr, "megalostomus", "sp. 'Inambari'"),
-    fastMRCA(ntr, "sp. 'Inambari'", "bolivianus"),
-    fastMRCA(ntr, "kelsorum", "tentaculatus"),
-    fastMRCA(ntr, "kelsorum", "tigris"),
-    fastMRCA(ntr, "kelsorum", "dumus"),
-    fastMRCA(ntr, "dumus", "stearleyi"),
-    fastMRCA(ntr, "dumus", "anthrax"),
-    fastMRCA(ntr, "stearleyi", "nicoi.gr2"),
-    fastMRCA(ntr, "nicoi.gr2", "nicoi.gr1"),
-    fastMRCA(ntr, "nicoi.gr1", "n. sp.")
-)#
-# intraspecies nodes 
-want <- c(insp, unlist(lapply(unique(ntr$tip.label), function(x) getMRCA(ntr, x))))
-# get numbers from edge matrix
-df <- data.frame(cbind(sort(unique(ntr$edge[,1])), p))
-names(df) <- c("node", "bpp")
-wm <- match(want, df$node) 
-# add taxon names
-lmcc$tip.label <- mixedFontLabel(ttab$code[match(lmcc$tip.label, ttab$code)], ttab$genus[match(lmcc$tip.label, ttab$code)], #
-gsub("\\.gr1|\\.gr2", "", ttab$species[match(lmcc$tip.label, ttab$code)]), italic=2:3, always.upright=c("n. sp.", "sp. 'Inambari'", "sp. 'Xingu'"))
+ntr <- cytb.lmcc
+ttab <- read.table(file="../data/mol_samples.csv", header=TRUE, sep=",", stringsAsFactors=FALSE, na.strings=c("NA", ""))
+
+# make the names
+noms <- ifelse(test=ttab$taxonRank != "species", yes=paste(ttab$genus, ttab$identificationQualifier), no=paste(ttab$genus, ttab$specificEpithet))
+ntr$tip.label <- paste0(ttab$catalogNumber[match(ntr$tip.label, ttab$catalogNumber)], " ", noms[match(ntr$tip.label, ttab$catalogNumber)], " (", ttab$waterBody[match(ntr$tip.label, ttab$catalogNumber)], ")")
+
 # plot
-pdf(file="../temp/pseudolithoxus_beast_tree.pdf", width=8, height=12, useDingbats=FALSE)
-plot.phylo(lmcc, cex=0.8, edge.width=3, no.margin=TRUE, font=1, label.offset=0.005, edge.col="gray30", tip.color="grey50")
-nodelabels(node=want, pch=21, bg=p[wm], cex=1.1, col="dodgerblue")
-legend("bottomleft", legend=c("Bayesian posterior probability >= 0.95", "Bayesian posterior probability < 0.95"), pch=21, cex=0.75, pt.bg=co, pt.cex=1.25, bty="n", col="dodgerblue")
+pdf(file="../temp2/CYTB_geneTree.pdf", width=9, height=9, useDingbats=FALSE)
+plot.phylo(ntr, cex=0.7, edge.width=2, no.margin=TRUE, font=1, label.offset=0.1, edge.col="gray30", tip.color="grey50")
+nodelabels(pch=21, bg=p, cex=0.7, col="gray30")
+add.scale.bar(lwd=2, lcol="gray30", length=1, cex=0.5)
 dev.off()
 
+################ Gene trees RAG1
 
+rag.mcc <- read.beast(file="../data/COMBO.rag1_phased.tre", digits=2)
+rag.lmcc <- ladderize(rag.mcc)
 
+# make posterior probs
+p <- character(length(rag.lmcc$posterior))
+co <- c("gray30", "white")
+p[rag.lmcc$posterior >= 0.95] <- co[1]
+p[rag.lmcc$posterior < 0.95] <- co[2]
+# copy tree
+ntr <- rag.lmcc
+ttab <- read.table(file="../data/mol_samples.csv", header=TRUE, sep=",", stringsAsFactors=FALSE, na.strings=c("NA", ""))
+
+ntr$tip.label <- gsub("a|b", "", ntr$tip.label)
+
+# make the names
+noms <- ifelse(test=ttab$taxonRank != "species", yes=paste(ttab$genus, ttab$identificationQualifier), no=paste(ttab$genus, ttab$specificEpithet))
+ntr$tip.label <- paste0(ttab$catalogNumber[match(ntr$tip.label, ttab$catalogNumber)], " ", noms[match(ntr$tip.label, ttab$catalogNumber)], " (", ttab$waterBody[match(ntr$tip.label, ttab$catalogNumber)], ")")
+
+# plot
+pdf(file="../temp2/RAG1_geneTree.pdf", width=9, height=12, useDingbats=FALSE)
+plot.phylo(ntr, cex=0.5, edge.width=2, no.margin=TRUE, font=1, label.offset=0.1, edge.col="gray30", tip.color="grey50")
+nodelabels(pch=21, bg=p, cex=0.7, col="gray30")
+add.scale.bar(lwd=2, lcol="gray30", length=1, cex=0.5)
+dev.off()
 
 
 
