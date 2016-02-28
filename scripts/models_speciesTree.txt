@@ -1,0 +1,63 @@
+FOR SPECIES TREE analysis
+
+11.8 MYA -- 13.5 MYA from Fig 1.7 in Albert and Reis (neotrop book)
+
+lognorm dist (mean real space)
+mean 12.65
+logstdev 0.035
+(encompasses 95% of date range).
+
+two partitions with unlinked subst models: 
+	cytb == HKY+G
+	rag1phased == K80
+	
+priors & models:
+	calibrated Yule tree model
+	strict clock
+	species.yule.birthrate (exp, init 0.25, mean 1)
+	species.popmean (exp, init 0.1, mean 1)
+	
+runs:
+	chain length 60,000,000
+	sample every 50,000
+	= 1,200 trees
+	remove 20% burnin (201 trees or 12,000,000 gens)
+
+remember:
+	remember to set the tmrca prior for ancistrus before selecting monophyletic
+	remember to remove duplicated "Id=cytb_trmod.taxa" blocks from the XML
+	remember to change name of "cytb_clockMod.cytb_trMod.branchRates" to "cytb_clockMod.branchRates"
+	can improve the on screen logging as follows:
+	
+		<!-- write log to screen                                                     -->
+		<log id="screenLog" logEvery="50000">
+			<column label="Likelihood" dp="4" width="12">
+				<likelihood idref="likelihood"/>
+			</column>
+			<column label="speciesTree.rootHeight" sf="6" width="18">
+				<parameter idref="cytb.treeModel.rootHeight"/>
+			</column>
+			<column label="cytb.clock.rate" sf="6" width="18">
+				<parameter idref="cytb.clock.rate"/>
+			</column>
+			<column label="rag1_phased.clock.rate" sf="6" width="18">
+				<parameter idref="rag1_phased.clock.rate"/>
+			</column>
+		</log>
+
+	
+Rates from literature
+
+clock rates: cytb from Mueller (2006)
+	0.62 / 100 Ma (sd 0.16)
+	0.0062 / 1 Ma (sd 0.0016)
+	95% CI = 0.003--0.009
+
+various rates - Doadrio and Dominguez (2004, Goodeid paper)
+
+2% rate in mammals came from Brown et al (1979)
+
+Martin & Palumbi (1993)- slower rates in ectotherms
+
+Ruber (2004) and Ruber (2007) for cytb rates
+	0.007 - 0.0092
