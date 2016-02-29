@@ -17,12 +17,13 @@ bfdf <- data.frame(as.factor(method), as.factor(model), as.numeric(lik))
 names(bfdf) <- c("method", "model", "lik")
 
 # subset the stepping stone results for only the combined runs
-ss <- subset(subset(bfdf, method=="ss"), model=="m0run1 m0run2" | model=="m1run1 m1run2" | model=="m2run1 m2run2" | model=="m3run1 m3run2")
+ss <- subset(subset(bfdf, method=="ss"), model=="m0run1 m0run2 m0run3" | model=="m1run1 m1run2 m1run3" | model=="m2run1 m2run2 m2run3" | model=="m3run1 m3run2 m3run3")
 
 # add the number of species and the groupings
 nsp <- c("1 sp.", "3 spp.", "2 spp.", "2 spp.")
 comp <- c("nicoi.gr1+nicoi.gr2+n.sp.", "nicoi.gr1,nicoi.gr2,n.sp.", "nicoi.gr1+n.sp.,nicoi.gr2", "nicoi.gr1+nicoi.gr2,n.sp.")
 ss <- cbind(ss, comp, nsp)
+ss$model <- as.factor(gsub("run.*", "", as.character(ss$model)))
 
 # rank the models according to likelihood
 rank <- as.factor(c(1,2,3,4))
@@ -33,10 +34,10 @@ Bf <- 2*(ssr$lik[ssr$rank==1] - ssr$lik)
 ssr <- cbind(ssr, Bf)
 
 # save the table
-write.table(ssr, file="../analyses/delimitation_27-02-16/bf_tab.csv", sep=",", row.names=FALSE)
+write.table(ssr, file="../analyses/delimitation_27-02-16/bf_table.csv", sep=",", row.names=FALSE)
 
 # calculate Bf for other model we are interested in 
-2*(ssr$lik[ssr$model=="m3run1 m3run2"] - ssr$lik[ssr$model=="m2run1 m2run2"])
+2*(ssr$lik[ssr$model=="m3"] - ssr$lik[ssr$model=="m2"])
 
 
 # delimiting allopatric spp is hard (fujita 2012)
