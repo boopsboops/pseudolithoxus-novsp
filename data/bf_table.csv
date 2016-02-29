@@ -1,0 +1,5 @@
+"method","model","lik","comp","nsp","rank","Bf"
+"ss","m1",-4159.1104399429,"nicoi.gr1,nicoi.gr2,n.sp.","3 spp.","1",0
+"ss","m3",-4162.03040729157,"nicoi.gr1+nicoi.gr2,n.sp.","2 spp.","2",5.83993469733468
+"ss","m2",-4175.45714919022,"nicoi.gr1+n.sp.,nicoi.gr2","2 spp.","3",32.6934184946385
+"ss","m0",-4186.30659267729,"nicoi.gr1+nicoi.gr2+n.sp.","1 sp.","4",54.392305468793
