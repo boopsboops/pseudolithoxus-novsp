@@ -66,6 +66,58 @@ write.nexus.data(firsec, file="../temp/final_alignments/cytb_pseudolithoxus_cp12
 write.nexus.data(cytbpseud, file="../temp/final_alignments/cytb_pseudolithoxus.nex", format="dna", interleaved=FALSE, gap="-", missing="?")
 write.dna(cytbpseud, file="../temp/final_alignments/cytb_pseudolithoxus.phy", format="sequential", colw=9999)
 
+
+## export for BP&P
+cytb <- as.matrix(as.DNAbin(read.nexus.data(file="../data/cytb_aligned.nex")))
+rag <- as.matrix(as.DNAbin(read.nexus.data(file="../data/rag1_phased_aligned.nex")))
+ttab <- read.table(file="../data/mol_samples.csv", header=TRUE, sep=",", stringsAsFactors=FALSE, na.strings=c("", "NA"))
+
+cats <- ttab$catalogNumber[which(ttab$specificEpithet == "nicoi" | ttab$identificationQualifier == "n. sp.")]
+
+cattab <- cbind(ttab$catalogNumber[which(ttab$specificEpithet == "nicoi" | ttab$identificationQualifier == "n. sp.")], #
+    paste(ttab$waterBody[which(ttab$specificEpithet == "nicoi" | ttab$identificationQualifier == "n. sp.")], #
+    ttab$locality[which(ttab$specificEpithet == "nicoi" | ttab$identificationQualifier == "n. sp.")]), seq(from=1, to=length(unique(cats)), by=1))
+
+phasedcats <- c(paste0(cats, "a"), paste0(cats, "b"))
+
+cytb.red <- cytb[match(cats, labels(cytb)), ]
+rag.red <- rag[match(phasedcats, labels(rag)), ]
+
+rag.red.tru <- gsub("a|b", "", labels(rag.red))
+    
+dimnames(rag.red)[[1]] <- paste0(rag.red.tru, "^", cattab[,3][match(rag.red.tru, cattab[,1])])
+dimnames(cytb.red)[[1]] <- paste0(labels(cytb.red), "^", cattab[,3][match(labels(cytb.red), cattab[,1])])
+
+write.dna(cytb.red, file="../data/bpp.phy", format="sequential", colw=9999, append=FALSE)
+write.dna(rag.red, file="../data/bpp.phy", format="sequential", colw=9999, append=TRUE)
+
+# for the IMAP file
+codes <- toupper(rep(letters, length.out=length(unique(cattab[,2]))))
+
+li <- vector(mode="character", length=length(cattab[,2]))
+for(i in 1:length(cattab[,2])){
+    li[which(cattab[,2] %in% unique(cattab[,2])[i])] <- codes[i]
+    }#
+
+# for loci catalogNumber     
+(table(li) * 3)
+
+# write out
+write.table(cbind(cattab[,3], li), file="../data/bpp_imap.tsv", quote=FALSE, sep="\t", row.names=FALSE, col.names=FALSE)
+
+cbind(cattab[,2], li)
+
+# make a random starting tree
+tr <- rtree(n=length(codes), tip.label=codes)
+tr$edge.length <- NULL
+write.tree(phy=tr, file="../temp2/tr.nwk")
+
+bpptr <- read.tree(text="(H, ((B, C) #0.823470, (G, (D, (E, (A, F) #0.280090) #0.631330) #0.920580) #0.997170) #1.000000) #1.000000;")
+bpptr <- read.tree(text="(H, ((B, C) #0.854280, (G, (D, (E, (A, F) #0.299310) #0.660270) #0.939200) #0.998690) #1.000000) #1.000000;")
+
+plot(bpptr)
+nodelabels(bpptr$node.label)
+
 ## make a concatenated matrix
 cytb <- as.matrix(as.DNAbin(read.nexus.data(file="../temp2/final_alignments/cytb.nex")))
 rag <- as.matrix(as.DNAbin(read.nexus.data(file="../temp2/final_alignments/rag1.nex")))
