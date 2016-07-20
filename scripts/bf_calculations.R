@@ -5,6 +5,14 @@
 tab <- read.table(file="../analyses/delimitation_27-02-16/bf_results.csv", header=FALSE, sep=",", stringsAsFactors=FALSE)
 ord <- read.table(file="../analyses/delimitation_27-02-16/bf_order.csv", header=FALSE, sep=",", stringsAsFactors=FALSE)
 
+
+tab <- read.table(file="../analyses/beast_spdelim/test-beast-1.8.4/1.Prior/bf_results.csv", header=FALSE, sep=",", stringsAsFactors=FALSE)
+ord <- read.table(file="../analyses/beast_spdelim/test-beast-1.8.4/1.Prior/bf_order.csv", header=FALSE, sep=",", stringsAsFactors=FALSE)
+
+tab <- read.table(file="../analyses/beast_spdelim/test-beast-1.8.4/0.1Prior/bf_results.csv", header=FALSE, sep=",", stringsAsFactors=FALSE)
+ord <- read.table(file="../analyses/beast_spdelim/test-beast-1.8.4/0.1Prior/bf_order.csv", header=FALSE, sep=",", stringsAsFactors=FALSE)
+
+
 method <- rep("", length(ord$V1))
 method[grep("pathSamplingAnalysis", ord$V1)] <- "ps"
 method[grep("steppingStoneSamplingAnalysis", ord$V1)] <- "ss"
@@ -35,6 +43,8 @@ ssr <- cbind(ssr, Bf)
 
 # save the table
 write.table(ssr, file="../analyses/delimitation_27-02-16/bf_table.csv", sep=",", row.names=FALSE)
+write.table(ssr, file="../analyses/beast_spdelim/test-beast-1.8.4/0.1Prior/bf_table.csv", sep=",", row.names=FALSE)
+
 
 # calculate Bf for other model we are interested in 
 2*(ssr$lik[ssr$model=="m3"] - ssr$lik[ssr$model=="m2"])
