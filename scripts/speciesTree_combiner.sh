@@ -32,3 +32,11 @@ treeannotator -burninTrees ${10} -heights mean ${9} ${11}
 #./speciesTree_combiner.sh ../analyses/species_tree_27-02-16/RUN1.cytb.trees ../analyses/species_tree_27-02-16/RUN2.cytb.trees ../analyses/species_tree_27-02-16/RUN3.cytb.trees ../analyses/species_tree_27-02-16/RUN4.cytb.trees ../analyses/species_tree_27-02-16/RUN5.cytb.trees ../analyses/species_tree_27-02-16/RUN6.cytb.trees ../analyses/species_tree_27-02-16/RUN7.cytb.trees ../analyses/species_tree_27-02-16/RUN8.cytb.trees ../analyses/species_tree_27-02-16/COMBO.cytb.trees 1608 ../analyses/species_tree_27-02-16/COMBO.cytb.tre
 
 #./speciesTree_combiner.sh ../analyses/species_tree_27-02-16/RUN1.rag1_phased.trees ../analyses/species_tree_27-02-16/RUN2.rag1_phased.trees ../analyses/species_tree_27-02-16/RUN3.rag1_phased.trees ../analyses/species_tree_27-02-16/RUN4.rag1_phased.trees ../analyses/species_tree_27-02-16/RUN5.rag1_phased.trees ../analyses/species_tree_27-02-16/RUN6.rag1_phased.trees ../analyses/species_tree_27-02-16/RUN7.rag1_phased.trees ../analyses/species_tree_27-02-16/RUN8.rag1_phased.trees ../analyses/species_tree_27-02-16/COMBO.rag1_phased.trees 1608 ../analyses/species_tree_27-02-16/COMBO.rag1_phased.tre
+
+
+# run July 2016
+#../../scripts/speciesTree_combiner.sh run1_species.trees run2_species.trees run3_species.trees run4_species.trees run5_species.trees run6_species.trees run7_species.trees run8_species.trees combo_species.trees 1608 combo_species.tre
+
+#../../scripts/speciesTree_combiner.sh run1_rag1.trees run2_rag1.trees run3_rag1.trees run4_rag1.trees run5_rag1.trees run6_rag1.trees run7_rag1.trees run8_rag1.trees combo_rag1.trees 1608 combo_rag1.tre
+
+#../../scripts/speciesTree_combiner.sh run1_cytb.trees run2_cytb.trees run3_cytb.trees run4_cytb.trees run5_cytb.trees run6_cytb.trees run7_cytb.trees run8_cytb.trees combo_cytb.trees 1608 combo_cytb.tre
