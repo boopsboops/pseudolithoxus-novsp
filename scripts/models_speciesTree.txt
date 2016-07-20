@@ -12,10 +12,13 @@ two partitions with unlinked subst models:
 	rag1phased == K80
 	
 priors & models:
-	calibrated Yule tree model
+	calibrated Yule tree model - but cannot force monophyly of 
 	strict clock
 	species.yule.birthrate (exp, init 0.25, mean 1)
 	species.popmean (exp, init 0.1, mean 1)
+	cytb - mito
+	rag - autosomal nuc
+	clock rate prior - CTMC
 	
 runs:
 	chain length 60,000,000
