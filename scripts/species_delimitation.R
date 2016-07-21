@@ -27,19 +27,6 @@ nic12nsp$delimitation <- gsub("nicoi.gr1|nicoi.gr2|n.sp.", "nicoi.gr1+gr2+n.sp."
 cytbnic <- cytb[na.omit(match(ttab$catalogNumber[grep("nicoi.gr2|nicoi.gr1|n.sp.", ttab$delimitation)], labels(cytb))), ]
 rag1nic <- rag1[na.omit(match(ttab$catalogNumber[grep("nicoi.gr2|nicoi.gr1|n.sp.", ttab$delimitation)], labels(rag1))), ]
 
-# make the species vectors (note that this writes over prev objects so run one at a time)
-#cytbspp <- ttab$delimitation[match(labels(cytbpseud), ttab$catalogNumber)]# all pseudos: 3 spp. delim
-#rag1spp <- ttab$delimitation[match(labels(rag1pseud), ttab$catalogNumber)]# all pseudos:3 spp. delim
-#
-#cytbspp <- nic12$delimitation[match(labels(cytbpseud), nic12$catalogNumber)]# all pseudos: nicoi gr1+gr2
-#rag1spp <- nic12$delimitation[match(labels(rag1pseud), nic12$catalogNumber)]# all pseudos: nicoi gr1+gr2
-#
-#cytbspp <- nic1nsp$delimitation[match(labels(cytbpseud), nic1nsp$catalogNumber)]# all pseudos: nicoi gr1+n.sp.
-#rag1spp <- nic1nsp$delimitation[match(labels(rag1pseud), nic1nsp$catalogNumber)]# all pseudos: nicoi gr1+n.sp.
-#
-#cytbspp <- nic12nsp$delimitation[match(labels(cytbpseud), nic12nsp$catalogNumber)]# all pseudos: nicoi gr1+gr2+n.sp.
-#rag1spp <- nic12nsp$delimitation[match(labels(rag1pseud), nic12nsp$catalogNumber)]# all pseudos: nicoi gr1+gr2+n.sp.
-
 #
 cytbspp <- ttab$delimitation[match(labels(cytbnic), ttab$catalogNumber)]# just nicoi: 3 spp. delim
 rag1spp <- ttab$delimitation[match(labels(rag1nic), ttab$catalogNumber)]# just nicoi: 3 spp. delim
@@ -51,9 +38,6 @@ cytbspp <- nic1nsp$delimitation[match(labels(cytbnic), nic1nsp$catalogNumber)]# 
 rag1spp <- nic1nsp$delimitation[match(labels(rag1nic), nic1nsp$catalogNumber)]# just nicoi: nicoi gr1+n.sp.
 #
 #To view the nucleotide values 
-#lapply(nucDiag(cytbpseud, cytbspp), length)
-#lapply(nucDiag(rag1pseud, rag1spp), length)
-#
 lapply(nucDiag(cytbnic, cytbspp), length)
 lapply(nucDiag(rag1nic, rag1spp), length)
 
@@ -126,40 +110,70 @@ is.monophyletic(phy=rag1tr.nic12, tips=which(rag1tr.nic12$tip.label == "nicoi.gr
 ## gsi analysis
 # cytb
 # remember to run the trees again
-# drop the non-pseudo tips
-dcytbtr <- drop.tip(cytbtr, tip=cytbtr$tip.label[match(ttab$code[grep("ancistrus", ttab$genus, ignore.case=TRUE)], cytbtr$tip.label)])
 # prepare the assignments file
-write.table(cbind(dcytbtr$tip.label, ttab$species[match(dcytbtr$tip.label, ttab$code)]), file="../temp/cytb_gsi_assignments.txt", sep=" ", row.names=FALSE, col.names=FALSE, quote=TRUE) 
+write.table(cbind(dcytbtr$tip.label, ttab$delimitation[match(dcytbtr$tip.label, ttab$catalogNumber)]), file="../temp/cytb_gsi_assignments.txt", sep=" ", row.names=FALSE, col.names=FALSE, quote=TRUE) 
 # run the analysis
 cytbgsi <- singleTreeAnalysis(tree=dcytbtr, assignmentFile="../temp/cytb_gsi_assignments.txt", nperms=10000, nprocs=1)
 names(cytbgsi$gsi) <- cytbgsi$groups
 format(round(rbind(cytbgsi$gsi, cytbgsi$pvals), digits=4), scientific=FALSE)
 # for alt delims
-write.table(cbind(dcytbtr$tip.label, nic12$species[match(dcytbtr$tip.label, nic12$code)]), file="../temp/cytb_gsi_assignments.txt", sep=" ", row.names=FALSE, col.names=FALSE, quote=TRUE) 
-write.table(cbind(dcytbtr$tip.label, nic1nsp$species[match(dcytbtr$tip.label, nic1nsp$code)]), file="../temp/cytb_gsi_assignments.txt", sep=" ", row.names=FALSE, col.names=FALSE, quote=TRUE) 
-write.table(cbind(dcytbtr$tip.label, nic12nsp$species[match(dcytbtr$tip.label, nic12nsp$code)]), file="../temp/cytb_gsi_assignments.txt", sep=" ", row.names=FALSE, col.names=FALSE, quote=TRUE) 
+write.table(cbind(dcytbtr$tip.label, nic12$delimitation[match(dcytbtr$tip.label, nic12$catalogNumber)]), file="../temp/cytb_gsi_assignments.txt", sep=" ", row.names=FALSE, col.names=FALSE, quote=TRUE) 
+write.table(cbind(dcytbtr$tip.label, nic1nsp$delimitation[match(dcytbtr$tip.label, nic1nsp$catalogNumber)]), file="../temp/cytb_gsi_assignments.txt", sep=" ", row.names=FALSE, col.names=FALSE, quote=TRUE) 
 
 
 # rag1
 # drop the non-pseudo tips
-# remember to run the trees again
-drag1tr <- drop.tip(rag1tr, tip=rag1tr$tip.label[match(ttab$code[grep("ancistrus", ttab$genus, ignore.case=TRUE)], rag1tr$tip.label)])
 # prepare the assignments file
-write.table(cbind(drag1tr$tip.label, ttab$species[match(drag1tr$tip.label, ttab$code)]), file="../temp/rag1_gsi_assignments.txt", sep=" ", row.names=FALSE, col.names=FALSE, quote=TRUE) 
+write.table(cbind(drag1tr$tip.label, ttab$delimitation[match(drag1tr$tip.label, ttab$catalogNumber)]), file="../temp/rag1_gsi_assignments.txt", sep=" ", row.names=FALSE, col.names=FALSE, quote=TRUE) 
 # run the analysis
 rag1gsi <- singleTreeAnalysis(tree=drag1tr, assignmentFile="../temp/rag1_gsi_assignments.txt", nperms=10000, nprocs=1)
 names(rag1gsi$gsi) <- rag1gsi$groups
 format(round(rbind(rag1gsi$gsi, rag1gsi$pvals), digits=4), scientific=FALSE)
 # for alt delims
-write.table(cbind(drag1tr$tip.label, nic12$species[match(drag1tr$tip.label, nic12$code)]), file="../temp/rag1_gsi_assignments.txt", sep=" ", row.names=FALSE, col.names=FALSE, quote=TRUE) 
-write.table(cbind(drag1tr$tip.label, nic1nsp$species[match(drag1tr$tip.label, nic1nsp$code)]), file="../temp/rag1_gsi_assignments.txt", sep=" ", row.names=FALSE, col.names=FALSE, quote=TRUE) 
-write.table(cbind(drag1tr$tip.label, nic12nsp$species[match(drag1tr$tip.label, nic12nsp$code)]), file="../temp/rag1_gsi_assignments.txt", sep=" ", row.names=FALSE, col.names=FALSE, quote=TRUE) 
+write.table(cbind(drag1tr$tip.label, nic12$delimitation[match(drag1tr$tip.label, nic12$catalogNumber)]), file="../temp/rag1_gsi_assignments.txt", sep=" ", row.names=FALSE, col.names=FALSE, quote=TRUE) 
+write.table(cbind(drag1tr$tip.label, nic1nsp$delimitation[match(drag1tr$tip.label, nic1nsp$catalogNumber)]), file="../temp/rag1_gsi_assignments.txt", sep=" ", row.names=FALSE, col.names=FALSE, quote=TRUE) 
 
 
-## other
-plot(drag1tr)
-?is.binary.tree(drag1tr)
-## networks
-#nn <- neighborNet(dist.dna(cytbnic, model="raw", pairwise.deletion=TRUE, as.matrix=TRUE))
-#nn <- neighborNet(dist.dna(rag1nic, model="raw", pairwise.deletion=TRUE, as.matrix=TRUE))
-#plot.networx(nn, "2D", edge.color="black", edge.width=1)
+# work out Posterior probs using MonoPhy package
+require("MonoPhy")#?MonoPhy
+
+ # cytb 
+# load trees and remove burnin
+cytb <- read.nexus(file="../analyses/speciesTree/15-07-16/trees/combo_cytb.trees")
+cytb <- cytb[1609:9608]
+
+# load traits file
+m <- read.table(file="../data/pseudolithoxus_traits_m3.tsv", header=TRUE, sep="\t", stringsAsFactors=FALSE) 
+
+# subset the trees and the models traits
+keep <- intersect(cytb[[1]]$tip.label, m$traits)
+m <- m[which(m$traits %in% keep), ]
+labels <- cytb[[1]]$tip.label
+
+# drop the tips
+dcytb <- lapply(cytb, function(x) drop.tip(phy=x, tip=setdiff(labels, keep)))
+
+# run the Monophyly
+res <- lapply(dcytb, function(x) AssessMonophyly(x, taxonomy=m))
+
+# check names
+res[[1]]$species$result
+
+# tabulate the results for the taxa
+tt <- table(sapply(res, function(x) x$species$result$Monophyly[which(rownames(res[[1]]$species$result) == "nicoi.gr1+gr2")]))
+tt / 8000
+
+
+# for RAG1
+rag1 <- read.nexus(file="../analyses/speciesTree/15-07-16/trees/combo_rag1.trees")
+rag1 <- rag1[1609:9608]
+m <- read.table(file="../data/pseudolithoxus_traits_m2.tsv", header=TRUE, sep="\t", stringsAsFactors=FALSE)
+labels <- rag1[[1]]$tip.label
+keep <- intersect(labels, m$traits)
+m <- m[which(m$traits %in% keep), ]
+drag1 <- lapply(rag1, function(x) drop.tip(phy=x, tip=setdiff(labels, keep)))
+drag1[[1]]
+res <- lapply(drag1, function(x) AssessMonophyly(x, taxonomy=m))
+res[[1]]$species$result
+tt <- table(sapply(res, function(x) x$species$result$Monophyly[which(rownames(res[[1]]$species$result) == "nicoi.gr2")]))
+tt / 8000
