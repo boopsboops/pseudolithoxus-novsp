@@ -134,7 +134,7 @@ dev.off()
 
 ############### *BEAST species tree
 
-mcc <- read.beast(file="../data/COMBO.species.tre", digits=2)
+mcc <- read.beast(file="../data/combo_species.tre", digits=2)
 lmcc <- ladderize(mcc)
 p <- character(length(lmcc$posterior))
 co <- c("gray30", "white")
@@ -145,8 +145,8 @@ p[lmcc$posterior < 0.95] <- co[2]
 plot(lmcc, edge.color=0, tip.color=0)
 HPDbars(lmcc, col="skyblue", lwd=7)
 # plot
-pdf(file="../temp2/starbeast_spTree_27-02-16.pdf", width=14, height=10, useDingbats=FALSE)
-plot(lmcc, edge.color=0, tip.color=0, x.lim=c(-2.69241, 23.38284))
+pdf(file="../temp2/starbeast_spTree_22-07-16.pdf", width=14, height=10, useDingbats=FALSE)
+plot(lmcc, edge.color=0, tip.color=0, x.lim=c(-3.24214, 25.64739))
 HPDbars(lmcc, col="skyblue", lwd=7)
 plot.phylo.upon(lmcc, cex=1, edge.width=2, font=1, label.offset=0.2, edge.col="gray30", tip.color="grey50")
 nodelabels(pch=21, bg=p, cex=1, col="gray30")
@@ -161,7 +161,7 @@ lmcc$"height_95%_HPD_MIN"
 
 ################ Gene trees CYTB
 # read the tree
-cytb.mcc <- read.beast(file="../data/COMBO.cytb.tre", digits=2)
+cytb.mcc <- read.beast(file="../data/combo_cytb.tre", digits=2)
 cytb.lmcc <- ladderize(cytb.mcc)
 
 # make posterior probs
@@ -178,15 +178,15 @@ noms <- ifelse(test=ttab$taxonRank != "species", yes=paste(ttab$genus, ttab$iden
 ntr$tip.label <- paste0(ttab$catalogNumber[match(ntr$tip.label, ttab$catalogNumber)], " ", noms[match(ntr$tip.label, ttab$catalogNumber)], " (", ttab$waterBody[match(ntr$tip.label, ttab$catalogNumber)], ")")
 
 # plot
-pdf(file="../temp2/CYTB_geneTree.pdf", width=9, height=9, useDingbats=FALSE)
+pdf(file="../temp2/CYTB_geneTree_22-07-16.pdf", width=9, height=9, useDingbats=FALSE)
 plot.phylo(ntr, cex=0.7, edge.width=2, no.margin=TRUE, font=1, label.offset=0.1, edge.col="gray30", tip.color="grey50")
 nodelabels(pch=21, bg=p, cex=0.7, col="gray30")
-add.scale.bar(lwd=2, lcol="gray30", length=1, cex=0.5)
+#add.scale.bar(lwd=2, lcol="gray30", length=1, cex=0.5)
 dev.off()
 
 ################ Gene trees RAG1
 
-rag.mcc <- read.beast(file="../data/COMBO.rag1_phased.tre", digits=2)
+rag.mcc <- read.beast(file="../data/combo_rag1.tre", digits=2)
 rag.lmcc <- ladderize(rag.mcc)
 
 # make posterior probs
@@ -205,10 +205,10 @@ noms <- ifelse(test=ttab$taxonRank != "species", yes=paste(ttab$genus, ttab$iden
 ntr$tip.label <- paste0(ttab$catalogNumber[match(ntr$tip.label, ttab$catalogNumber)], " ", noms[match(ntr$tip.label, ttab$catalogNumber)], " (", ttab$waterBody[match(ntr$tip.label, ttab$catalogNumber)], ")")
 
 # plot
-pdf(file="../temp2/RAG1_geneTree.pdf", width=9, height=12, useDingbats=FALSE)
+pdf(file="../temp2/RAG1_geneTree_22-07-16.pdf", width=9, height=12, useDingbats=FALSE)
 plot.phylo(ntr, cex=0.5, edge.width=2, no.margin=TRUE, font=1, label.offset=0.1, edge.col="gray30", tip.color="grey50")
 nodelabels(pch=21, bg=p, cex=0.7, col="gray30")
-add.scale.bar(lwd=2, lcol="gray30", length=1, cex=0.5)
+#add.scale.bar(lwd=2, lcol="gray30", length=1, cex=0.5)
 dev.off()
 
 
