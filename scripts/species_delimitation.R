@@ -2,6 +2,7 @@
 require("spider")
 require("genealogicalSorting")
 require("phangorn")
+require("MonoPhy")
 # rm(list=ls())
 
 ## load data
@@ -135,7 +136,7 @@ write.table(cbind(drag1tr$tip.label, nic1nsp$delimitation[match(drag1tr$tip.labe
 
 
 # work out Posterior probs using MonoPhy package
-require("MonoPhy")#?MonoPhy
+
 
  # cytb 
 # load trees and remove burnin
@@ -177,3 +178,15 @@ res <- lapply(drag1, function(x) AssessMonophyly(x, taxonomy=m))
 res[[1]]$species$result
 tt <- table(sapply(res, function(x) x$species$result$Monophyly[which(rownames(res[[1]]$species$result) == "nicoi.gr2")]))
 tt / 8000
+
+
+# species tree
+sptr <- read.nexus(file="../analyses/speciesTree/15-07-16/trees/combo_species.trees")
+sptr <- sptr[1609:9608]
+ta <- data.frame(cbind(sptr$tip.label[[1]], gsub("nicoi.gr1|nicoi.gr2", "nicoi.gr1+nicoi.gr2", sptr$tip.label[[1]])))
+names(ta) <- c("traits", "species")
+res <- lapply(sptr, function(x) AssessMonophyly(x, taxonomy=ta))
+res[[1]]$species$result
+tt <- table(sapply(res, function(x) x$species$result$Monophyly[which(rownames(res[[1]]$species$result) == "nicoi.gr1+nicoi.gr2")]))
+tt / 8000
+
