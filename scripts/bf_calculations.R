@@ -2,16 +2,8 @@
 #rm(list=ls())
 
 # read the table
-tab <- read.table(file="../analyses/delimitation_27-02-16/bf_results.csv", header=FALSE, sep=",", stringsAsFactors=FALSE)
-ord <- read.table(file="../analyses/delimitation_27-02-16/bf_order.csv", header=FALSE, sep=",", stringsAsFactors=FALSE)
-
-
-tab <- read.table(file="../analyses/beast_spdelim/test-beast-1.8.4/1.Prior/bf_results.csv", header=FALSE, sep=",", stringsAsFactors=FALSE)
-ord <- read.table(file="../analyses/beast_spdelim/test-beast-1.8.4/1.Prior/bf_order.csv", header=FALSE, sep=",", stringsAsFactors=FALSE)
-
-tab <- read.table(file="../analyses/beast_spdelim/test-beast-1.8.4/0.1Prior/bf_results.csv", header=FALSE, sep=",", stringsAsFactors=FALSE)
-ord <- read.table(file="../analyses/beast_spdelim/test-beast-1.8.4/0.1Prior/bf_order.csv", header=FALSE, sep=",", stringsAsFactors=FALSE)
-
+tab <- read.table(file="../analyses/delimitation/18-07-16/bf_results.csv", header=FALSE, sep=",", stringsAsFactors=FALSE)
+ord <- read.table(file="../analyses/delimitation/18-07-16/bf_order.csv", header=FALSE, sep=",", stringsAsFactors=FALSE)
 
 method <- rep("", length(ord$V1))
 method[grep("pathSamplingAnalysis", ord$V1)] <- "ps"

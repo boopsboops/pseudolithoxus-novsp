@@ -22,7 +22,7 @@ sed -i '$ d' ${9}
 paste -d"\n" <(grep "tree STATE" ${1}) <(grep "tree STATE" ${2}) <(grep "tree STATE" ${3}) <(grep "tree STATE" ${4}) <(grep "tree STATE" ${5}) <(grep "tree STATE" ${6}) <(grep "tree STATE" ${7}) <(grep "tree STATE" ${8}) >> ${9}
 #adds the closing nexus code
 echo "End;" >> ${9}
-# run tree annotator with 10% burnin
+# run tree annotator with 17% burnin = 200 of 1200 trees = 1608 inc initial trees
 treeannotator -burninTrees ${10} -heights mean ${9} ${11}
 
 
