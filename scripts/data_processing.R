@@ -1,5 +1,7 @@
 require("ape")
 require("phyloch")
+require("spider")
+require("phangorn")
 # rm(list=ls())
 
 ## load and process data
@@ -199,3 +201,38 @@ names(nonpolyseqsB) <- paste0(names(nonpolyseqsB), "b")
 phased.all <- c(nonpolyseqsA, nonpolyseqsB, as.list(pop2))
 # write out
 write.nexus.data(phased.all, file="../temp/final_alignments/rag_phased.nex", format="dna", interleaved=FALSE, gap="-", missing="?")
+
+
+### missing data & stats
+cytb <- as.matrix(as.DNAbin(read.nexus.data(file="../data/cytb_aligned.nex")))
+rag1 <- as.matrix(as.DNAbin(read.nexus.data(file="../data/rag1_aligned.nex")))
+
+print(cytb)
+bstats(data=cytb)
+seqStat(cytb)
+
+print(rag1)
+bstats(data=rag1)
+seqStat(rag1)
+
+# load the function first
+bstats <- function(data){#
+    # alignment length
+    ddat <- dim(data)[2]
+    # num parsimony informative sites
+    pisnum <- pis(data, abs=TRUE)
+    # proportion parsimony informative sites
+    pisprop <- round((pisnum / ddat), digits=3)
+    # proportion of missing data (Ns)
+    propn <- round((length(grep("n|\\?", data)) / length(data)), digits=3)
+    # return results
+    print(deparse(substitute(data)))
+    names(ddat) <- "Alignment length"
+    print(ddat)
+    names(pisnum) <- "Number parsimony informative sites"
+    print(pisnum)
+    names(pisprop) <- "Proportion parsimony informative sites"
+    print(pisprop)
+    names(propn) <- "Proportion of missing data (Ns, ?s)"
+    print(propn)
+}#
