@@ -39,7 +39,8 @@ write.table(ssr, file="../analyses/beast_spdelim/test-beast-1.8.4/0.1Prior/bf_ta
 
 
 # calculate Bf for other model we are interested in 
-2*(ssr$lik[ssr$model=="m3"] - ssr$lik[ssr$model=="m2"])
+2*(ssr$lik[ssr$model=="m3"] - ssr$lik[ssr$model=="m2"])#25.99992
+2*(ssr$lik[ssr$model=="m3"] - ssr$lik[ssr$model=="m0"])#51.66919
 
 
 # delimiting allopatric spp is hard (fujita 2012)
