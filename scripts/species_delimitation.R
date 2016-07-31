@@ -135,7 +135,7 @@ write.table(cbind(drag1tr$tip.label, nic12$delimitation[match(drag1tr$tip.label,
 write.table(cbind(drag1tr$tip.label, nic1nsp$delimitation[match(drag1tr$tip.label, nic1nsp$catalogNumber)]), file="../temp/rag1_gsi_assignments.txt", sep=" ", row.names=FALSE, col.names=FALSE, quote=TRUE) 
 
 
-# work out Posterior probs using MonoPhy package
+## work out Posterior probs using MonoPhy package
 
 
  # cytb 
@@ -189,4 +189,17 @@ res <- lapply(sptr, function(x) AssessMonophyly(x, taxonomy=ta))
 res[[1]]$species$result
 tt <- table(sapply(res, function(x) x$species$result$Monophyly[which(rownames(res[[1]]$species$result) == "nicoi.gr1+nicoi.gr2")]))
 tt / 8000
+
+
+## interspecific distances in cytb
+source(file="sppDistMatrix2.R")
+
+# change names
+dimnames(cytb)[[1]] <- ttab$delimitation[match(labels(cytb), ttab$catalogNumber)]
+
+# reduce the matrix
+cytb2 <- cytb[!is.na(dimnames(cytb)[[1]]), ]
+
+# run min distances per spp.
+sppDistMatrix2(distobj=dist.dna(cytb2, model="raw", pairwise.deletion=TRUE), sppVector=labels(cytb2), dist=min)
 
