@@ -1,5 +1,5 @@
-"method","model","lik","comp","nsp","rank","Bf"
-"ss","m1",-4147.68805371442,"nicoi.gr1,nicoi.gr2,n.sp.","3 spp.","1",0
-"ss","m3",-4154.0681104456,"nicoi.gr1+nicoi.gr2,n.sp.","2 spp.","2",12.7601134623692
-"ss","m2",-4167.06806870739,"nicoi.gr1+n.sp.,nicoi.gr2","2 spp.","3",38.7600299859405
-"ss","m0",-4179.90270533925,"nicoi.gr1+nicoi.gr2+n.sp.","1 sp.","4",64.4293032496716
+"method","model","lik","delimitation","num. spp.","rank","Bf"
+"ss","m1",-4147.6880537144,"UNE, MIU, NSP","3 spp.",1,0
+"ss","m3",-4154.0681104456,"UNE+MIU,NSP","2 spp.",2,12.7601134624
+"ss","m2",-4167.0680687074,"UNE+NSP,MIU","2 spp.",3,38.7600299859
+"ss","m0",-4179.9027053393,"UNE+MIU+NSP","1 sp.",4,64.4293032497

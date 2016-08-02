@@ -9,7 +9,7 @@
    xmlns="http://www.w3.org/2000/svg"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
-   width="995.54999"
+   width="1051.7125"
    height="821.83124"
    id="svg2"
    version="1.1"
@@ -33,9 +33,9 @@
      borderopacity="1.0"
      inkscape:pageopacity="0"
      inkscape:pageshadow="2"
-     inkscape:zoom="3.959798"
-     inkscape:cx="808.99213"
-     inkscape:cy="498.73518"
+     inkscape:zoom="1.4"
+     inkscape:cx="562.63381"
+     inkscape:cy="549.24282"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="false"
@@ -47,7 +47,7 @@
      fit-margin-top="1"
      fit-margin-left="1"
      fit-margin-right="1"
-     fit-margin-bottom="0.6" />
+     fit-margin-bottom="1" />
   <metadata
      id="metadata7">
     <rdf:RDF>
@@ -462,7 +462,7 @@
          id="tspan3176"><tspan
    style="font-style:italic;font-weight:bold;fill:#808080"
    id="tspan4059">Pseudolithoxus</tspan>
- n. sp.</tspan>
+ n. sp. (NSP)</tspan>
     </text>
     <text
        id="text3178"
@@ -477,7 +477,7 @@
          id="tspan3180"><tspan
    style="font-style:italic;font-weight:bold"
    id="tspan4080">Pseudolithoxus nicoi</tspan>
- (gr. 1)</tspan>
+ 'upper Negro' (UNE)</tspan>
     </text>
     <text
        id="text3182"
@@ -491,7 +491,7 @@
          sodipodi:role="line"
          id="tspan3184">Pseudolithoxus nicoi <tspan
    style="font-style:normal"
-   id="tspan4057">'Miuá' (gr. 2)</tspan>
+   id="tspan4057">'Miuá' (MIU)</tspan>
 </tspan>
     </text>
     <text
@@ -531,7 +531,6 @@
          id="tspan3196"><tspan
    style="font-style:italic"
    id="tspan4084">Ancistrus</tspan>
-
  sp. 'Inambari'</tspan>
     </text>
     <text
@@ -547,7 +546,6 @@
          id="tspan3200"><tspan
    style="font-style:italic"
    id="tspan4082">Ancistrus</tspan>
-
  sp. 'Xingu'</tspan>
     </text>
     <text
