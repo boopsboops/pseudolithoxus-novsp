@@ -24,12 +24,14 @@ tr <- mlik$tree
 rtr <- ladderize(reorder(midpoint(tr)))
 
 
-ttab <- read.table(file="mol_samples.csv", header=TRUE, sep=",", stringsAsFactors=FALSE)
-rtr$tip.label <- paste(ttab$code[match(rtr$tip.label, ttab$code)], ttab$genus[match(rtr$tip.label, ttab$code)], ttab$species[match(rtr$tip.label, ttab$code)], ttab$locality_drainage[match(rtr$tip.label, ttab$code)], sep="_")
+ttab <- read.table(file="../data/mol_samples.csv", header=TRUE, sep=",", stringsAsFactors=FALSE)
+rtr$tip.label <- paste(ttab$catalogNumber[match(rtr$tip.label, ttab$catalogNumber)], ttab$genus[match(rtr$tip.label, ttab$catalogNumber)], #
+ttab$specificEpithet[match(rtr$tip.label, ttab$catalogNumber)], ttab$waterBody[match(rtr$tip.label, ttab$catalogNumber)], sep="_")
+
 rag.tr <- rtr
 cytb.tr <- rtr
 
-pdf(file="../temp/pseudolithoxus_rag1.pdf", width=12, height=15, useDingbats=FALSE)
+pdf(file="../temp2/pseudolithoxus_rag1.pdf", width=12, height=15, useDingbats=FALSE)
 plot.phylo(rtr, cex=1, edge.width=2, no.margin=TRUE, font=1, label.offset=0.0001, edge.col="gray30", tip.color="grey50")
 dev.off()
 
