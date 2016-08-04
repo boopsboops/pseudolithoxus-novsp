@@ -1,5 +1,5 @@
-"method","model","lik","delimitation","num. spp.","rank","Bf"
-"ss","m1",-4147.6880537144,"UNE, MIU, NSP","3 spp.",1,0
-"ss","m3",-4154.0681104456,"UNE+MIU,NSP","2 spp.",2,12.7601134624
-"ss","m2",-4167.0680687074,"UNE+NSP,MIU","2 spp.",3,38.7600299859
-"ss","m0",-4179.9027053393,"UNE+MIU+NSP","1 sp.",4,64.4293032497
+"Model","Delimitation","No. spp.","Marginal likelihood","2lnBf","Model rank"
+"m1","UNE, MIU, NSP","3 spp.",-4147.6880537144,0,1
+"m3","UNE+MIU,NSP","2 spp.",-4154.0681104456,12.7601134624,2
+"m2","UNE+NSP,MIU","2 spp.",-4167.0680687074,38.7600299859,3
+"m0","UNE+MIU+NSP","1 sp.",-4179.9027053393,64.4293032497,4

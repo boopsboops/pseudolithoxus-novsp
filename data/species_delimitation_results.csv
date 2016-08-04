@@ -1,6 +1,6 @@
-"delimitation","no. spp.","cytb diag sites","rag1 diag sites","cytb gsi (p-val gsi, p-val rosenberg)","rag1 gsi (p-val gsi, p-val rosenberg)","cytb post prob","rag1 post prob"
-"P. nicoi 'upper Negro' (UNE)",3,0,0,"1 (0.0001, 0.0667)","0.4789 (0.0005, NA)",0.91,0
-"P. nicoi 'Miuá' (MIU)",3,39,0,"1 (0.0002, 0.05)","0.32 (0.0111, NA)",1,0
-"P. n. sp. (NSP)",3,2,2,"1 (0.0001, 0.0159)","1 (0.0001, 0.0476)",0.99,1
-"P. nicoi 'upper Negro' + P. nicoi 'Miuá' (UNE+MIU)",2,2,2,"0.8712 (0.0001, NA)","1 (0.0001, 0.0182)",0,0.21
-"P. nicoi 'upper Negro' + P. n. sp. (UNE+NSP)",2,39,0,"1 (0.0001, 0.0001)","0.5455 (0.0001, NA)",1,0
+"Delimitation","No. spp.","Cytb diag.","RAG1 diag.","Cytb GSI (p GSI, p RRM)","RAG1 GSI (p GSI, p RRM)","Cytb BPP","RAG1 BPP"
+"UNE",3,0,0,"1 (0.0001, 0.0667)","0.4789 (0.0005, NA)",0.91,0
+"MIU",3,39,0,"1 (0.0002, 0.05)","0.32 (0.0111, NA)",1,0
+"NSP",3,2,2,"1 (0.0001, 0.0159)","1 (0.0001, 0.0476)",0.99,1
+"UNE+MIU",2,2,2,"0.8712 (0.0001, NA)","1 (0.0001, 0.0182)",0,0.21
+"UNE+NSP",2,39,0,"1 (0.0001, 0.0001)","0.5455 (0.0001, NA)",1,0
