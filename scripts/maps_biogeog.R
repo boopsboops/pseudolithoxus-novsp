@@ -73,8 +73,8 @@ ff <- ff[!duplicated(ff$catalogNumber), ]
 #https://pakillo.github.io/R-GIS-tutorial/
 #https://cran.r-project.org/web/packages/raster/vignettes/Raster.pdf
 # open raster and shapefiles
-dem.ras <- raster("../data/maps/sa_dem_30s.bil")# USGS digital elevation model (void-filled)
-rivs.shp <- readShapeLines("../data/maps/sa_riv_30s.shp")# USGS river network (stream lines)
+dem.ras <- raster("../temp2/maps/sa_dem_30s.bil")# USGS digital elevation model (void-filled)
+rivs.shp <- readShapeLines("../temp2/maps/sa_riv_30s.shp")# USGS river network (stream lines)
 
 # filter the rivers data removing all the 
 rivs.shp.red <- rivs.shp[rivs.shp$UP_CELLS > 2500, ]
