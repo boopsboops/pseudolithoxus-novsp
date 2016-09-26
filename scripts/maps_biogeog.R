@@ -139,8 +139,30 @@ legend(x="topright", legend=unique(ff$specificEpithet), text.font=3, cex=0.9, pt
 dev.off()
 
 
+### to make a wider map
 
+# crop to region of interest
+newext <- c(-85, -35, -57.5, 12.5)#c(left, right, bottom, top)
+dem.ras.crop <- crop(dem.ras, newext)
+#rivs.shp.crop <- crop(rivs.shp.red, newext)
+rivs.shp.red <- rivs.shp[rivs.shp$UP_CELLS > 12000, ]
+ci <- classIntervals(rivs.shp.red$UP_CELLS, n=6, style="kmeans")
+rivs.shp.red$breaks <- NA
+rivs.shp.red$breaks[which(rivs.shp.red$UP_CELLS > ci$brks[1] & rivs.shp.red$UP_CELLS < ci$brks[2])] <- 0.5
+rivs.shp.red$breaks[which(rivs.shp.red$UP_CELLS > ci$brks[2] & rivs.shp.red$UP_CELLS < ci$brks[3])] <- 1
+rivs.shp.red$breaks[which(rivs.shp.red$UP_CELLS > ci$brks[3] & rivs.shp.red$UP_CELLS < ci$brks[4])] <- 1.5
+rivs.shp.red$breaks[which(rivs.shp.red$UP_CELLS > ci$brks[4] & rivs.shp.red$UP_CELLS < ci$brks[5])] <- 2
+rivs.shp.red$breaks[which(rivs.shp.red$UP_CELLS > ci$brks[5] & rivs.shp.red$UP_CELLS < ci$brks[6])] <- 2.25
+rivs.shp.red$breaks[which(rivs.shp.red$UP_CELLS > ci$brks[6] & rivs.shp.red$UP_CELLS < ci$brks[7])] <- 2.75
+br <- rivs.shp.red$breaks
 
+cbr <- rev(colorRampPalette(brewer.pal(n=11, name="RdYlGn"))(16))
+
+pdf(file="../temp2/map_pseudolithoxus_sa.pdf", useDingbats=FALSE, useKerning=FALSE)
+plot(dem.ras.crop, add=FALSE, alpha=0.9, col=cbr, cex.axis=0.75, legend=FALSE, axes=FALSE, frame=FALSE)
+plot(rivs.shp.red, add=TRUE, col="grey20", lwd=br, axes=FALSE, frame=FALSE)#, 
+rect(xleft=-70, ybottom=-12.5, xright=-47.5, ytop=10, border="red")
+dev.off()
 
 
 
