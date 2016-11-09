@@ -147,10 +147,10 @@ p[lmcc$posterior < 0.95] <- co[2]
 plot(lmcc, edge.color=0, tip.color=0)
 HPDbars(lmcc, col="skyblue", lwd=7)
 # plot
-pdf(file="../temp2/starbeast_spTree_22-07-16.pdf", width=14, height=10, useDingbats=FALSE)
+pdf(file="../temp2/starbeast_spTree_09-11-16.pdf", width=13, height=10, useDingbats=FALSE)
 plot(lmcc, edge.color=0, tip.color=0, x.lim=c(-3.24214, 25.64739))
 HPDbars(lmcc, col="skyblue", lwd=7)
-plot.phylo.upon(lmcc, cex=1, edge.width=2, font=1, label.offset=0.2, edge.col="gray30", tip.color="grey50")
+plot.phylo.upon(lmcc, cex=1, edge.width=2, font=1, label.offset=0.2, edge.col="gray30", tip.color="grey40")
 nodelabels(pch=21, bg=p, cex=1, col="gray30")
 data(gradstein04)
 data(strat2012)
