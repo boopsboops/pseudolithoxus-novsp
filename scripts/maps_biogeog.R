@@ -4,7 +4,7 @@ require("rjson")
 require("ggmap")
 require("celestial")
 require("dplyr")
-require("OpenStreetMap")
+require("OpenStreetMap")# needs rJava: first run 'sudo R CMD javareconf', then run 'sudo R' followed by 'install.packages("rJava", dependencies=FALSE)' 
 require("maptools")
 require("rgdal")
 require("sp")
