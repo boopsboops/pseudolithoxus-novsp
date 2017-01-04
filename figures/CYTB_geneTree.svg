@@ -11,14 +11,14 @@
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
    id="svg2"
    version="1.1"
-   inkscape:version="0.48.4 r9939"
+   inkscape:version="0.91 r13725"
    width="756.28876"
    height="761.63751"
    xml:space="preserve"
-   sodipodi:docname="CYTB_geneTree_22-07-16.pdf"><metadata
+   sodipodi:docname="CYTB_geneTree.svg"><metadata
      id="metadata8"><rdf:RDF><cc:Work
          rdf:about=""><dc:format>image/svg+xml</dc:format><dc:type
-           rdf:resource="http://purl.org/dc/dcmitype/StillImage" /><dc:title></dc:title></cc:Work></rdf:RDF></metadata><defs
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" /><dc:title /></cc:Work></rdf:RDF></metadata><defs
      id="defs6" /><sodipodi:namedview
      pagecolor="#ffffff"
      bordercolor="#666666"
@@ -28,20 +28,20 @@
      guidetolerance="10"
      inkscape:pageopacity="0"
      inkscape:pageshadow="2"
-     inkscape:window-width="1016"
-     inkscape:window-height="817"
+     inkscape:window-width="1920"
+     inkscape:window-height="1053"
      id="namedview4"
      showgrid="false"
      fit-margin-top="1"
      fit-margin-right="1"
      fit-margin-bottom="1"
      fit-margin-left="1"
-     inkscape:zoom="0.82408494"
-     inkscape:cx="378.83125"
-     inkscape:cy="380.8175"
-     inkscape:window-x="381"
-     inkscape:window-y="216"
-     inkscape:window-maximized="0"
+     inkscape:zoom="3.2963398"
+     inkscape:cx="576.84965"
+     inkscape:cy="116.54651"
+     inkscape:window-x="0"
+     inkscape:window-y="27"
+     inkscape:window-maximized="1"
      inkscape:current-layer="g10" /><g
      id="g10"
      inkscape:groupmode="layer"
@@ -712,43 +712,43 @@
          inkscape:connector-curvature="0" /><text
          transform="matrix(1,0,0,-1,406.43,54.62)"
          id="text348"><tspan
-           style="font-size:8px;font-variant:normal;font-weight:normal;writing-mode:lr-tb;fill:#7f7f7f;fill-opacity:1;fill-rule:nonzero;stroke:none;font-family:Helvetica;-inkscape-font-specification:Helvetica"
-           x="0 4.448 8.8959999 13.344 17.792 22.24 24.464001 29.799999 33.799999 38.248001 42.695999 47.144001 51.591999 53.368 55.144001 57.368 61.816002 66.024002 70.024002 74.472 78.472 80.695999 85.143997 87.367996 89.592003 93.592003 97.760002 99.984001 102.208 104.872 110.208 116.872 121.32 125.2 129.64799 134.09599 138.54401 142.424 144.64799 146.87199 152.64799 157.09599 161.54401 168.12801 172.576 177.024 181.472 185.92"
+           style="font-variant:normal;font-weight:normal;font-size:8px;font-family:Helvetica;-inkscape-font-specification:Helvetica;writing-mode:lr-tb;fill:#7f7f7f;fill-opacity:1;fill-rule:nonzero;stroke:none"
+           x="0 4.448 8.8959999 13.344 17.792 22.24 24.464001 29.799999 33.799999 38.248001 42.695999 47.144001 51.591999 53.368 55.144001 57.368 61.816002 66.024002 70.024002 74.472"
            y="0"
            sodipodi:role="line"
-           id="tspan350">14422 Pseudolithoxus n. sp. (Amazonas, Nhamundá)</tspan></text>
+           id="tspan350">14422 Pseudolithoxus kinja (Amazonas, Nhamundá)</tspan></text>
 <text
          transform="matrix(1,0,0,-1,406.43,21.89)"
          id="text352"><tspan
-           style="font-size:8px;font-variant:normal;font-weight:normal;writing-mode:lr-tb;fill:#7f7f7f;fill-opacity:1;fill-rule:nonzero;stroke:none;font-family:Helvetica;-inkscape-font-specification:Helvetica"
-           x="0 4.448 8.8959999 13.344 17.792 22.24 24.464001 29.799999 33.799999 38.248001 42.695999 47.144001 51.591999 53.368 55.144001 57.368 61.816002 66.024002 70.024002 74.472 78.472 80.695999 85.143997 87.367996 89.592003 93.592003 97.760002 99.984001 102.208 104.872 110.208 116.872 121.32 125.2 129.64799 134.09599 138.54401 142.424 144.64799 146.87199 152.64799 157.09599 161.54401 168.12801 172.576 177.024 181.472 185.92"
+           style="font-variant:normal;font-weight:normal;font-size:8px;font-family:Helvetica;-inkscape-font-specification:Helvetica;writing-mode:lr-tb;fill:#7f7f7f;fill-opacity:1;fill-rule:nonzero;stroke:none"
+           x="0 4.448 8.8959999 13.344 17.792 22.24 24.464001 29.799999 33.799999 38.248001 42.695999 47.144001 51.591999 53.368 55.144001 57.368 61.816002 66.024002 70.024002 74.472"
            y="0"
            sodipodi:role="line"
-           id="tspan354">14482 Pseudolithoxus n. sp. (Amazonas, Nhamundá)</tspan></text>
+           id="tspan354">14482 Pseudolithoxus kinja (Amazonas, Nhamundá)</tspan></text>
 <text
          transform="matrix(1,0,0,-1,406.43,65.53)"
          id="text356"><tspan
-           style="font-size:8px;font-variant:normal;font-weight:normal;writing-mode:lr-tb;fill:#7f7f7f;fill-opacity:1;fill-rule:nonzero;stroke:none;font-family:Helvetica;-inkscape-font-specification:Helvetica"
-           x="0 4.448 8.8959999 13.344 17.792 22.24 24.464001 29.799999 33.799999 38.248001 42.695999 47.144001 51.591999 53.368 55.144001 57.368 61.816002 66.024002 70.024002 74.472 78.472 80.695999 85.143997 87.367996 89.592003 93.592003 97.760002 99.984001 102.208 104.872 110.208 116.872 121.32 125.2 129.64799 134.09599 138.54401 142.424 144.64799 146.87199 152.64799 157.09599 161.54401 168.12801 172.576 177.024 181.472 185.92"
+           style="font-variant:normal;font-weight:normal;font-size:8px;font-family:Helvetica;-inkscape-font-specification:Helvetica;writing-mode:lr-tb;fill:#7f7f7f;fill-opacity:1;fill-rule:nonzero;stroke:none"
+           x="0 4.448 8.8959999 13.344 17.792 22.24 24.464001 29.799999 33.799999 38.248001 42.695999 47.144001 51.591999 53.368 55.144001 57.368 61.816002 66.024002 70.024002 74.472 78.472"
            y="0"
            sodipodi:role="line"
-           id="tspan358">14483 Pseudolithoxus n. sp. (Amazonas, Nhamundá)</tspan></text>
+           id="tspan358">14483 Pseudolithoxus kinja (Amazonas, Nhamundá)</tspan></text>
 <text
          transform="matrix(1,0,0,-1,406.43,43.71)"
          id="text360"><tspan
-           style="font-size:8px;font-variant:normal;font-weight:normal;writing-mode:lr-tb;fill:#7f7f7f;fill-opacity:1;fill-rule:nonzero;stroke:none;font-family:Helvetica;-inkscape-font-specification:Helvetica"
-           x="0 4.448 8.8959999 13.344 17.792 22.24 24.464001 29.799999 33.799999 38.248001 42.695999 47.144001 51.591999 53.368 55.144001 57.368 61.816002 66.024002 70.024002 74.472 78.472 80.695999 85.143997 87.367996 89.592003 93.592003 97.760002 99.984001 102.208 104.872 110.208 116.872 121.32 125.2 129.64799 134.09599 138.54401 142.424 144.64799 146.87199 152.64799 157.09599 161.54401 168.12801 172.576 177.024 181.472 185.92"
+           style="font-variant:normal;font-weight:normal;font-size:8px;font-family:Helvetica;-inkscape-font-specification:Helvetica;writing-mode:lr-tb;fill:#7f7f7f;fill-opacity:1;fill-rule:nonzero;stroke:none"
+           x="0 4.448 8.8959999 13.344 17.792 22.24 24.464001 29.799999 33.799999 38.248001 42.695999 47.144001 51.591999 53.368 55.144001 57.368 61.816002 66.024002 70.024002"
            y="0"
            sodipodi:role="line"
-           id="tspan362">14484 Pseudolithoxus n. sp. (Amazonas, Nhamundá)</tspan></text>
+           id="tspan362">14484 Pseudolithoxus kinja (Amazonas, Nhamundá)</tspan></text>
 <text
          transform="matrix(1,0,0,-1,406.43,32.8)"
          id="text364"><tspan
-           style="font-size:8px;font-variant:normal;font-weight:normal;writing-mode:lr-tb;fill:#7f7f7f;fill-opacity:1;fill-rule:nonzero;stroke:none;font-family:Helvetica;-inkscape-font-specification:Helvetica"
-           x="0 4.448 8.8959999 13.344 17.792 22.24 24.464001 29.799999 33.799999 38.248001 42.695999 47.144001 51.591999 53.368 55.144001 57.368 61.816002 66.024002 70.024002 74.472 78.472 80.695999 85.143997 87.367996 89.592003 93.592003 97.760002 99.984001 102.208 104.872 110.208 116.872 121.32 125.2 129.64799 134.09599 138.54401 142.424 144.64799 146.87199 152.64799 157.09599 161.54401 168.12801 172.576 177.024 181.472 185.92"
+           style="font-variant:normal;font-weight:normal;font-size:8px;font-family:Helvetica;-inkscape-font-specification:Helvetica;writing-mode:lr-tb;fill:#7f7f7f;fill-opacity:1;fill-rule:nonzero;stroke:none"
+           x="0 4.448 8.8959999 13.344 17.792 22.24 24.464001 29.799999 33.799999 38.248001 42.695999 47.144001 51.591999 53.368 55.144001 57.368 61.816002 66.024002 70.024002 74.472"
            y="0"
            sodipodi:role="line"
-           id="tspan366">14485 Pseudolithoxus n. sp. (Amazonas, Nhamundá)</tspan></text>
+           id="tspan366">14485 Pseudolithoxus kinja (Amazonas, Nhamundá)</tspan></text>
 <text
          transform="matrix(1,0,0,-1,406.43,567.4)"
          id="text368"><tspan
@@ -800,19 +800,19 @@
 <text
          transform="matrix(1,0,0,-1,406.43,76.44)"
          id="text392"><tspan
-           style="font-size:8px;font-variant:normal;font-weight:normal;writing-mode:lr-tb;fill:#7f7f7f;fill-opacity:1;fill-rule:nonzero;stroke:none;font-family:Helvetica;-inkscape-font-specification:Helvetica"
-           x="0 5.336 9.7840004 14.232 18.68 20.903999 26.24 30.24 34.688 39.136002 43.584 48.032001 49.807999 51.584 53.807999 58.256001 62.464001 66.463997 70.912003 74.912003 77.136002 81.584 83.807999 86.031998 90.031998 94.199997 96.424004 98.648003 101.312 106.648 113.312 117.76 121.64 126.088 130.536 134.98399 138.864 141.088 143.312 149.088 153.536 155.75999 160.20799 166.87199 171.32001"
+           style="font-variant:normal;font-weight:normal;font-size:8px;font-family:Helvetica;-inkscape-font-specification:Helvetica;writing-mode:lr-tb;fill:#7f7f7f;fill-opacity:1;fill-rule:nonzero;stroke:none"
+           x="0 5.336 9.7840004 14.232 18.68 20.903999 26.24 30.24 34.688 39.136002 43.584 48.032001 49.807999 51.584 53.807999 58.256001 62.464001 66.463997 70.912003"
            y="0"
            sodipodi:role="line"
-           id="tspan394">P161 Pseudolithoxus n. sp. (Amazonas, Uatumã)</tspan></text>
+           id="tspan394">P161 Pseudolithoxus kinja (Amazonas, Uatumã)</tspan></text>
 <text
          transform="matrix(1,0,0,-1,406.43,87.35)"
          id="text396"><tspan
-           style="font-size:8px;font-variant:normal;font-weight:normal;writing-mode:lr-tb;fill:#7f7f7f;fill-opacity:1;fill-rule:nonzero;stroke:none;font-family:Helvetica;-inkscape-font-specification:Helvetica"
-           x="0 5.336 9.7840004 14.232 18.68 20.903999 26.24 30.24 34.688 39.136002 43.584 48.032001 49.807999 51.584 53.807999 58.256001 62.464001 66.463997 70.912003 74.912003 77.136002 81.584 83.807999 86.031998 90.031998 94.199997 96.424004 98.648003 101.312 106.648 113.312 117.76 121.64 126.088 130.536 134.98399 138.864 141.088 143.312 149.088 153.536 155.75999 160.20799 166.87199 171.32001"
+           style="font-variant:normal;font-weight:normal;font-size:8px;font-family:Helvetica;-inkscape-font-specification:Helvetica;writing-mode:lr-tb;fill:#7f7f7f;fill-opacity:1;fill-rule:nonzero;stroke:none"
+           x="0 5.336 9.7840004 14.232 18.68 20.903999 26.24 30.24 34.688 39.136002 43.584 48.032001 49.807999 51.584 53.807999 58.256001 62.464001 66.463997 70.912003"
            y="0"
            sodipodi:role="line"
-           id="tspan398">P162 Pseudolithoxus n. sp. (Amazonas, Uatumã)</tspan></text>
+           id="tspan398">P162 Pseudolithoxus kinja (Amazonas, Uatumã)</tspan></text>
 <text
          transform="matrix(1,0,0,-1,406.43,141.95)"
          id="text400"><tspan
@@ -833,10 +833,10 @@
          transform="matrix(1,0,0,-1,406.43,120.13)"
          id="text408"><tspan
            style="font-size:8px;font-variant:normal;font-weight:normal;writing-mode:lr-tb;fill:#7f7f7f;fill-opacity:1;fill-rule:nonzero;stroke:none;font-family:Helvetica;-inkscape-font-specification:Helvetica"
-           x="0 5.336 9.7840004 14.232 18.68 23.128 27.576 29.799999 35.136002 39.136002 43.584 48.032001 52.48 56.928001 58.703999 60.48 62.703999 67.152 71.360001 75.360001 79.807999 83.807999 86.031998 90.480003 92.255997 96.255997 100.704 102.48 104.704 107.368 113.144 117.592 122.04 124.704 129.15199"
-           y="0"
            sodipodi:role="line"
-           id="tspan410">P18073 Pseudolithoxus nicoi (Negro)</tspan></text>
+           id="tspan410"
+           y="0"
+           x="0 5.336 9.7840004 14.232 18.68 23.128 27.576 29.799999 35.136002 39.136002 43.584 48.032001 52.48 56.928001 58.703999 60.48 62.703999 67.152 71.360001 75.360001 79.807999 83.807999 86.031998 90.480003 92.255997 96.255997 100.704 102.48 104.704 107.368 113.144 117.592 122.04 124.704 129.15199">P18073 Pseudolithoxus nicoi (Negro)</tspan></text>
 <text
          transform="matrix(1,0,0,-1,406.43,98.24)"
          id="text412"><tspan
