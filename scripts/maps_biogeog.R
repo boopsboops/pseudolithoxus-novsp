@@ -76,28 +76,36 @@ ff <- ff[!duplicated(ff$catalogNumber), ]
 dem.ras <- raster("../temp2/maps/sa_dem_30s.bil")# USGS digital elevation model (void-filled)
 rivs.shp <- readShapeLines("../temp2/maps/sa_riv_30s.shp")# USGS river network (stream lines)
 
-# filter the rivers data removing all the 
-rivs.shp.red <- rivs.shp[rivs.shp$UP_CELLS > 2500, ]
+# load the files
+dem.ras <- raster("../temp2/maps/sa_dem_30s.bil")# USGS digital elevation model (void-filled) ?raster
+rivs.shp <- readOGR("../temp2/maps/sa_riv_30s.shp")# USGS river network (stream lines)
+wat.bod <- readOGR("../temp2/maps/gis.osm_water_a_free_1.shp")# http://download.geofabrik.de/south-america/brazil.html
+
+
+## for the main map
+# filter the rivers data removing all the small rivers
+rivs.shp.red <- rivs.shp[rivs.shp$UP_CELLS > 5000, ]
 
 # crop to region of interest
-newext <- c(-70, -47.5, -12.5, 10)#c(left, right, bottom, top)
+newext <- c(-71, -48.5, -12.5, 10)#c(left, right, bottom, top)
 dem.ras.crop <- crop(dem.ras, newext)
 rivs.shp.crop <- crop(rivs.shp.red, newext)
-
+wat.bod.crop <- crop(wat.bod, newext)
 
 # make the breaks
-ci <- classIntervals(rivs.shp.red$UP_CELLS, n=6, style="kmeans")
-rivs.shp.red$breaks <- NA
-rivs.shp.red$breaks[which(rivs.shp.red$UP_CELLS > ci$brks[1] & rivs.shp.red$UP_CELLS < ci$brks[2])] <- 0.5
-rivs.shp.red$breaks[which(rivs.shp.red$UP_CELLS > ci$brks[2] & rivs.shp.red$UP_CELLS < ci$brks[3])] <- 1.5
-rivs.shp.red$breaks[which(rivs.shp.red$UP_CELLS > ci$brks[3] & rivs.shp.red$UP_CELLS < ci$brks[4])] <- 2.5
-rivs.shp.red$breaks[which(rivs.shp.red$UP_CELLS > ci$brks[4] & rivs.shp.red$UP_CELLS < ci$brks[5])] <- 2.5
-rivs.shp.red$breaks[which(rivs.shp.red$UP_CELLS > ci$brks[5] & rivs.shp.red$UP_CELLS < ci$brks[6])] <- 3.5
-rivs.shp.red$breaks[which(rivs.shp.red$UP_CELLS > ci$brks[6] & rivs.shp.red$UP_CELLS < ci$brks[7])] <- 4.0
-br <- rivs.shp.red$breaks
+ci <- classIntervals(rivs.shp.crop$UP_CELLS, n=6, style="kmeans")
+rivs.shp.crop$breaks <- NA
+rivs.shp.crop$breaks[which(rivs.shp.crop$UP_CELLS > ci$brks[1] & rivs.shp.crop$UP_CELLS < ci$brks[2])] <- 0.25
+rivs.shp.crop$breaks[which(rivs.shp.crop$UP_CELLS > ci$brks[2] & rivs.shp.crop$UP_CELLS < ci$brks[3])] <- 0.75
+rivs.shp.crop$breaks[which(rivs.shp.crop$UP_CELLS > ci$brks[3] & rivs.shp.crop$UP_CELLS < ci$brks[4])] <- 1
+rivs.shp.crop$breaks[which(rivs.shp.crop$UP_CELLS > ci$brks[4] & rivs.shp.crop$UP_CELLS < ci$brks[5])] <- 1.25
+rivs.shp.crop$breaks[which(rivs.shp.crop$UP_CELLS > ci$brks[5] & rivs.shp.crop$UP_CELLS < ci$brks[6])] <- 1.75
+rivs.shp.crop$breaks[which(rivs.shp.crop$UP_CELLS > ci$brks[6] & rivs.shp.crop$UP_CELLS < ci$brks[7])] <- 2
+br <- rivs.shp.crop$breaks
 
 
-## Plot the Maps
+
+## plotting data
 # make colours (different options)
 #cols1 <- brewer.pal(n=6, name="Set1")
 #cols1 <- cols1[c(1,2,9,5,8,6)]
@@ -105,9 +113,9 @@ cols1 <- c("chartreuse1", "firebrick1", "dodgerblue1", "gold1", "grey80", "hotpi
 
 # create cols vector
 ff$collist <- NA
-for (i in 1:length(cols1)){
-    ff$collist[which(ff$specificEpithet %in% unique(ff$specificEpithet)[i])] <- cols1[i]
-}
+for (i in 1:length(cols1)){#
+    ff$collist[which(ff$specificEpithet %in% unique(ff$specificEpithet)[i])] <- cols1[i]#
+}#
 
 # add the type material column
 ff$types <- FALSE
@@ -115,26 +123,27 @@ ff$types[which(ff$catalogNumber %in% c("3220", "V-17544", "V-17546", "28355", "5
 fft <- ff[ff$types==TRUE, ]
 fft <- fft[order(fft$specificEpithet), ]
 
-
 # MY DATA
 pch1 <- c(21,22,23,24,25,21)
 ff$symb <- NA
-for (i in 1:length(pch1)){
-    ff$symb[which(ff$specificEpithet %in% unique(ff$specificEpithet)[i])] <- pch1[i]
-}
+for (i in 1:length(pch1)){#
+    ff$symb[which(ff$specificEpithet %in% unique(ff$specificEpithet)[i])] <- pch1[i]#
+}#
 
-
-# col ramp for terrain
-cbr <- rev(colorRampPalette(brewer.pal(n=11, name="RdYlGn"))(16))
+# col ramp for terrain and rivers
+cbr <- rev(colorRampPalette(brewer.pal(n=9, name="YlGn")[1:9])(25))
+riv.col <- "#7B9EC8"
 
 # plot the map
 pdf(file="../temp2/map_pseudolithoxus.pdf", useDingbats=FALSE, useKerning=FALSE)
-plot(dem.ras.crop, add=FALSE, alpha=0.9, col=cbr, cex.axis=0.75, legend=FALSE)
-plot(rivs.shp.red, add=TRUE, col="grey20", lwd=br)
+plot(dem.ras.crop, add=FALSE, alpha=0.95, col=cbr, cex.axis=0.75, legend=FALSE)
+plot(rivs.shp.crop, add=TRUE, col=riv.col, lwd=br)
+plot(wat.bod.crop, add=TRUE, col=riv.col, lty=0)
 #points(x=gdat$decimalLongitude, y=gdat$decimalLatitude, col="black", bg=alpha(gdat$collist,1), pch=gdat$symb, lwd=0.5, cex=1.5)
 points(x=ff$decimalLongitude, y=ff$decimalLatitude, col="grey10", bg=ff$collist, pch=ff$symb, lwd=0.5, cex=1.5)
 points(x=fft$decimalLongitude, y=fft$decimalLatitude, col="black", bg=fft$collist, pch=fft$symb, lwd=2, cex=1.5)
 #text(x=ff$decimalLongitude, y=ff$decimalLatitude, labels=ff$catalogNumber, cex=0.5, adj=0.2)# to check
+rect(xleft=-68, ybottom=-1, xright=-66, ytop=1, border="white")#c(-68, -66, -1, 1)
 legend(x="topright", legend=unique(ff$specificEpithet), text.font=3, cex=0.9, pt.lwd=0.5, pt.cex=1.25, col="black", pt.bg=cols1, pch=pch1, bty="n")
 dev.off()
 
@@ -146,23 +155,56 @@ newext <- c(-85, -35, -57.5, 12.5)#c(left, right, bottom, top)
 dem.ras.crop <- crop(dem.ras, newext)
 #rivs.shp.crop <- crop(rivs.shp.red, newext)
 rivs.shp.red <- rivs.shp[rivs.shp$UP_CELLS > 12000, ]
+
 ci <- classIntervals(rivs.shp.red$UP_CELLS, n=6, style="kmeans")
 rivs.shp.red$breaks <- NA
-rivs.shp.red$breaks[which(rivs.shp.red$UP_CELLS > ci$brks[1] & rivs.shp.red$UP_CELLS < ci$brks[2])] <- 0.5
-rivs.shp.red$breaks[which(rivs.shp.red$UP_CELLS > ci$brks[2] & rivs.shp.red$UP_CELLS < ci$brks[3])] <- 1
-rivs.shp.red$breaks[which(rivs.shp.red$UP_CELLS > ci$brks[3] & rivs.shp.red$UP_CELLS < ci$brks[4])] <- 1.5
-rivs.shp.red$breaks[which(rivs.shp.red$UP_CELLS > ci$brks[4] & rivs.shp.red$UP_CELLS < ci$brks[5])] <- 2
-rivs.shp.red$breaks[which(rivs.shp.red$UP_CELLS > ci$brks[5] & rivs.shp.red$UP_CELLS < ci$brks[6])] <- 2.25
-rivs.shp.red$breaks[which(rivs.shp.red$UP_CELLS > ci$brks[6] & rivs.shp.red$UP_CELLS < ci$brks[7])] <- 2.75
+rivs.shp.red$breaks[which(rivs.shp.red$UP_CELLS > ci$brks[1] & rivs.shp.red$UP_CELLS < ci$brks[2])] <- 0.25
+rivs.shp.red$breaks[which(rivs.shp.red$UP_CELLS > ci$brks[2] & rivs.shp.red$UP_CELLS < ci$brks[3])] <- 0.75
+rivs.shp.red$breaks[which(rivs.shp.red$UP_CELLS > ci$brks[3] & rivs.shp.red$UP_CELLS < ci$brks[4])] <- 1
+rivs.shp.red$breaks[which(rivs.shp.red$UP_CELLS > ci$brks[4] & rivs.shp.red$UP_CELLS < ci$brks[5])] <- 1
+rivs.shp.red$breaks[which(rivs.shp.red$UP_CELLS > ci$brks[5] & rivs.shp.red$UP_CELLS < ci$brks[6])] <- 2
+rivs.shp.red$breaks[which(rivs.shp.red$UP_CELLS > ci$brks[6] & rivs.shp.red$UP_CELLS < ci$brks[7])] <- 2
 br <- rivs.shp.red$breaks
 
-cbr <- rev(colorRampPalette(brewer.pal(n=11, name="RdYlGn"))(16))
+# cols
+cbr <- rev(colorRampPalette(brewer.pal(n=9, name="YlGn")[1:9])(25))
 
 pdf(file="../temp2/map_pseudolithoxus_sa.pdf", useDingbats=FALSE, useKerning=FALSE)
-plot(dem.ras.crop, add=FALSE, alpha=0.9, col=cbr, cex.axis=0.75, legend=FALSE, axes=FALSE, frame=FALSE)
-plot(rivs.shp.red, add=TRUE, col="grey20", lwd=br, axes=FALSE, frame=FALSE)#, 
+plot(dem.ras.crop, add=FALSE, alpha=0.95, col=cbr, cex.axis=0.75, legend=FALSE, axes=FALSE, frame=FALSE)
+plot(rivs.shp.red, add=TRUE, col=rgb(134,194,230,maxColorValue = 255), lwd=br, axes=FALSE, frame=FALSE)#, 
 rect(xleft=-70, ybottom=-12.5, xright=-47.5, ytop=10, border="red")
 dev.off()
+
+
+## small maps of upper negro
+# crop to region of interest
+newext <- c(-68, -66, -1, 1)#c(left, right, bottom, top)
+dem.ras.crop <- crop(dem.ras, newext)
+rivs.shp.red <- rivs.shp[rivs.shp$UP_CELLS > 400, ]
+rivs.shp.crop <- crop(rivs.shp.red, newext)
+wat.bod.crop <- crop(wat.bod, newext)
+
+ci <- classIntervals(rivs.shp.crop$UP_CELLS, n=6, style="kmeans")
+rivs.shp.crop$breaks <- NA
+rivs.shp.crop$breaks[which(rivs.shp.crop$UP_CELLS > ci$brks[1] & rivs.shp.crop$UP_CELLS < ci$brks[2])] <- 0.25
+rivs.shp.crop$breaks[which(rivs.shp.crop$UP_CELLS > ci$brks[2] & rivs.shp.crop$UP_CELLS < ci$brks[3])] <- 0.75
+rivs.shp.crop$breaks[which(rivs.shp.crop$UP_CELLS > ci$brks[3] & rivs.shp.crop$UP_CELLS < ci$brks[4])] <- 1
+rivs.shp.crop$breaks[which(rivs.shp.crop$UP_CELLS > ci$brks[4] & rivs.shp.crop$UP_CELLS < ci$brks[5])] <- 1
+rivs.shp.crop$breaks[which(rivs.shp.crop$UP_CELLS > ci$brks[5] & rivs.shp.crop$UP_CELLS < ci$brks[6])] <- 2
+rivs.shp.crop$breaks[which(rivs.shp.crop$UP_CELLS > ci$brks[6] & rivs.shp.crop$UP_CELLS < ci$brks[7])] <- 2
+br <- rivs.shp.crop$breaks
+
+# subset molecular nicoi
+ttab.nic <- ttab[grep("nicoi", ttab$specificEpithet), ]
+
+# plot the map
+pdf(file="../temp2/map_pseudolithoxus_negro.pdf", useDingbats=FALSE, useKerning=FALSE)
+plot(dem.ras.crop, add=FALSE, alpha=0.95, col=cbr, cex.axis=0.75, legend=FALSE, axes=FALSE, frame=FALSE)
+plot(rivs.shp.crop, add=TRUE, col=riv.col, lwd=br, axes=FALSE, frame=FALSE)
+plot(wat.bod.crop, add=TRUE, col=riv.col, lty=0, axes=FALSE, frame=FALSE)
+points(x=ttab.nic$decimalLongitude, y=ttab.nic$decimalLatitude, col="grey10", bg="gold1", pch=24, lwd=0.5, cex=2)
+dev.off()
+#https://graphicdesign.stackexchange.com/questions/6419/increment-dynamic-offset-size
 
 
 
