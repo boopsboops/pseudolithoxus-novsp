@@ -1,0 +1,563 @@
+% Use only LaTeX2e, calling the article.cls class and 12-point type.
+\documentclass[12pt]{article}
+\usepackage{times}
+\usepackage{booktabs}
+\usepackage{lineno}% linenumbering
+%\usepackage[onehalfspacing]{setspace} % onehalf spacing
+\usepackage{graphicx}% add graphics
+\usepackage[utf8]{inputenc}% encoding
+\usepackage{gensymb}% symbols
+\usepackage{textcomp}% symbols
+\usepackage[document]{ragged2e}% left justify
+\setlength{\RaggedRightParindent}{\parindent}%indent
+\usepackage[labelsep=period,labelfont=bf,singlelinecheck=false,figurename=Fig.]{caption}% caption format
+
+
+% Hyperlinking
+\usepackage{url}% for better urls
+\renewcommand{\UrlFont}{\small\ttfamily}% make urls smaller
+\PassOptionsToPackage{hyphens,spaces,obeyspaces}{url}\usepackage{hyperref}% to avoid clashes between url and hyperref
+\hypersetup{breaklinks=true,bookmarks=true,colorlinks=true,urlcolor=blue,linkcolor=green,citecolor=red,pdfauthor={Rupert A.\ Collins},pdftitle={Biogeography and species delimitation of the rheophilic suckermouth-catfish genus Pseudolithoxus (Siluriformes: Loricariidae), with the description of a new species from the Brazilian Amazon}}
+\renewcommand*{\figureautorefname}{Fig.}
+
+% Bibliography customisation for T&F APA style
+\usepackage[natbibapa,nodoi]{apacite}
+\usepackage{natbib}
+\bibliographystyle{apacite}
+
+% The following parameters seem to provide a reasonable page setup.
+\topmargin 0.0cm
+\oddsidemargin 0.2cm
+\textwidth 16cm 
+\textheight 21cm
+\footskip 1.0cm
+
+
+% new cprime commands
+%\newcommand*{\mins}{$^{\prime}$}
+%\newcommand*{\secs}{$^{\prime\prime}$}
+
+%The next command sets up an environment for the abstract to your paper.
+\newenvironment{sciabstract}{%
+\begin{quote} \bf}
+{\end{quote}}
+
+% Include your paper's title here
+\title{Biogeography and species delimitation of the rheophilic suckermouth-catfish genus \emph{Pseudolithoxus} (Siluriformes: Loricariidae), with the description of a new species from the Brazilian Amazon} 
+
+\author
+{Rupert A. Collins$^{1\ast}$, Alessandro G. Bifi$^{1}$,  Renildo R. de Oliveira$^{2}$,\\ Emanuell D. Ribeiro$^{2}$, Nathan K. Lujan$^{2}$, Lúcia H. Rapp Py-Daniel$^{2}$,\\ Tomas Hrbek$^{2}$ \\
+\\
+\small{$^{1}$Laboratório de Evolução e Genética Animal, Departamento de Biologia,}\\
+\small{Universidade Federal do Amazonas, Manaus, AM, Brazil}\\
+\small{$^{2}$School of Biological Sciences, University of Bristol,}\\
+\small{Life Sciences Building, Tyndall Avenue, Bristol BS8 1TQ, UK}\\
+\small{$^{3}$Coordenação em Biodiversidade, Coleção de Peixes,}\\
+\small{Programa de Coleções Científicas Biológicas-PCCB,}\\
+\small{Instituto Nacional de Pesquisas da Amazônia-INPA,}\\
+\small{Av.\ Andre Araújo 2936, Petrópolis, CEP 69067-375 Manaus, AM, Brazil}\\
+\small{$^{4}$Department of Biological Sciences, University of Toronto Scarborough,}\\
+\small{Toronto, Ontario, M1C 1A4, Canada}\\
+\\
+\normalsize{$^\ast$To whom correspondence should be addressed; E-mail:  rupertcollins@gmail.com.}
+}
+% Include the date command, but leave its argument blank.
+\date{}
+
+%%%%%%%%%%%%%%%%% END OF PREAMBLE %%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%% END OF PREAMBLE %%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%% END OF PREAMBLE %%%%%%%%%%%%%%%%
+
+\begin{document} 
+
+% Double-space the manuscript.
+\baselineskip24pt
+
+% Make the title.
+\maketitle 
+\newpage
+
+% Place your abstract within the special {sciabstract} environment.
+\begin{sciabstract}
+\section*{Abstract}
+The rapids-dwelling suckermouth catfish genus \emph{Pseudolithoxus} was previously only known from the Guiana-Shield-draining Orinoco and Casiquiare river systems of Colombia and Venezuela, but new records expand this range considerably further into the Amazon basin of Brazil, and include occurrences from rivers draining the northern Brazilian Shield. %
+These highly disjunct records are now placed in an evolutionary and phylogeographic context using a dated species tree constructed from mitochondrial (Cytb) and nuclear (RAG1) gene sequence data. %
+Due to mito-nuclear discordance, we also delimit the putative species using statistical coalescent models and a range of additional metrics. %
+We infer that at least two species of \emph{Pseudolithoxus} are present in the Amazon basin: \emph{P}.\ \emph{nicoi}, previously only recorded from the Casiquiare River but now also reported from the upper rio Negro, and a new species---which we describe herein---from south-draining Guiana Shield and north-draining Brazilian Shield drainages. %
+Our data reject a simple model of Miocene vicariance in the group following uplift of the Uaupés Arch separating the Orinoco and Amazon systems, and instead suggest more complex dispersal scenarios through palaeo-connections in the Pliocene and also via the contemporary rio Negro and rio Madeira in the late Pleistocene.%
+
+\bigskip
+Keywords: aquatic, biodiversity, ichthyology, Neotropics, phylogeny, rio Negro, taxonomy.
+\end{sciabstract}
+
+\newpage
+\section*{Introduction}
+
+Field excursions to the rio Uatumã and rio Nhamundá---two Amazon-draining clearwater rivers of the Guiana Shield---and to the upper rio Negro near São Gabriel da Cachoeira have revealed new records of the rheophilic suckermouth-catfish genus \emph{Pseudolithoxus} Isbrücker \& Werner, 2001 in the territory of Brazil. %
+These findings are of particular interest because this genus was previously reported only from the río Orinoco of Venezuela and Colombia, its right-bank tributaries draining the western Guiana Shield of Venezuela, and the río Casiquiare \citep{Armbruster2000,Lujan2011kelsorum}, and was therefore not known from the Amazon system. %
+Subsequent examination of museum material revealed a further collection of \emph{Pseudolithoxus} from the rio Guariba, a Brazilian Shield tributary of the rio Aripuanã (rio Madeira basin). %
+Given the disjunct distribution of these new records and the interesting biogeographic implications, here we aim to place these new records in an evolutionary context using a dated molecular phylogeny and Bayesian species delimitation. %
+We also use this opportunity to provide a name and description for the putatively new species from the Guiana and Brazilian shields.
+
+The genus \emph{Pseudolithoxus} was erected to accommodate four former \emph{Lasiancistrus} species of the \emph{L}.\ \emph{anthrax} species group described by \citet{Armbruster2000}: \emph{Pseudolithoxus anthrax}, \emph{P}.\ \emph{dumus}, \emph{P}.\ \emph{tigris} and \emph{P}.\ \emph{nicoi}, all from Amazonas State, Venezuela, río Orinoco drainage. %
+In their original description, \citet{Armbruster2000} called attention to the distinctive features of the group: extreme elongation of flexible odontodes on pectoral-fin spines, and presence of hypertrophied odontodes along the border of the snout of males and females. %
+\citet{Armbruster2000} also highlighted the absence of flexible, whiskerlike cheek plate odontodes as a major feature distinguishing the \emph{L}.\ \emph{anthrax} species group from all other \emph{Lasiancistrus} species. %
+More recently, \citet{Lujan2011kelsorum} described a fifth species, \emph{P}.\ \emph{kelsorum}, also from the upper Orinoco in Venezuela.%
+
+In the most recent osteological phylogenetic analysis including \emph{Pseudolithoxus}, \citet{Armbruster2008} recovered \emph{P}.\ \emph{anthrax} and \emph{P}.\ \emph{dumus} as sister taxa, a grouping in turn sister to \emph{Lasiancistrus} and \emph{Ancistrus}. %
+In that study, \emph{P}.\ \emph{anthrax} and \emph{P}.\ \emph{dumus} shared three homoplastic synapomorphies: presence of a posteromedial invagination of ceratobranchial 5, presence of a dorsomedial process on the pterotic-supracleithrum, and three to eight vertebrae between the first normal neural spine behind the dorsal fin and the first spine under the preadipose plates.%
+
+Molecular phylogenetic research by \citet{Covain2012} and \citet{Lujan2015phylo} found support for the same intergeneric relationships found by \citet{Armbruster2008}. %
+One exception that \citet{Lujan2015phylo} found to \citet{Armbruster2008} was that the monotypic genus and species \emph{Soromonichthys stearleyi} \citet{Lujan2011sorom} was nested within \emph{Pseudolithoxus} in a position sister to \emph{Pseudolithoxus nicoi}. %
+\emph{Soromonichthys stearleyi} is narrowly endemic to caño Soromoni, a small river draining the southwestern slope of Cerro Duida, a large Guiana Shield tepui near the bifurcation between the upper Orinoco and Casiquiare rivers. %
+\citet{Armbruster2008} had found \emph{Soromonichthys} (then referred to as ``New Genus 2'') to be sister to a clade comprising \emph{Lithoxus} and \emph{Exastilithoxus} from the Guiana Shield, and \emph{Cordylancistrus}, \emph{Leptoancistrus}, \emph{Dolichancistrus} and \emph{Chaetostoma} from the Andes Mountains; however, few of the morphology-based relationships within this ``Trans-Highland Clade'' \citep[sensu][]{Lujan2011book,Lujan2011sorom} have been supported by subsequent molecular phylogenetic analyses \citep{Lujan2015phylo,Lujan2015chaeto}. %
+Validity of \emph{Soromonichthys} as a distinct genus is therefore in doubt, and evidence for \emph{S}.\ \emph{stearleyi} being a distinctive member of \emph{Pseudolithoxus} is growing.%
+
+Since 2000, many new loricariid taxa have been described from rivers draining the Guiana Shield in Venezuela and Guyana \citep{Armbruster2004,Armbruster2008pseud,Lujan2011sorom,Lujan2009}. %
+ Of the five \emph{Pseudolithoxus} described from this region, three (\emph{P}.\ \emph{anthrax}, \emph{P}.\ \emph{dumus}, and \emph{P}.\ \emph{tigris}) are sympatric in the Santa Barbara rapids at the confluence between the upper Orinoco and Ventuari rivers. %
+ Of these, the larger-bodied sister-species \emph{P}.\ \emph{anthrax} and \emph{P}.\ \emph{dumus} have relatively broad but not entirely sympatric distributions, with both species ranging further up the Orinoco and Ventuari rivers, \emph{P}.\ \emph{dumus} alone ranging further down the Orinoco main channel to just downstream of the Atures rapids, and \emph{P}.\ \emph{anthrax} alone occupying more eastern tributaries of the Orinoco (e.g., Caura, Aro rivers). %
+ The smaller-bodied sister species \emph{P}.\ \emph{tigris} and \emph{P}.\ \emph{kelsorum} are allopatrically distributed within the main channel of the Orinoco between the Maipures and Santa Barbara rapids, with \emph{P}.\ \emph{tigris} restricted to the confluence of the Orinoco and Ventuari rivers and \emph{P}.\ \emph{kelsorum} only occurring in the río Orinoco further downstream.%
+ 
+The fifth species, \emph{P}.\ \emph{nicoi}, is similar in body size to \emph{P}.\ \emph{anthrax} and \emph{P}.\ \emph{dumus} and is part of a lineage that is sister to these species. %
+ Until now, \emph{Pseudolithoxus nicoi} was thought to be restricted to the río Casiquiare, where it is allopatric with respect to all other described congeners. %
+ The Casiquiare is a southwesterly flowing bifurcation of the río Orinoco that is in the process of capturing a large portion of the Orinoco headwaters into the rio Negro system. %
+ As such, the Casiquiare acts as a potential corridor for faunal exchange between the Orinoco and rio Negro \citep{Lujan2011kelsorum,Winemiller2008,Winemiller2011}. %
+ With \emph{Pseudolithoxus nicoi} present in the Casiquiare and new records of \emph{Pseudolithoxus} from the upper rio Negro and Brazilian Amazon, the genus \emph{Pseudolithoxus} becomes a valuable system in which to investigate the dispersal routes, vicariant events and zoogeographic filters of the region \citep{Winemiller2008}.%
+ 
+Due to tectonically driven uplift of the Uaupés Arch in the Late Miocene (approximately 8–11 Ma), the Orinoco and Amazon basins became hydrologically separated \citep{Albert2011,Lundberg1998,Wesselingh2011}, thus providing an opportunity for cladogenesis within fish lineages that had been contiguously distributed across these basins \citep{Lovejoy2010}. %
+ Were this vicariant event to have affected \emph{Pseudolithoxus}, the simplest model would assume the Amazon and Negro/Casiquiare species would be monophyletic and sister taxon to the Orinoco species, with a most recent common ancestor dateable to the Late Miocene. %
+ Although it is not known exactly when the Casiquiare corridor breached the uplifted Uaupés Arch \citep{Willis2010,Winemiller2011}, a divergence date more recent than the Miocene would likely support a dispersal hypothesis via this corridor, or other historical connections.%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section*{Materials \& methods}
+
+\subsection*{Morphology}
+
+Measurements were made with digital calipers to the nearest 0.1 mm. %
+All measurements and counts were taken from the left side, unless the structure was missing or damaged. %
+Measurements and plate counts followed those proposed by \citet{Fisch-Muller2001} and \citet{Bifi2009}. %
+Specimens were cleared and counterstained (c\&s) for bone and cartilage following the procedures of \citet{Taylor1985}. %
+Vertebral counts include Weberian (five) and ural (one) complexes. %
+In the description section, fin rays and other counts are followed by the number of individuals with each count between parentheses. %
+Nomenclature of the dermal plates in lateral series follows \citet{Schaefer1997}. %
+Museum abbreviations: ANSP, Academy Natural Sciences of Philadelphia; INPA, Instituto Nacional de Pesquisas da Amazônia, Manaus; MPEG, Museu Paraense Emílio Goeldi, Belém; MZUEL, Museu de Zoologia da Universidade Estadual de Londrina, Londrina; MZUSP, Museu de Zoologia da Universidade de São Paulo, São Paulo and NUP, Núcleo de Pesquisas em Limnologia, Ictiologia e Aquicultura da Universidade Estadual de Maringá, Maringá.%
+
+
+\subsection*{Molecular methods}
+
+\subsubsection*{Phylogeny and dated species tree}
+
+To construct a phylogeny and perform species delimitation we chose two frequently used and reliable markers for fish phylogenetics, viz.\ mitochondrial protein-coding gene cytochrome \emph{b} (\emph{Cytb}), and exon three of the nuclear protein-coding recombination-activating gene 1 (\emph{RAG1}). %
+We accessed all sequences presented by \citet{Lujan2015phylo} for these genes from \emph{Pseudolithoxus} as well as two outgroup genera (\emph{Ancistrus} and\emph{ Lasiancistrus}). %
+We used the primer combinations and PCR cycling steps from \citet{Lujan2015phylo}, specifically CytbFa/CytbRa and RAG1Fa/RAG1R1186. Resulting chromatograms were assembled in Geneious v7 \citep{Kearse2012}, aligned manually using translated amino acid sequences, and then checked for consistency using exploratory maximum likelihood gene trees in Phangorn v2.04 \citep{Schliep2011}. %
+Particular care was taken to correctly call heterozygous sites in the \emph{RAG1} chromatograms. 
+
+A dated species tree for \emph{Pseudolithoxus} and the two outgroup genera was generated using the multispecies-coalescent software package *Beast v1.8.4 \citep{Heled2010}. %
+All biallelic nuclear \emph{RAG1} sequences were first phased into haplotypes using the software Phase v2.1 \citep{Stephens2003}. %
+Data were partitioned by gene, with independent tree and clock models for each. %
+Substitution models were chosen using jModelTest2 \citep{Darriba2012}, resulting in the HKY$+\Gamma$ model for the \emph{Cytb} partition, and K80 (= K2P) model for the \emph{RAG1} partition. %
+Investigations into further partitioning---i.e. at the codon level---proved unsuccessful, as parameter estimates from *Beast were often either poorly estimated (low effective sample sizes) or imprecise (wide and unrealistic HPDs); this is most likely due to the paucity of information in these smaller subsets. %
+Individuals were assigned to species based on either their morphological identification, or in the case of \emph{P}.\ \emph{nicoi} and the new species of \emph{Pseudolithoxus}, based on the results of the species delimitation step (below). %
+Initial tests using an uncorrelated relaxed clock confirmed that the strict molecular clock could not be rejected for our data (HPD of ``ucld.stdev'' parameter encompassing zero, i.e.\ very little rate heterogeneity). %
+The species tree was dated using a geological calibration point; here we chose the divergence between the trans-Andean \emph{Ancistrus clementinae} and the remaining cis-Andean members of the genus to represent a vicariant event caused by tectonic uplift of the Eastern Cordillera in the Upper Miocene at around 11.8 to 13.5 Ma \citep{Albert2011}. %
+This calibration point was accommodated by a lognormal calibration density of mean 12.65 (real space), and standard deviation 0.035 for the basal node in \emph{Ancistrus}. %
+The analysis was run eight times from random starting trees for 60 million generations. %
+Run convergence and parameter effective sample sizes were assessed using Tracer v1.6 \citet{Rambaut2014}. %
+After a burnin of 200 trees (= 17\%), 1,000 trees were collected from each run, resulting in a total of 8,000 trees which were summarised into a maximum clade credibility species tree in TreeAnnotator v1.8.4 \citep{Rambaut2016}. %
+All command and input files for these analyses are available as supporting information at \href{https://github.com/boopsboops/pseudolithoxus-novsp}{https://github.com/boopsboops/pseudolithoxus-novsp}. %
+We made use of the Beagle library \citep{Ayres2012} to increase computational efficiency.%
+
+\subsubsection*{Species delimitation}
+
+To obtain statistical support for species delimitations from the molecular data, we used a Bayes factor analysis based on marginal likelihoods of each coalescent model \citep{Fujita2012,Grummer2014}. %
+The dataset and settings used were the same as for the species tree analysis, but retaining only the \emph{Pseudolithoxus} species. %
+Four delimitation models for the \emph{P}.\ \emph{nicoi} group were proposed (\autoref{tab:bf}), comprising the four most likely scenarios based on initial phylogenetic analyses and geographical localities. %
+We ran each model three times for 100 million generations from random starting trees, and afterwards ran 100 stepping stone \citep{Xie2011} path steps of length 1,000,000 to obtain marginal likelihood values.%
+
+We also calculated the number of diagnostic sites for each putative species using the nucDiag function in Spider v1.3 \citep{Brown2012}, as well as their genealogical sorting indices \citep[genealogicalSorting v0.92;][]{Cummings2008} and probabilities of reciprocal monophyly \citep{Rosenberg2007} using Spider. %
+For these analyses, maximum likelihood trees (Phangorn, previous model settings) of unphased sequences were used.%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section*{Results}
+
+\emph{Pseudolithoxus kinja} sp.\ nov.\ Bifi, de Oliveira, Rapp Py-Daniel \& Collins \\(\autoref{fig:holotype} and \autoref{fig:paratype}).\\
+\bigskip
+
+\noindent HOLOTYPE: INPA 3220, 148.0 mm SL, Brazil, Amazonas, São Sebastião do Uatumã, rio Uatumã, Santa Luzia de Jacarequara, 2\degree26’46.7”S 58\degree16’31.9”W, 19 Sep 1985, M.\ Jegu.\\%
+\bigskip
+
+\noindent PARATYPES: All from Brazil, Amazonas State: ANSP 201028, 1, 112.9 mm SL; INPA 43889, 14, (13 alc, 63.6--146.9 mm SL and 1 c\&s, 99.5 mm SL); MZUSP xxxTBCxxx, 1, 101.2 mm SL; NUP 18761, 1, 98,3 mm SL; Nhamundá, rio Nhamundá, acima da cidade de Nhamundá, abaixo da lagoa Sete Ilhas, 0\degree43'04''S 57\degree22'07''W, 6 Nov 2013, V.\ N.\ Machado, E.\ D.\ Ribeiro \& R.\ A.\ Collins. %
+INPA 5370, 1, 73.2 mm SL, Presidente Figueiredo, rio Uatumã, Pé da barragem de Balbina, 1\degree55’2.6”S 59\degree28’23.8”W, 24 Oct 1987, J.\ Zuanon. %
+INPA 5626, 2, 73.3--91.2 mm SL, Presidente Figueiredo, rio Uatumã, Pé da barragem de Balbina, 1\degree55’2.6”S 59\degree28’23.8”W, 24 Oct 1987, J.\ Zuanon et al. %
+INPA 16270, 6, (5 alc, 97.5--153.1 mm SL and 1 skl, 146.8 mm SL); MPEG 34202, 1, 131,4 mm SL; Presidente Figueiredo, rio Uatumã, cachoeira do Miriti, corredeiras com fundo pedregoso, 2\degree1’44.2”S 59\degree26’23.5”W, 13 Oct 1987, R.\ Leite \& C.\ de Deus. %
+INPA 16271, 3, 108.3--126.4 mm SL, Presidente Figueiredo, rio Uatumã, cachoeira Morena, pedral com corredeira, 2\degree7’27.4”S 59\degree19’43.3”W, 7 Oct 1987, E.\ Ferreira, R.\ Leite \& S.\ Kullander. %
+INPA 16272, 6, (5 alc, 77.3--111.2 mm SL and 1 c\&s, 73.3 mm SL), Presidente Figueiredo, rio Uatumã, ilha de Nazaré, pedral do jacaré, 1\degree32’14.6”S 60\degree0’48.4”W, 16 Sep 1985, M.\ Jegu. %
+INPA 16275, 1, 111.6 mm SL, Presidente Figueiredo, rio Uatumã, Balbina abaixo da ponte, 1\degree55’43.9”S 59\degree28’43.7”W, 1987, Equipe de Ictiologia do INPA. %
+INPA 25939, 1, 109.8 mm SL, Presidente Figueiredo, rio Uatumã, pé da barragem de Balbina, 1\degree55’2.6”S 59\degree28’23.8”W, 26 Oct 1987, J.\ Zuanon et al. %
+INPA 46102, 1, 115.6 mm SL; MZUEL 16865, 1, 99.0 mm SL; Presidente Figueiredo, rio Pitinga, corredeiras 40 Ilhas, 0\degree53’16”S 59\degree34’28”W, drenagem do rio Uatumã, 19 Sep 2014, J.\ L.\ Birindelli, L.\ Rapp Py-Daniel, F.\ Jerep, V.\ N.\ Machado.\\
+\bigskip
+
+\noindent NONTYPES: All from Brazil, Amazonas State: %
+INPA 14786, 1, 64.3 mm SL, Presidente Figueiredo, rio Uatumã, ilha de Nazaré, corredeira do Jacaré, 1\degree32’14.6”S 60\degree0’48.4”W, 1 Oct 1987, J.\ Zuanon. %
+INPA 15656, 2, 45.5--49.0 mm SL, Presidente Figueiredo, rio Uatumã, poça embaixo da ponte Balbina, 1\degree55’43.9”S 59\degree28’43.7”W, 28 Oct 1987, equipe de Ictiologia do INPA. %
+INPA 33645, 1, 100.1 mm SL, Apuí, calha do Guariba, Reserva extrativista do Guariba, rio Madeira/Aripuanã basin, 8\degree45’03”S 60\degree26’10”W, 7 Nov 2008, W.\ Pedroza, W.\ Ohara, F.\ R.\ V.\ Ribeiro \& T.\ F.\ Teixeira. %
+INPA 43888, 1, 103.7 mm SL, São Sebastião do Uatumã, rio Uatumã, Santa Luzia de Jacarequara, 2\degree26’46.7”S 58\degree16’31.9”W, 30 Jun 1985, M.\ Jegu.\\%
+\bigskip
+
+\noindent DIAGNOSIS: \emph{Pseudolithoxus kinja} is diagnosed from all congeners by having a brown to dark grey body base colour with large yellowish spots (vs.\ colour pattern consisting of white to yellow bands in \emph{P}.\ \emph{kelsorum} and \emph{P}.\ \emph{tigris}; small white to yellow spots in \emph{P}.\ \emph{anthrax} and \emph{P}.\ \emph{nicoi}; dark brown to black spots in \emph{P}.\ \emph{dumus}). %
+Furthermore, \emph{Pseudolithoxus} kinja can be diagnosed from \emph{P}.\ \emph{anthrax} and \emph{P}.\ \emph{nicoi} by having dark bands on caudal fin (vs.\ absence); and cleithral width 30.0--33.5\% SL \citep[vs.\ 27.2--30.5\% in \emph{P}.\ \emph{anthrax} and 27.0--28.6\% in \emph{P}.\ \emph{nicoi}; data from ][]{Armbruster2000}.\\%
+\bigskip
+
+\noindent DESCRIPTION: General aspect of \emph{Pseudolithoxus} kinja shown in \autoref{fig:holotype} and \autoref{fig:paratype}. %
+Morphometric data and counts in Supplementary Table S1. %
+Forty-six specimens were examined; largest specimen reached 171.1 mm SL. %
+Body rounded anteriorly in dorsal view, gradually narrowing from cleithrum to caudal-fin origin. %
+Greatest body width at cleithrum. %
+Body dorsoventrally flattened with body depth greatest at supraoccipital. %
+In lateral view, dorsal and ventral profiles slightly convergent caudally. %
+Head large and moderately wide; snout rounded, covered by small plates, with large odontodes on anterior margin. %
+Head and eyes without crest or carenae, medial small ridge between nares and snout tip. %
+Four first lateral plates of mid-ventral series gently bent, rest of body without keels or carenae. %
+Anterior portion of body half trapezoidal and oval at caudal peduncle in cross section.%
+
+Head and trunk completely covered by plates dorsally, except dorsal-fin base depression and small gap between pterotic-supracleithrum and first plate of median series. %
+Ventral surface unplated from snout to anal-fin origin. %
+Base of first anal-fin pterygiophore covered by skin; preanal plate not present.%
+
+Eye large (14.3--18.9\% in HL), orbit round, dorsally positioned at posterior third of head length; iris operculum present and developed. %
+Orbit not elevated, interorbital area almost completely flat. %
+Low ridge between eye and nare. %
+Supraoccipital process inconspicuous, not elevated and triangular posteriorly. %
+Supraoccipital process limited posteriorly by first pair of predorsal plates and posterolaterally by one plate. %
+Two pairs of predorsal plates plus one azygous nuchal plate. First predorsal pair large, roughly triangular, strongly sutured medially, sometimes fused.
+
+Mouth and lips of moderate size; oral disk rounded; lips covered with small round papillae (larger on central portion of lower lip) except around maxillae. %
+Lower lip large but not reaching pectoral girdle. %
+Maxillary barbel short, with large distal portion free from lower lip. %
+Branchial opening small. Mandibular tooth row moderate; teeth thin, delicate and deeply cuspidate. %
+Cusps round, mesial cusp slightly larger than lateral cusp, with vertical divide between cusps; in smaller specimens cusps are largely asymmetrical with diagonal divide between cusps. %
+Premaxilla and dentary of similar size and oriented parallel to border of snout. %
+Mean number of premaxillary teeth 61, dentary teeth 67 (ranges of tooth numbers in Supplementary Table S1). %
+Only one small internal buccal papilla between premaxillae.
+
+Five rows of lateral plates, reduced to three rows on caudal peduncle. %
+Lateral median plates 23--25 (mode 24, holotype 24). %
+Odontodes present all along body, except on naked areas along dorsal-fin base, and ventrally from snout to anal-fin origin. %
+All plates marked with lines of small and uniformly sized odontodes. %
+Odontodes generally short, but larger on ventral margin of opercle and on pectoral-fin spine. %
+Numerous hypertrophied odontodes on cheek plates (range 29--49, holotype 43), large and reaching posterior margin of opercle; fleshy and thick tissue covering the proximal half of cheek plate odontodes. %
+Exposed part of opercle sickle-shaped; area above opercle covered by numerous small dermal plates.%
+
+Dorsal-fin origin at portion anterior of body, slightly anterior to vertical line of pelvic-fin origin. %
+Dorsal-fin II,7; spinelet present and dorsal-fin locking mechanism developed. %
+Dorsal fin long and low, but not reaching adipose-fin spine when adpressed; sometimes covering the azygous preadipose plate. %
+Adipose fin of moderate size, with posterior membrane well developed. %
+Caudal fin i,14,i, obliquely truncate or slightly emarginate, with inferior lobe unbranched ray longer than superior lobe unbranched ray. %
+Pectoral fin I,6, very large, reaching end of pelvic fin when adpressed. %
+Pelvic fin i,5, large, reaching anal-fin origin when adpressed. %
+Anal fin ii,4 (34, holotype included), i,5 (5), i,4 (1) and ii,2 (1). %
+Branched rays of pelvic and anal fins slightly larger than first unbranched rays. %
+All rays covered by numerous short odontodes on their free surface. %
+Four to five dorsal procurrent caudal-fin rays and three to five ventral procurrents caudal-fin rays. Vertebrae: 28 (3).\\%
+\bigskip
+
+\noindent DNA BARCODES: DNA barcodes (mitochondrial cytochrome \emph{c} oxidase subunit I; COI) for three paratypes from lot INPA 43889 from the rio Nhamundá were published by \citet{Collins2015} under the name \emph{Pseudolithoxus} sp.\ ``INPA 43888'' and GenBank accession numbers KP772584, KP772590, and KP772591.\\%
+\bigskip
+
+\noindent COLOUR IN ALCOHOL:  Body and fins with yellowish pale spots on a brown to dark grey background. %
+Spots increase in size posteriorly, being generally almost the same diameter as the pupil on the head, and as large as the orbit on the caudal peduncle. %
+Ventral surface of body lighter, creamy. %
+Caudal fin with dark bands and thin white distal band at tip.\\%
+\bigskip
+
+\noindent COLOUR IN LIFE: Live colouration is similar to preserved, with light olive-green pale spots over a brownish-grey background (\autoref{fig:paratype}). %
+Colouration gives the overall impression of dark reticulations.\\%
+\bigskip
+
+\noindent SEXUAL DIMORPHISM: Young specimens and fully reproductive males have a urogenital papilla which is well-developed as a small elongate tube located immediately behind the anal opening. %
+This small tube is almost perpendicular to the main plane of the body, facing ventrally with a tiny opening at the tip. %
+In mature males with developed testes, the third branched pelvic-fin ray becomes elongated, and the whole fin becomes lanceolate shaped. %
+In the anal fin of mature males the second simple ray becomes almost twice the length of the first short ray, and the first, second and third branched rays also become elongate (the third the longest); owing to this fin-ray elongation in mature males, the whole anal fin becomes larger and has a strongly curved posterior border rather than the regular straight border usually seen in females or non-reproductive males.\\%
+\bigskip
+
+\noindent DISTRIBUTION: The species is currently known from three clearwater rivers of the Brazilian and Guiana shields in Amazonas State, Brazil (\autoref{fig:map}): rio Uatumã, rio Nhamundá and rio Guariba (rio Madeira-Aripuanã drainage). %
+The new species has been reported in the aquarium trade literature under the tag name \emph{Pseudolithoxus} sp.\ ``L385'', a fish purportedly from the rio Trombetas \citep{Seidel2005}.\\%
+\bigskip
+
+\noindent ETYMOLOGY: ``Kinja'', meaning the ``true people'', is how the waimiri-atroari indigenous people call themselves. %
+This people inhabits areas surrounding the rio Uatumã and part of the rio Negro in the states of Amazonas and Roraima, Brazil. %
+The ethnic term ``waimiri-atroari'' was adopted in the beginning of the twentieth century. %
+The epithet ``kinja'' pays homage to this brave people who survived three attempts of genocide in the last century, and survive and thrive today in their protected area.\\%
+\bigskip
+
+\noindent ECOLOGICAL NOTES: The rio Nhamundá material was collected in shallow (depth $<$ 1.5 m), fast-flowing water over a substrate of eroded bedrock. %
+The fishes were living among narrow cracks between rocks, and were abundant at the sampling site. %
+However, this type of habitat was not frequently encountered on the lower Nhamundá, and the species was not found associated with more common woody-debris sites, or rocky sites lacking any appreciable water current. %
+Water temperature and conductivity were 28.3\degree C and 6 \micro s/cm. %
+Syntopic fishes encountered during the night survey included: \emph{Leporinus}, \emph{Symphysodon}, \emph{Cichla}, \emph{Pimelodella} and \emph{Tatia}. %
+\emph{Pseudolithoxus} was the dominant loricariid in this habitat.%
+
+The rio Uatumã, before the construction of the Balbina dam, was a large, rocky-bottomed clearwater river with areas of strong currents. %
+Nowadays, most of the formerly exposed rocky beds are submerged, and due to the release of tannins by vegetation drowned during filling of the reservoir, the reservoir and the river downstream of the reservoir transformed from a clearwater to blackwater river. %
+Hence, localities sampled in the rio Uatumã were either submerged or deeply modified after construction of the Balbina Dam in 1987--1988, and habitat specifics were not recorded during collections. %
+Recent collections in the rio Uatumã drainage recovered \emph{P}.\ \emph{kinja} only from more pristine tributaries such as the rio Pitinga. %
+However, water flow even across these more preserved waterfalls has been artificially controlled over the past 20 years by the upstream-located Paranapanema dam owned by a Brazilian mining company.\\%
+\bigskip
+
+\noindent CONSERVATION STATUS: We estimate that \emph{Pseudolithoxus kinja} has lost approximately 23\% of its historical distribution due to impoundment of the rio Uatumã by the Balbina dam. %
+The rio Pitinga, despite the water-control regime, still harbours the species. %
+No appreciable threat to the quality of its natural habitat appears to exist in the rio Nhamundá and rio Guariba, but the extent of distribution in these rivers remains unclear (collections were only made from single locations in each basin). %
+Thus, we suggest that \emph{P}.\ \emph{kinja} be classified as LC (Least Concern) under the IUCN criteria of evaluation of conservation status \citep{IUCN2012}.%
+
+
+\subsection*{Phylogenetic results}
+
+The \emph{Cytb} dataset comprised: 56 individuals; sequences of maximum length 1,131 bp (mean 1,047); missing data 7.4\%; and parsimony informative sites 43.9\% (= 497). %
+The \emph{RAG1} dataset comprised: 55 individuals; sequences of maximum length 1,017 bp (mean 1,002); missing data 1.5\%; and parsimony informative sites 17.5\% (178). %
+New sequence data have been submitted to GenBank under the accession numbers TBC:TBC.
+
+Our species tree analyses (\autoref{fig:tree}) indicate three main clades within \emph{Pseudolithoxus}, comprising: (1) \emph{P}.\ \emph{tigris} and \emph{P}.\ \emph{kelsorum}; (2) \emph{P}.\ \emph{anthrax} and \emph{P}.\ \emph{dumus}; and (3) \emph{P}.\ \emph{nicoi} and \emph{P}.\ \emph{kinja}. %
+The \emph{nicoi+kinja} clade was found to be sister taxon to \emph{anthrax+dumus}, to the exclusion of \emph{tigris+kelsorum}. All of these clades were supported with Bayesian posterior probability (BPP) $>$ 0.95. %
+The \emph{P}.\ \emph{nicoi} populations were not supported as monophyletic, with the new species found to be phylogenetically closer to the ``upper Negro'' population, although this result was not well supported (BPP = 0.69). %
+The alternative, monophyly of \emph{P}.\ \emph{nicoi}, was also poorly supported (BPP = 0.22).%
+
+In the gene tree analyses, each population was monophyletic in \emph{Cytb} (gsi = 1; BPPs $>$ 0.91), with \emph{P}.\ \emph{nicoi} ``upper Negro'' sistergroup to \emph{Pseudolithoxus kinja} on a short branch (BPP = 1), with \emph{P}.\ \emph{nicoi} ``Miuá'' sistergroup to both, on a longer branch (Fig.\ S1); uncorrected p-distance between \emph{P}.\ \emph{nicoi} ``upper Negro'' and \emph{P}.\ \emph{nicoi} ``Miuá'' was 0.0396. %
+In the \emph{RAG1} gene tree (Fig.\ S2; \autoref{tab:metrics}), \emph{P}.\ \emph{kinja} formed a monophyletic group (BPP = 1) sister to \emph{P}.\ \emph{nicoi}, with both \emph{P}.\ \emph{nicoi} populations forming partially exclusive groups of phased haplotypes with low posterior probabilities and genealogical sorting indices (\autoref{tab:metrics}). %
+The \emph{P}.\ \emph{nicoi} (both groups) phased haplotypes were not monophyletic, with one sistergroup to \emph{P}.\ \emph{kinja} (BPP = 0.35), although the gsi analysis of unphased sequences reported monophyly (gsi = 1).%
+
+
+\subsection*{Clade age estimates}
+
+Our dated species tree indicates that the basal split in \emph{Pseudolithoxus}---\emph{tigris+kelsorum} sistergroup to all other \emph{Pseudolithoxus}---occurred in the Miocene at around 8.5 Ma, with the highest posterior density (HPD) encompassing 6.54--10.85 Ma. %
+This was followed by a subsequent split between \emph{anthrax+dumus} and \emph{nicoi+kinja} in the Pliocene at around 4.7 Ma (HPD = 2.21--6.79). %
+Divergences between \emph{P}.\ \emph{tigris} and \emph{P}.\ \emph{kelsorum}, and \emph{P}.\ \emph{anthrax} and \emph{P}.\ \emph{dumus} occurred in the Pleistocene at 1.6 Ma (HPD = 0.58--2.48) and 1.5 Ma (HPD = 0.8--2.21) respectively. %
+The \emph{P}.\ \emph{nicoi} group split initially at around 0.5 Ma (HPD = 0.22–0.9), with the ancestor of \emph{P}.\ \emph{kinja} dated to around 0.3 Ma (HPD = 0.15–0.53). %
+Mean molecular clock rate (substitutions per site per million years) for \emph{Cytb} was 0.01 (HPD = 0.008--0.012), and 0.00059 for \emph{RAG1} (HPD = 0.00044--0.00076).
+
+\subsection*{Species delimitation in the \emph{Pseudolithoxus nicoi} group}
+
+The analysis of marginal likelihoods (\autoref{tab:bf}) using Bayes factors (2$ln$Bf) indicated that the highest ranked species delimitation model was the three species model $m1$ (\emph{P}.\ \emph{nicoi} ``Muia'', \emph{P}.\ \emph{nicoi} ``upper Negro'' and \emph{P}.\ \emph{kinja} all considered distinct; 2$ln$Bf = 0). %
+The model ($m3$) with the next best statistical support was for two species comprising \emph{P}.\ \emph{kinja} and \emph{P}.\ \emph{nicoi} (both populations), with a 2$ln$Bf of 12.76. %
+Alternative hypotheses ($m0$, $m2$) of either one species (all) or two species (\emph{P}.\ \emph{kinja} + \emph{P}.\ \emph{nicoi} ``upper Negro'') received less support (2$ln$Bf = 64. 42, and 38.76 respectively). %
+The difference in Bayes factor between the two two-species models ($m2$ and $m3$) was 26.0.%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection*{Discussion}
+
+Our well-supported species tree results reject the hypothesis that the rise of the Uaupés Arch is the sole factor explaining the distribution of \emph{Pseudolithoxus}, and point to a more complex model including historical dispersal between the Amazon and Orinoco drainages. %
+While the basal split in the genus was found to be consistent with the rise of the Uaupés Arch, we found that the Orinoco species did not represent a monophyletic group, with \emph{P}.\ \emph{anthrax} and \emph{P}.\ \emph{dumus} phylogenetically closer to \emph{P}.\ \emph{nicoi} and \emph{P}.\ \emph{kinja}. %
+Therefore, while it is possible that a vicariant event did take place at this time, it would require a Pliocene secondary colonisation of the Orinoco by the ancestor of \emph{P}.\ \emph{anthrax} and \emph{P}.\ \emph{dumus} via palaeo-connections between the Orinoco and Negro drainages that would have been formed once valleys on either side of the Uaupés Arch filled with sediments \citep{Winemiller2011}. %
+An alternative model would be that the basal split was not caused by uplift of the Uaupés Arch, but that the upper rio Negro basin was more recently colonised via palaeo-connections by the ancestor of \emph{P}.\ \emph{nicoi} and \emph{P}.\ \emph{kinja}, and was then followed by more recent dispersal down into the Amazon system (\emph{P}.\ \emph{kinja}) and up into the río Casiquiare (\emph{P}.\ \emph{nicoi}). %
+This alternative model would be further supported if the monotypic Orinoco genus \emph{Soromonichthys} was found to be nested within \emph{Pseudolithoxus} as suggested by the molecular analysis of \citet{Lujan2015phylo}, where it was recovered as sister taxon to \emph{P}.\ \emph{nicoi} (otherwise their phylogeny recovered the same topology as ours with the same taxa minus \emph{P}.\ \emph{kinja}). %
+We did not include \emph{Soromonichthys} in our analysis due to its controversial phylogenetic position---morphological evidence does not support its inclusion in \emph{Pseudolithoxus}---and so until this is resolved, we hesitate to infer biogeographic implications. %
+Regarding the near identical divergences at around 1.6 Ma between \emph{P}.\ \emph{tigris} and \emph{P}.\ \emph{kelsorum}, and \emph{P}.\ \emph{anthrax} and \emph{P}.\ \emph{dumus}, we do not know of an event in the history of the upper Orinoco that may have caused this, but the almost identical ages of these clades indicates a common factor.%
+
+It is important to emphasise that estimates of clade ages and our interpretations make several implicit assumptions \citep[e.g.][]{Duchene2014,Ho2014,Lovejoy2010}, including but not limited to: (1) that there are no undiscovered or extinct major lineages in the genus; (2) that our calibration using \emph{Ancistrus} is biologically---the rise of the Andes caused a vicariance event---and geologically---age estimations of the tectonic events---plausible; and that (3) our molecular clock model is not misspecified. %
+We report, however, that the \emph{Pseudolithoxus} clock rate of 1\% for \emph{Cytb} is broadly consistent with approximate rates for this gene in other fish taxa \citep[e.g.\ 0.74-0.92\%;][]{Ruber2004}.%
+
+We show that \emph{Pseudolithoxus kinja} occupies an apical position in the phylogeny, being nested within \emph{P}.\ \emph{nicoi} in some of the posterior trees, and the divergence being dated to the middle Pleistocene at around 0.3 Ma. %
+This position and timing of diversification supports the hypothesis of ancestral dispersal down the rio Negro during the Pleistocene. %
+During repeated glacial maxima, low-sea-level events and hydrological incisions into the landscape during the Quaternary \citep{Irion1995}, more extensive reaches of the rio Negro would likely have been rapids or shallower and faster flowing, possibly creating conditions more suitable for dispersal of rheophilic species such as \emph{Pseudolithoxus}, which are likely to be impeded by large stretches of slow moving water \citep{deSouza2014,Wesselingh2011}. %
+The apparently disjunct presence of the species in the Madeira-Aripuanã drainage to the south may be explained by the mouth of the Aripuanã being historically closer to the mouths of the Negro, Nhamundá and Uatumã rivers before the capture of the Aripuanã by the Madeira at around 2 Ma (Muniz et al., in press), following the rise of the Fitzcarrald Arch in the Pliocene after around 4 Ma \citep{Espurt2010}. %
+A similar pattern to \emph{Pseudolithoxus} was observed in \emph{Cichla monoculus}, with Casiquiare, Negro and Madeira haplotypes grouping together \citep{Willis2010}, and possibly indicating a common signal of dispersal.%
+
+All \emph{Pseudolithoxus} species currently inhabit clearwater and blackwater habitats, so it is assumed that a large stretch of whitewater such as the Madeira would be a formidable barrier, but a pre-river-capture dispersal event seems unlikely given that results of the dated phylogeny suggest that divergence took place much more recently in the late Pleistocene. %
+Therefore, it is possible that during glacial periods with lower rainfall in South America \citep{Cheng2013} that the Madeira carried less sediment and was more hospitable to these fishes. %
+This latter hypothesis is supported by reports of a black-with-white-spots \emph{Pseudolithoxus} from the clearwater rio Guaporé (upper Madeira drainage) near the Brazil-Bolivia border by \citet{Seidel2005}, indicating several headwaters of the Brazilian Shield were possibly colonised via the Madeira. %
+This record currently awaits confirmation.
+
+Our genetic sampling of \emph{P}.\ \emph{nicoi} from five locations on the upper rio Negro and Casiquiare indicate that \emph{P}.\ \emph{nicoi} comprises at least two mtDNA-divergent populations: one from the rapids at São Gabriel da Cachoeira and upstream including the Uaupés mouth and the Casiquiare, and another from downstream of these rapids, in the rio Miuá. %
+This Miuá population was approximately four percent divergent in \emph{Cytb}, but showed little differentiation in \emph{RAG1} nDNA. %
+It is peculiar that this apparent phylogeographic break in the species occurs over a small distance of less than 30 km, and while these locations are separated by a significant set of rapids at São Gabriel da Cachoeira---a potent dispersal barrier to slow water species such as discus \citep{Farias2008}---rheophilic loricariids that live in such environments should not be impeded. %
+This kind of phylogeographic break has also been observed in non-rheophilic needlefishes \citep[\emph{Potamorrhaphis};][]{Lovejoy2000} and peacock bass \citep[\emph{Cichla};][]{Willis2007}. %
+Several studies of small floodplain characiform fishes in the rio Negro \citep[e.g.][]{Cooke2009,Piggott2011,Schneider2012,Sistrom2009,Terencio2012} have also found multiple lineages that are consistent with historical population fragmentation following Miocene marine incursions. %
+We believe it likely, therefore, that this mitonuclear discordance was caused by genetic drift after a small population was isolated following environmental change, and insufficient time having elapsed for the single nDNA marker to sort and reach reciprocal monophyly \citep{Edwards2009,Zink2008}.%
+
+To examine how our phylogeographic results influenced our taxonomic interpretations, we tested hypotheses of different numbers of \emph{Pseudolithoxus} species using Bayes factors \citep[see][for interpretation of Bayes factors]{Kass1995}. %
+The most favourable model was that of three species ($m1$), but while support for this model was ``positive'' (\autoref{tab:bf}), it was not overwhelmingly superior to the two species model $m3$ comprising a monophyletic \emph{P}.\ \emph{nicoi} (2$ln$Bf = 12.76). %
+Furthermore, support for $m3$ was considered ``strong'' when compared to the one species model ($m0$) at 2$ln$Bf = 51.67. %
+In light of this, as well as the lack of morphologically distinctive features, the low posterior probabilities in the species tree, and the lack of diagnostic nucleotides in nuclear \emph{RAG1} for \emph{P}.\ \emph{nicoi} ``Miuá'', we prefer to consider this group as a population of \emph{P}.\ \emph{nicoi}.%
+
+Together with further geological evidence, studies including population genomic techniques are required on a wider range of both rheophilic and floodplain taxa to formulate better models of the biotic history of the Negro basin.%
+
+\subsection*{Acknowledgements}
+
+We sincerely thank Mark Sabaj (ANSP) for providing tissue samples and museum loans. %
+We also thank José Luis Birindelli for the invitation to participate in the rio Pitinga Expedition (2014), funded by CNPq Proc.\ CNPq n\degree 478900/2013-9. %
+AGB was supported by a postdoctoral fellowship (FAPEAM/CNPq Proc.\ 062.01066./2015). %
+RAC was supported by a CNPq Ciência sem Fronteiras fellowship (400813/2012-2). %
+The field trip to São Gabriel da Cachoeira (2013-2015) was funded by FAPEAM/UNIVERSAL Proc.\ 062.00350/2013. %
+Additionally, we would like to acknowledge all our colleagues that assisted us in the field (rio Pitinga: Valéria Nogueira, Fernando Jerep; rio Negro: Douglas Bastos, Andreza Oliveira, Ronnayana Silva, Isabel Mattos, Priscila Ito and Mario de Pinna).%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\bibliography{pseudolithoxus-novsp}
+
+\newpage
+\subsection*{Tables \& Figures}
+
+\begin{table}[htbp]
+\scriptsize
+\caption{Bayes factor species delimitation results for the \emph{Pseudolithoxus nicoi} group using stepping stone sampling. %
+Marginal likelihoods were calculated from three independent MCMC chains. %
+ Taxon abbreviations as follows: NEG = \emph{P}.\ \emph{nicoi} ``upper Negro''; MIU = \emph{P}.\ \emph{nicoi} ``Miuá''; and KIN = \emph{P}.\ \emph{kinja}}
+\begin{tabular}{llllll}
+\toprule
+Model & Delimitation & No.\ spp.\ & Marginal likelihood &  2$ln$Bf & Model rank\\
+\midrule
+$m1$ & NEG,MIU,KIN & 3 spp.\ & -4147.6880537144 & 0 & 1\\
+$m3	$ & NEG+MIU,KIN &	2 spp.\ & -4154.0681104456 & 12.7601134624 & 2\\
+$m2$ &	NEG+KIN,MIU & 2 spp.\ & -4167.0680687074 & 38.7600299859 & 3\\
+$m0$ &	NEG+MIU+KIN & 1 sp.\ & -4179.9027053393 & 64.4293032497 & 4\\
+\bottomrule
+\end{tabular}
+\label{tab:bf}
+\end{table}
+
+\newpage
+\begin{table}[htbp]
+\scriptsize
+\caption{Molecular species delimitation results by gene (\emph{Cytb} and \emph{RAG1}) for the \emph{Pseudolithoxus nicoi} group using diagnostic nucleotides (diag.), genealogical sorting indices (GSI), Rosenberg's reciprocal monophyly statistic (RRM), and Bayesian posterior probabilities (BPP) in gene trees. %
+Taxon abbreviations as follows: NEG = \emph{P}.\ \emph{nicoi} ``upper Negro''; MIU = \emph{P}.\ \emph{nicoi} ``Miuá''; and KIN = \emph{P}.\ \emph{kinja}.}
+\begin{tabular}{llllllll}
+\toprule
+Delimitation & No.\ spp.\ & \emph{Cytb} diag.\ & \emph{RAG1} diag.\ & \emph{Cytb} GSI (p GSI, p RRM) & \emph{RAG1} GSI (p GSI, p RRM) & \emph{Cytb} BPP & \emph{RAG1} BPP\\
+\midrule
+NEG	 & 3 & 0 & 0 & 1 (0.0001, 0.0667) & 0.4789 (0.0005, NA) & 0.91 & 0\\
+MIU & 3 & 39 & 0 & 1 (0.0002, 0.05) & 0.32 (0.0111, NA) & 1 & 0\\
+KIN & 3 & 2 & 2 & 1 (0.0001, 0.0159) & 1 (0.0001, 0.0476) & 0.99 & 1\\
+NEG+MIU & 2 & 2 & 2 & 0.8712 (0.0001, NA) & 1 (0.0001, 0.0182) & 0 & 0.21\\
+NEG+KIN & 2 & 39 & 0 & 1 (0.0001, 0.0001) & 0.5455 (0.0001, NA) & 1 & 0\\
+\bottomrule
+\end{tabular}
+\label{tab:metrics}
+\end{table}
+
+
+\newpage
+
+%\noindent \textbf{Figure 1}. 
+\begin{figure}[!htbp]
+\caption{\emph{Pseudolithoxus kinja}, holotype, 148.0 mm SL, INPA 3220; adult male in alcohol, rio Uatumã, Amazonas, Brazil.}
+\begin{center}
+%\includegraphics[width=0.7\textwidth]{Fig1_inpa3220_holotype.tif}
+\end{center}
+\label{fig:holotype}
+\end{figure}
+
+%\noindent \textbf{Figure 2}. 
+\begin{figure}[!htbp]
+\caption{\emph{Pseudolithoxus kinja}, paratype, 72.6 mm SL, INPA 43889; live colouration of juvenile, rio Nhamundá, Amazonas, Brazil.}
+\begin{center}
+%\includegraphics[width=0.7\textwidth]{Fig2_ctga14486_paratype.tif}
+\end{center}
+\label{fig:paratype}
+\end{figure}
+
+%\noindent \textbf{Figure 3}. 
+\begin{figure}[!htbp]
+\caption{Map of the known distribution of \emph{Pseudolithoxus} spp.\ based on museum records (\href{http://www.gbif.org/}{http://www.gbif.org/}; this study). %
+Points with thick borders indicate holotype localities (\emph{anthrax}, \emph{dumus} and \emph{tigris} are superimposed). %
+ Lower left inset shows locations of molecular samples for the upper rio Negro with respect to the rapids at São Gabriel da Cachoeira (black line) and the rio Miuá.}
+\begin{center}
+%\includegraphics[width=0.7\textwidth]{Fig3_map_combined.tif}
+\end{center}
+\label{fig:map}
+\end{figure}
+
+%\noindent \textbf{Figure 4}. 
+\begin{figure}[!htbp]
+\caption{Dated species tree (maximum clade credibility) constructed from \emph{Cytb} and \emph{RAG1} sequences using *Beast. %
+Full matrix comprised 56 individuals. %
+All filled nodes had $\geq$ 0.95 Bayesian posterior probability; values are shown for unfilled nodes with a lower value. %
+Node bars correspond to the highest posterior density of node heights in millions of years. %
+The geologically calibrated node (basal node of \emph{Ancistrus}) is indicated by a ``C''.}
+\begin{center}
+%\includegraphics[width=0.7\textwidth]{Fig4_speciesTree.eps}
+\end{center}
+\label{fig:tree}
+\end{figure}
+
+
+
+\newpage
+\section*{Supplementary materials}
+
+\noindent \textbf{Table S1}. Morphometric data for \emph{Pseudolithoxus kinja}. %
+N = number of observations (including the holotype), SD = standard deviation.%
+\bigskip
+
+\noindent \textbf{Fig.\ S1}. Maximum clade credibility gene tree for \emph{Cytb} sequences constructed using *Beast. %
+All filled nodes had $\geq$ 0.95 Bayesian posterior probability.%
+\bigskip
+
+\noindent \textbf{Fig.\ S2}. Maximum clade credibility gene tree for \emph{RAG1} sequences constructed using *Beast. %
+All filled nodes had $\geq$ 0.95 Bayesian posterior probability. %
+Both phased haplotypes for each individual are presented.%
+\bigskip
+\newpage 
+
+\section*{Appendix}
+\subsubsection*{Comparative material examined}
+
+\noindent \emph{Pseudolithoxus anthrax}: ANSP 135902, 1, 95.6 mm SL, Venezuela, Bolivar, Surapire Rapids on río Caura, ca.\ two hrs.\ upstream from río Caura, río Nichare junction, 6\degree30’N 64\degree40’W, 23 Jan 1977, J.\ E.\ Bohlke, W.\ G.\ Saul, E. Ferrrer-Veliz \& L.\ Contreras. %
+ANSP 162175, 3 paratypes, 50.7--112.7 mm CP; ANSP 193381, 1 cs, Venezuela, Amazonas, backwater of río Orinoco behind sand playa ca.\ de 30 min.\ Upstream from isla Temblador, 3\degree4’0”N 66\degree28’0”W, 10 Mar 1987, B.\ Chernoff, W.\ Saul, H.\ Lopez, J. Fernandez, O.\ Castilho, M.\ E.\ Antonio \& J.\ Moreno. %
+ANSP 182278, 2, 116.6--118.4 mm SL, Venezuela, Amazonas, purchased from ornamental fisherman at site on río Orinoco 60 km E of San Fernando de Atabapo, 3\degree58’26”N 67\degree9’46”W, 3 Mar 2005, M.\ H.\ Sabaj, N.\ K.\ Lujan, D.\ C.\ Werneke \& M.\ Arce. %
+ANSP 185256, 3, 40.3--121.0 mm SL, Venezuela, Amazonas, río Orinoco, beach and bedrock outcrop, 50 km east of San Fernando de Atabapo, 3\degree58’13”N 67\degree15’18”W, 2 Mar 2005, M.\ H.\ Sabaj, N.\ K.\ Lujan, D.\ C.\ Werneke \& M.\ Arce. %
+ANSP 185262, 1, 77.9 mm SL, Venezuela, Amazonas, río Orinoco at Cucue Amerindian village, opposite Trapichote village, 60 km east of San Fernando de Atabapo, 3\degree58’26”N 67\degree9’30”W, 3 Apr 2004, M.\ H.\ Sabaj, N.\ K.\ Lujan, D.\ C.\ Werneke \& L.\ De Souza. %
+ANSP 185267, 2, 43.6--47.6 mm SL, Venezuela, Amazonas, río Orinoco, 50 km east of San Fernando de Atabapo, 3\degree58’2”N 67\degree15’12”, 3 Mar 2005, M.\ H.\ Sabaj, N.\ K.\ Lujan, D.\ C.\ Werneke \& M.\ Arce. %
+ANSP 190823, 1, 163.9 mm SL, Venezuela, Amazonas, Atabapo, río Ventuari, island in deltaic confluence with río Orinoco, 71.5 km east of San Fernando de Atabapo, 3\degree58’42.3”N, 67\degree3’37.7”W, 29 Mar 2010, M.\ H.\ Sabaj-Pérez, N.\ K.\ Lujan, D.\ C.\ Werneke, T.\ P.\ Carvalho, S.\ V.\ Meza \& O.\ León Mata. %
+ANSP 190751, 1, 121.2 mm SL, Venezuela, Amazonas, Atabapo, río Ventuari (Orinoco Dr.), at Raudales Chipirito, 88.5 km east of San Fernando de Atabapo, 4\degree4’5.7”N 66\degree54’13.3”W, 1 Apr 2010, M.\ Sabaj-Pérez, N.\ K.\ Lujan, D.\ C.\ Werneke, T.\ Carvalho, S.\ V.\ Meza, A.\ Luna \& O.\ Santaella. %
+ANSP 191325, 1, 99.7 mm SL, Venezuela, Amazonas, Manapiare río Ventuari (Orinoco Dr.), downstream end of extensive, rocky rapids ca.\ 1 km below Salto Tencua, 227 km east-southeast of Puerto Ayacucho, 5\degree3’2.6”N 65\degree37’28.5”W, 6 Apr 2010, M.\ Sabaj-Pérez, N.\ Lujan, D.\ Werneke, T.\ Carvalho, S.\ V.\ Meza \& O.\ Santaella.\\%
+\bigskip
+
+\noindent \emph{Pseudolithoxus dumus}: ANSP 162403, 1 paratype, 70.7 mm CP, Venezuela, Amazonas, backwater of río Orinoco behind sand playa ca.\ 30 min Upstream from isla Temblador, 3\degree4’0”N 66\degree28’0”W, 10 Mar 1987, B.\ Chernoff, W.\ Saul, H.\ Lopez, J.\ Fernandez, O.\ Castilho, M.\ E.\ Antonio \& J.\ Moreno. %
+ANSP 185253, 4, 81.2--98.6 mm SL, Venezuela, Amazonas, río Orinoco, 117 km E of la Esmeralda, 3\degree17’24”N 66\degree36’W, 29 Mar 2005, N.\ K.\ Lujan, M.\ Arce \& T.\ E.\ Wesley. %
+ANSP 185255, 3, 27.1--91.8 mm SL, Venezuela, Amazonas, río Orinoco (Atlantic Dr.), 147 km southeast of San Fernando de Atabapo, 3\degree18’24”N 66\degree36’12”, 4 Mar 2005, M.\ H.\ Sabaj, N.\ K.\ Lujan, M.\ Arce \& T.\ E.\ Wesley. %
+ANSP 190757, 1, 109.7 mm SL, Venezuela, Amazonas, Atabapo, río Ventuari (Orinoco Dr.), at Raudales Chipirito, 88.5 km east of San Fernando de Atabapo, 4\degree4’5.7”N 66\degree54’13.3”W, 1 Apr 2010, M.\ Sabaj-Pérez, N.\ K.\ Lujan, D.\ C.\ Werneke, T.\ Carvalho, S.\ V.\ Meza, A.\ Luna \& O.\ Santaella. %
+ANSP 191320, 1, 115.7 mm SL, Venezuela, Amazonas, Manapiare, río Ventuari (Orinoco Dr.), downstream end of extensive, rocky rapids ca.\ 1 km below Salto Tencua, 227 km east-southeast of Puerto Ayacucho, 5\degree3’2.6”N 65\degree37’28.5”W, 6 Apr 2010, M.\ Sabaj-Pérez, N.\ Lujan, D.\ Werneke, T.\ Carvalho, S.\ V.\ Meza \& O.\ Santaella.\\%
+\bigskip
+
+\noindent \emph{Pseudolithoxus kelsorum}: MZUSP 108090, 1 paratype, 52.7 mm SL, Venezuela, Amazonas, río Orinoco 97.6 km from San Fernando do Atabapo, 04\degree55’04”S 67\degree49’59”W, 18 April 2010, J.\ L.\ Birindelli, N.\ K.\ Lujan, V.\ Meza \& O.\ Leon.\\%
+\bigskip
+
+\noindent \emph{Pseudolithoxus nicoi}: INPA 42767, 2, 87.3--141.5 mm SL, Brasil, Amazonas, São Gabriel da Cachoeira, igarapé da cachoeirinha, tributário do rio Negro, 00\degree7’55”S 67\degree4’8”W, 1 Dec 2013, L.\ Rapp Py-Daniel, D.\ A.\ Bastos, R.\ R.\ Silva, A.\ S.\ Oliveira \& P.\ M.\ Ito. %
+INPA 42945, 3, 78.6--124.7 mm SL, Brasil, Amazonas, São Gabriel da Cachoeira, pedral no igarapé do Miuá, tributário do rio Negro, 00\degree6’48”S 66\degree52’26”W, 5 Dec 2013, L.\ Rapp Py-Daniel, D.\ A.\ Bastos, R.\ R.\ Silva, A.\ S.\ Oliveira, P.\ M.\ Ito \& M.\ de Pinna.\\%
+\bigskip
+
+\noindent \emph{Pseudolithoxus tigris}: ANSP 161496, 1 paratype, 49,3 mm CP, Venezuela, Amazonas, backwater of río Orinoco behind sand playa cerca de 30 min. Upstream from isla Temblador, 3\degree4’0”N 66\degree28’0”W, 10 Mar 1987, B.\ Chernoff, W.\ Saul, H.\ Lopez, J.\ Fernandez, O.\ Castilho, M.\ E.\ Antonio \& J.\ Moreno. %
+ANSP 185263, 5, 44.5--49.5 mm SL, Venezuela, Amazonas, río Orinoco, 50 km east of San Fernando de Atabapo, 3\degree58’2”N 67\degree15’12”W, 3 Mar 2005, M.\ H.\ Sabaj, N.\ K.\ Lujan, D.\ C.\ Werneke \& M.\ Arce. %
+ANSP 190821, 1, 54.4 mm SL, Venezuela, Amazonas, río Ventuari, island in deltaic confluence with río Orinoco, 71.5 km east of San Fernando de Atabapo, 3\degree58’42.3”N 67\degree3’37.7”W, 29 Mar 2010, M.\ H.\ Sabaj-Pérez, N.\ K.\ Lujan, D.\ C.\ Werneke, T.\ P.\ Carvalho, S.\ V.\ Meza \& O.\ León Mata. %
+ANSP 190774, 2, 45.1--55.8 mm SL, Venezuela, Amazonas, Atabapo, río Ventuari (Orinoco Dr.), at Raudales Chipirito, 88.5 km east of San Fernando de Atabapo, 4\degree4’5.7”N 66\degree54’13.3”W, 1 Apr 2010, M.\ Sabaj-Pérez, N.\ K.\ Lujan, D.\ C.\ Werneke, T.\ Carvalho, S.\ V.\ Meza, A.\ Luna \& O.\ Santaella.%
+
+
+\clearpage
+
+
+\end{document}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
