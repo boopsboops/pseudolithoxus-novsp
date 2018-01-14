@@ -23,6 +23,8 @@
 *.synctex.gz
 *.pdf
 *.mas
+*.kate-swp
+*.rkward_autosave
 manuscript-master.md
 manuscript-master.html
 temp
