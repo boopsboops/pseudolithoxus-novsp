@@ -1,36 +1,38 @@
 #!/usr/bin/env Rscript
-require("rgbif")
-require("rjson")
-require("ggmap")
-require("celestial")
-require("dplyr")
-require("OpenStreetMap")# needs rJava: first run 'sudo R CMD javareconf', then run 'sudo R' followed by 'install.packages("rJava", dependencies=FALSE)' 
-require("maptools")
-require("rgdal")
-require("sp")
-require("raster")
-require("rasterVis")
-require("rgeos")
-require("spatial.tools")
-require("RColorBrewer")
-require("binr")
-require("classInt")
+library("rgbif")
+library("rjson")
+library("ggmap")
+library("celestial")
+library("tidyverse")
+library("rJava")
+library("OpenStreetMap")# needs rJava: first run 'sudo R CMD javareconf', then run 'sudo R' followed by 'install.packages("rJava", dependencies=FALSE)' 
+library("maptools")
+library("rgdal")
+library("sp")
+library("raster")
+library("rasterVis")
+library("rgeos")
+library("spatial.tools")
+library("RColorBrewer")
+library("binr")
+library("classInt")
 
-# DL from GBIF
+# download Pseudolithoxus records from GBIF
 gkey <- name_backbone(name='Pseudolithoxus')$genusKey
 max <- occ_count(taxonKey=gkey, georeferenced=TRUE, basisOfRecord="PRESERVED_SPECIMEN")
 gdat <- occ_search(taxonKey=gkey, hasCoordinate=TRUE, basisOfRecord="PRESERVED_SPECIMEN", return="data", fields="all", limit=max)
 gdat <- data.frame(gdat)
 
 # rename the n. sp.
-gdat$specificEpithet[is.na(gdat$specificEpithet)] <- "viator"
+gdat$specificEpithet[is.na(gdat$specificEpithet)] <- "kinja"
 # clean up cat nuns
 gdat$catalogNumber <- gsub(".* ", "", gdat$catalogNumber)
 
 # DATA FROM MOL TABLE
-ttab <- read.table(file="../data/mol_samples.csv", header=TRUE, sep=",", stringsAsFactors=FALSE)
+ttab <- read_csv(file="../data/mol_samples.csv")
+ttab %>% dplyr::filter(genus == "Pseudolithoxus")
 ttab <- ttab[ttab$genus == "Pseudolithoxus", ]
-ttab$specificEpithet[which(ttab$identificationQualifier == "n. sp.")] <- "viator" 
+ttab$specificEpithet[which(ttab$identificationQualifier == "n. sp.")] <- "kinja" 
 
 # Extras from MANUSCRIPT
 mtab <- read.table(file="../data/materials_examined_gps.csv", header=TRUE, sep=",", stringsAsFactors=FALSE)
@@ -73,17 +75,15 @@ ff <- ff[!duplicated(ff$catalogNumber), ]
 #https://pakillo.github.io/R-GIS-tutorial/
 #https://cran.r-project.org/web/packages/raster/vignettes/Raster.pdf
 # open raster and shapefiles
-dem.ras <- raster("../temp2/maps/sa_dem_30s.bil")# USGS digital elevation model (void-filled)
-rivs.shp <- readShapeLines("../temp2/maps/sa_riv_30s.shp")# USGS river network (stream lines)
+dem.ras <- raster("/home/rupert/Dropbox/Projects-temp/ancistrin-barcode-temp/maps/sa_dem_30s.bil")# USGS digital elevation model (void-filled) ?raster
+rivs.shp <- readOGR("/home/rupert/Dropbox/Projects-temp/ancistrin-barcode-temp/maps/sa_riv_30s.shp", stringsAsFactors=FALSE)# USGS river network (stream lines)
+wat.bod <- readOGR("/home/rupert/Dropbox/Projects-temp/ancistrin-barcode-temp/maps/gis.osm_water_a_free_1.shp")# http://download.geofabrik.de/south-america/brazil.html
 
-# load the files
-dem.ras <- raster("../temp2/maps/sa_dem_30s.bil")# USGS digital elevation model (void-filled) ?raster
-rivs.shp <- readOGR("../temp2/maps/sa_riv_30s.shp")# USGS river network (stream lines)
-wat.bod <- readOGR("../temp2/maps/gis.osm_water_a_free_1.shp")# http://download.geofabrik.de/south-america/brazil.html
 
 
 ## for the main map
 # filter the rivers data removing all the small rivers
+rivs.shp$UP_CELLS <- as.numeric(rivs.shp$UP_CELLS)
 rivs.shp.red <- rivs.shp[rivs.shp$UP_CELLS > 5000, ]
 
 # crop to region of interest
@@ -136,7 +136,7 @@ riv.col <- "#7B9EC8"
 
 # plot the map
 pdf(file="../temp2/map_pseudolithoxus.pdf", useDingbats=FALSE, useKerning=FALSE)
-plot(dem.ras.crop, add=FALSE, alpha=0.95, col=cbr, cex.axis=0.75, legend=FALSE)
+plot(dem.ras.crop, add=FALSE, alpha=1, col=cbr, cex.axis=0.75, legend=FALSE)
 plot(rivs.shp.crop, add=TRUE, col=riv.col, lwd=br)
 plot(wat.bod.crop, add=TRUE, col=riv.col, lty=0)
 #points(x=gdat$decimalLongitude, y=gdat$decimalLatitude, col="black", bg=alpha(gdat$collist,1), pch=gdat$symb, lwd=0.5, cex=1.5)
@@ -146,7 +146,6 @@ points(x=fft$decimalLongitude, y=fft$decimalLatitude, col="black", bg=fft$collis
 rect(xleft=-68, ybottom=-1, xright=-66, ytop=1, border="white")#c(-68, -66, -1, 1)
 legend(x="topright", legend=unique(ff$specificEpithet), text.font=3, cex=0.9, pt.lwd=0.5, pt.cex=1.25, col="black", pt.bg=cols1, pch=pch1, bty="n")
 dev.off()
-
 
 ### to make a wider map
 
@@ -166,9 +165,7 @@ rivs.shp.red$breaks[which(rivs.shp.red$UP_CELLS > ci$brks[5] & rivs.shp.red$UP_C
 rivs.shp.red$breaks[which(rivs.shp.red$UP_CELLS > ci$brks[6] & rivs.shp.red$UP_CELLS < ci$brks[7])] <- 2
 br <- rivs.shp.red$breaks
 
-# cols
-cbr <- rev(colorRampPalette(brewer.pal(n=9, name="YlGn")[1:9])(25))
-
+# plot
 pdf(file="../temp2/map_pseudolithoxus_sa.pdf", useDingbats=FALSE, useKerning=FALSE)
 plot(dem.ras.crop, add=FALSE, alpha=0.95, col=cbr, cex.axis=0.75, legend=FALSE, axes=FALSE, frame=FALSE)
 plot(rivs.shp.red, add=TRUE, col=rgb(134,194,230,maxColorValue = 255), lwd=br, axes=FALSE, frame=FALSE)#, 
@@ -184,7 +181,7 @@ rivs.shp.red <- rivs.shp[rivs.shp$UP_CELLS > 400, ]
 rivs.shp.crop <- crop(rivs.shp.red, newext)
 wat.bod.crop <- crop(wat.bod, newext)
 
-ci <- classIntervals(rivs.shp.crop$UP_CELLS, n=6, style="kmeans")
+ci <- classIntervals(as.numeric(rivs.shp.crop$UP_CELLS), n=6, style="kmeans")
 rivs.shp.crop$breaks <- NA
 rivs.shp.crop$breaks[which(rivs.shp.crop$UP_CELLS > ci$brks[1] & rivs.shp.crop$UP_CELLS < ci$brks[2])] <- 0.25
 rivs.shp.crop$breaks[which(rivs.shp.crop$UP_CELLS > ci$brks[2] & rivs.shp.crop$UP_CELLS < ci$brks[3])] <- 0.75
@@ -199,10 +196,10 @@ ttab.nic <- ttab[grep("nicoi", ttab$specificEpithet), ]
 
 # plot the map
 pdf(file="../temp2/map_pseudolithoxus_negro.pdf", useDingbats=FALSE, useKerning=FALSE)
-plot(dem.ras.crop, add=FALSE, alpha=0.95, col=cbr, cex.axis=0.75, legend=FALSE, axes=FALSE, frame=FALSE)
+plot(dem.ras.crop, add=FALSE, alpha=0.95, col=cbr, cex.axis=0.75, legend=FALSE, axes=FALSE, frame=FALSE, bty="n", box=FALSE)
 plot(rivs.shp.crop, add=TRUE, col=riv.col, lwd=br, axes=FALSE, frame=FALSE)
 plot(wat.bod.crop, add=TRUE, col=riv.col, lty=0, axes=FALSE, frame=FALSE)
-points(x=ttab.nic$decimalLongitude, y=ttab.nic$decimalLatitude, col="grey10", bg="gold1", pch=24, lwd=0.5, cex=2)
+points(x=ttab.nic$decimalLongitude, y=ttab.nic$decimalLatitude, col="grey10", bg="gold1", pch=24, lwd=0.5, cex=3)
 dev.off()
 #https://graphicdesign.stackexchange.com/questions/6419/increment-dynamic-offset-size
 
