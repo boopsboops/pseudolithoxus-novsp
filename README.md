@@ -18,16 +18,18 @@ The rapids-dwelling suckermouth catfish genus _Pseudolithoxus_ was previously on
 
 The repository is organised into folders comprising `data`, `manuscript`, and `scripts`. File paths for scripts in the `scripts` folder will be relative to the `data` folder, or uncommitted `temp` or `analyses` folders (for temporary files).
 
-`data` contains raw data, input files for programs and results tables.
+`data` contains raw data, input files for programs
 
-`scripts` contains command files for running the analyses. Mostly `.R` or `.sh`. 
+`scripts` contains command files for running the analyses. Mostly `.R` or `.sh`
+
+`manuscript` contains the manuscript, bibliography files, figures, and results tables. 
 
 ## Files in the `data` folder
 
 * `bf.table.csv`: Results of the Bayes factor species delimitations (Table 1 in paper).
-* `combo_cytb.tre`: \*Beast _CYTB_ gene tree for all taxa.
-* `combo_rag1.tre`: \*Beast _RAG1_ gene tree for all taxa.
-* `combo_species.tre`: \*Beast species tree for all taxa.
+* `combo_cytb.tre`: \*Beast _CYTB_ gene tree (maximum clade consensus) for all taxa.
+* `combo_rag1.tre`: \*Beast _RAG1_ gene tree (maximum clade consensus) for all taxa.
+* `combo_species.tre`: \*Beast species tree (maximum clade consensus) for all taxa.
 * `cytb.fasta`
 * `cytb_aligned.nex`: Aligned matrix of _CYTB_ for all taxa (nexus format).
 * `cytb_pseudolithoxus_aligned.nex`: Aligned matrix of _CYTB_ for just _Pseudolithoxus_ (nexus format).
@@ -64,3 +66,21 @@ The repository is organised into folders comprising `data`, `manuscript`, and `s
 * `speciesTree_combiner.sh`: Shell script to combine multiple runs of \*Beast trees. 
 * `traits_speciesTree.txt`: File to assign individuals to species for the \*Beast species tree. 
 * `tree.R`: R script to plot the trees.
+
+## Files in the `manuscript` folder
+
+* `pseudolithoxus-novsp.bib`: Bibliography file (BibTex format)
+* `pseudolithoxus-novsp.tex`: Manuscript main (LaTeX format)
+* `tables/Supplementary_Table_S2.csv`: Metadata file for all samples in the study (Darwin Core flatfile format)
+* 
+* `figures/ctga14486_paratype.jpg`: Image of paratype
+* `figures/CYTB_geneTree.svg`: _CYTB_ gene tree
+* `figures/inpa3220_holotype.jpg`: Image of holotype
+* `figures/inpa43888_paratype.jpg`: Image of paratype
+* `figures/map_combined.png`: 
+* `figures/map_combined.svg`: Map final, all combined (Figure 3 in paper)
+* `figures/map_nicoi.svg`: Inset left of map (Figure 3 in paper)
+* `figures/map_pseudolithoxus.svg`: Base of map
+* `figures/map_south_america.svg`: Inset right of map
+* `figures/RAG1_geneTree.svg`: _RAG1_ gene tree
+* `figures/speciesTree.svg`: All taxa species tree
