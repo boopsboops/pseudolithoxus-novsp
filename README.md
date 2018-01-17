@@ -2,9 +2,11 @@
 
 ---
 
-## This is the GitHub repository for: 
+## This is the public GitHub repository for: 
 
 [Collins, R. A., Bifi, A. G., de Oliveira, R. R., Ribeiro, E. D., Lujan, N. K., Rapp Py-Daniel, L. H., Hrbek, T. (2018) **Biogeography and species delimitation of the rheophilic suckermouth-catfish genus _Pseudolithoxus_ (Siluriformes: Loricariidae), with the description of a new species from the Brazilian Amazon**. Systematics and Biodiversity XXX, xxx-xxx, DOI: XXX.](http://dx.doi/XXX)
+
+![pectoral-fin](pectoral.jpg)
 
 ### Abstract
 
@@ -14,7 +16,7 @@ The rapids-dwelling suckermouth catfish genus _Pseudolithoxus_ was previously on
 
 ## Organisation
 
-The repository is organised into folders comprising `data`, `manuscript`, and `scripts`. File paths for scripts in the `scripts` folder will be relative to the `data` folder, or a uncommitted `temp` folder (for temporary files).
+The repository is organised into folders comprising `data`, `manuscript`, and `scripts`. File paths for scripts in the `scripts` folder will be relative to the `data` folder, or uncommitted `temp` or `analyses` folders (for temporary files).
 
 `data` contains raw data, input files for programs and results tables.
 
@@ -43,3 +45,22 @@ The repository is organised into folders comprising `data`, `manuscript`, and `s
 * `rag1_pseudolithoxus_phased_aligned.nex`: Aligned matrix of phased _RAG1_ haplotypes for just _Pseudolithoxus_ (nexus format).
 * `species_delimitation_results.csv`: Table of species delimitation metrics (Table 2 in paper)
 
+## Files in the `scripts` folder
+
+* `beast_run_delim.sh`: Shell script to run the \*Beast species delimitation models.
+* `beast_run_speciesTree.sh`: Shell script to run the \*Beast species tree.
+* `bf_calculations.R`: R script to process the \*Beast species delimitation results.
+* `bf_calculations.xml`: XML files to carry out the Bayes factor path sampling analyses.
+* `data_processing.R`: 
+* `genbank_functions.R`: Utility functions for cleaning DNA and making GenBank files.
+* `genbank_submit.R`: R script to submit the sequences to GenBank
+* `jmodeltest.sh`: Shell script to run jModelTest
+* `maps_biogeog.R`: R script to make the map (Figure 3 in paper)
+* `models_delim.txt`: Text file explaining the setup for the \*Beast species delimitation analysis.
+* `models_speciesTree.txt`: Text file explaining the setup for the \*Beast species tree analysis.
+* `run_phase.sh`: Shell script to run the program Phase (for phasing the _RAG1_ data into haplotypes).
+* `sed_edit_xml.sh`: Script to create multiple XML files for multiple \*Beast chains.
+* `species_delimitation.R`: R script to generate metrics for species delimitation (Table 2 in paper).
+* `speciesTree_combiner.sh`: Shell script to combine multiple runs of \*Beast trees. 
+* `traits_speciesTree.txt`: File to assign individuals to species for the \*Beast species tree. 
+* `tree.R`: R script to plot the trees.
