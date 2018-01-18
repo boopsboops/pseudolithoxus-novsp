@@ -1,8 +1,10 @@
+#!/usr/bin/env Rscript
+
 ## load libs
-require("spider")
-require("genealogicalSorting")
-require("phangorn")
-require("MonoPhy")
+libary("spider")
+libary("genealogicalSorting")
+libary("phangorn")
+libary("MonoPhy")
 # rm(list=ls())
 
 ## load data
@@ -88,6 +90,7 @@ cytbros[names(cytbros) == getMRCA(cytbtr.nic12, tip="nicoi.gr1+gr2")]
 #cytbros[names(cytbros) == getMRCA(cytbtr.nic12nsp, tip="nicoi.gr1+gr2+n.sp.")]
 cytbros[names(cytbros) == getMRCA(cytbtr.nic1nsp, tip="nicoi.gr1+n.sp.")]
 
+
 ## rosenberg analysis (rag1)
 rag1ros <- rosenberg(drag1tr)
 # create the different trees with sp delims
@@ -106,7 +109,6 @@ rag1ros[names(rag1ros) == getMRCA(rag1tr.nic12, tip="nicoi.gr1+gr2")]
 plot.phylo(rag1tr.nic12, use.edge.length=FALSE)
 is.monophyletic(phy=rag1tr.nic12, tips=which(rag1tr.nic12$tip.label == "nicoi.gr1+gr2"))
 
-### DO BOOTSTRAP or POST PROBS ???
 
 ## gsi analysis
 # cytb
@@ -137,8 +139,7 @@ write.table(cbind(drag1tr$tip.label, nic1nsp$delimitation[match(drag1tr$tip.labe
 
 ## work out Posterior probs using MonoPhy package
 
-
- # cytb 
+# cytb 
 # load trees and remove burnin
 cytb <- read.nexus(file="../analyses/speciesTree/15-07-16/trees/combo_cytb.trees")
 cytb <- cytb[1609:9608]
@@ -192,7 +193,7 @@ tt / 8000
 
 
 ## interspecific distances in cytb
-source(file="sppDistMatrix2.R")
+source(file="/home/rupert/Software/spider-mods/sppDistMatrix2.R")
 
 # change names
 dimnames(cytb)[[1]] <- ttab$delimitation[match(labels(cytb), ttab$catalogNumber)]

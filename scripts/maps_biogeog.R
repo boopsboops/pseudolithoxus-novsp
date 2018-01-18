@@ -1,4 +1,6 @@
 #!/usr/bin/env Rscript
+
+# load libs
 library("rgbif")
 library("rjson")
 library("ggmap")
@@ -30,28 +32,25 @@ gdat$catalogNumber <- gsub(".* ", "", gdat$catalogNumber)
 
 # DATA FROM MOL TABLE
 ttab <- read_csv(file="../data/mol_samples.csv")
-ttab %>% dplyr::filter(genus == "Pseudolithoxus")
-ttab <- ttab[ttab$genus == "Pseudolithoxus", ]
-ttab$specificEpithet[which(ttab$identificationQualifier == "n. sp.")] <- "kinja" 
+ttab <- ttab %>% dplyr::filter(genus == "Pseudolithoxus")
 
 # Extras from MANUSCRIPT
-mtab <- read.table(file="../data/materials_examined_gps.csv", header=TRUE, sep=",", stringsAsFactors=FALSE)
+mtab <- read_csv(file="../data/materials_examined_gps.csv")
 # convert refs
 mtab$decimalLongitude <- dms2deg(mtab$longitude,sep='dms')
 mtab$decimalLatitude <-  dms2deg(mtab$latitude,sep='dms')
 
 # subset and make new DF
 # set ccolumns in common
-common_cols <- c("institutionCode", "catalogNumber", "specificEpithet", "decimalLatitude", "decimalLongitude")
-# select cols of interest
-ff <- rbind(subset(gdat, select=common_cols), subset(ttab, select=common_cols), subset(mtab, select=common_cols))
-# sort
-ff <- ff[order(ff$specificEpithet), ]
-# remove NA
-ff <- ff[!is.na(ff$decimalLatitude), ]
-# remove duplicates
-ff <- ff[!duplicated(ff$catalogNumber), ]
+gdat.red <- gdat %>% dplyr::select(institutionCode, catalogNumber, specificEpithet, decimalLatitude, decimalLongitude) %>% dplyr::mutate(catalogNumber=as.character(catalogNumber))
+ttab.red <- ttab %>% dplyr::select(institutionCode, catalogNumber, specificEpithet, decimalLatitude, decimalLongitude) %>% dplyr::mutate(catalogNumber=as.character(catalogNumber))
+mtab.red <- mtab %>% dplyr::select(institutionCode, catalogNumber, specificEpithet, decimalLatitude, decimalLongitude) %>% dplyr::mutate(catalogNumber=as.character(catalogNumber))
 
+# combine
+ff <- dplyr::bind_rows(gdat.red, ttab.red, mtab.red)
+
+# clean
+ff <- ff %>% dplyr::mutate(catalogNumber=str_replace_all(catalogNumber, "^0", "")) %>% distinct(catalogNumber, .keep_all=TRUE) %>% filter(!is.na(decimalLatitude))
 
 
 #### TESTING DOWNLOADED MAPS
@@ -65,10 +64,6 @@ ff <- ff[!duplicated(ff$catalogNumber), ]
 # http://fititnt.github.io/gis-dataset-brasil/ # state and municipality boundaries
 # http://www.worldwildlife.org/pages/global-lakes-and-wetlands-database # wetlands database # 
 # http://www.feow.org/downloads # FW ecoregions
-#ogrInfo(dsn="usgs_hydrosheds_maps/sa_dem_30s_grid/sa_dem_30s/sa_dem_30s", layer="sa_dem_30s")
-#readOGR(dsn="/home/rupert/Downloads/sa_bas_15s_beta", layer="sa_bas_15s_beta")#?readOGR
-#counties.mp <- readShapePoly("/home/rupert/Downloads/sa_bas_15s_beta/sa_bas_15s_beta")
-#plot(counties.mp, axes=TRUE, border="gray")
 
 
 ## Prep the Maps
@@ -78,8 +73,6 @@ ff <- ff[!duplicated(ff$catalogNumber), ]
 dem.ras <- raster("/home/rupert/Dropbox/Projects-temp/ancistrin-barcode-temp/maps/sa_dem_30s.bil")# USGS digital elevation model (void-filled) ?raster
 rivs.shp <- readOGR("/home/rupert/Dropbox/Projects-temp/ancistrin-barcode-temp/maps/sa_riv_30s.shp", stringsAsFactors=FALSE)# USGS river network (stream lines)
 wat.bod <- readOGR("/home/rupert/Dropbox/Projects-temp/ancistrin-barcode-temp/maps/gis.osm_water_a_free_1.shp")# http://download.geofabrik.de/south-america/brazil.html
-
-
 
 ## for the main map
 # filter the rivers data removing all the small rivers
@@ -103,32 +96,19 @@ rivs.shp.crop$breaks[which(rivs.shp.crop$UP_CELLS > ci$brks[5] & rivs.shp.crop$U
 rivs.shp.crop$breaks[which(rivs.shp.crop$UP_CELLS > ci$brks[6] & rivs.shp.crop$UP_CELLS < ci$brks[7])] <- 2
 br <- rivs.shp.crop$breaks
 
-
-
 ## plotting data
-# make colours (different options)
-#cols1 <- brewer.pal(n=6, name="Set1")
-#cols1 <- cols1[c(1,2,9,5,8,6)]
-cols1 <- c("chartreuse1", "firebrick1", "dodgerblue1", "gold1", "grey80", "hotpink1")
+# make colours  and symbols
 
-# create cols vector
-ff$collist <- NA
-for (i in 1:length(cols1)){#
-    ff$collist[which(ff$specificEpithet %in% unique(ff$specificEpithet)[i])] <- cols1[i]#
-}#
+# first make a mapping dataframe and join with prev
+mapping_df <- data.frame(specificEpithet=unique(ff$specificEpithet), collist=c("gold1", "hotpink1", "chartreuse1", "grey80", "firebrick1", "dodgerblue1"), symb=c(24,21,21,25,22,23), stringsAsFactors=FALSE)
+ff <- dplyr::left_join(ff, mapping_df, by="specificEpithet")
 
-# add the type material column
-ff$types <- FALSE
-ff$types[which(ff$catalogNumber %in% c("3220", "V-17544", "V-17546", "28355", "51644", "355199.5263750"))] <- TRUE
-fft <- ff[ff$types==TRUE, ]
-fft <- fft[order(fft$specificEpithet), ]
+# add the types
+ff <- ff %>% dplyr::mutate(types=ifelse(catalogNumber=="3220" | catalogNumber=="V-17544" | catalogNumber=="V-17546" | catalogNumber=="28355" | catalogNumber=="51644" | catalogNumber=="355199", "TRUE", "FALSE"))
 
-# MY DATA
-pch1 <- c(21,22,23,24,25,21)
-ff$symb <- NA
-for (i in 1:length(pch1)){#
-    ff$symb[which(ff$specificEpithet %in% unique(ff$specificEpithet)[i])] <- pch1[i]#
-}#
+# subset types
+fft <- ff %>% filter(types==TRUE)
+ff <- ff %>% filter(types==FALSE)
 
 # col ramp for terrain and rivers
 cbr <- rev(colorRampPalette(brewer.pal(n=9, name="YlGn")[1:9])(25))
@@ -139,12 +119,10 @@ pdf(file="../temp2/map_pseudolithoxus.pdf", useDingbats=FALSE, useKerning=FALSE)
 plot(dem.ras.crop, add=FALSE, alpha=1, col=cbr, cex.axis=0.75, legend=FALSE)
 plot(rivs.shp.crop, add=TRUE, col=riv.col, lwd=br)
 plot(wat.bod.crop, add=TRUE, col=riv.col, lty=0)
-#points(x=gdat$decimalLongitude, y=gdat$decimalLatitude, col="black", bg=alpha(gdat$collist,1), pch=gdat$symb, lwd=0.5, cex=1.5)
 points(x=ff$decimalLongitude, y=ff$decimalLatitude, col="grey10", bg=ff$collist, pch=ff$symb, lwd=0.5, cex=1.5)
 points(x=fft$decimalLongitude, y=fft$decimalLatitude, col="black", bg=fft$collist, pch=fft$symb, lwd=2, cex=1.5)
-#text(x=ff$decimalLongitude, y=ff$decimalLatitude, labels=ff$catalogNumber, cex=0.5, adj=0.2)# to check
-rect(xleft=-68, ybottom=-1, xright=-66, ytop=1, border="white")#c(-68, -66, -1, 1)
-legend(x="topright", legend=unique(ff$specificEpithet), text.font=3, cex=0.9, pt.lwd=0.5, pt.cex=1.25, col="black", pt.bg=cols1, pch=pch1, bty="n")
+rect(xleft=-68, ybottom=-1, xright=-66, ytop=1, border="white")
+legend(x="topright", legend=unique(mapping_df$specificEpithet), text.font=3, cex=0.9, pt.lwd=0.5, pt.cex=1.25, col="black", pt.bg=mapping_df$collist, pch=mapping_df$symb, bty="n")
 dev.off()
 
 ### to make a wider map
@@ -202,62 +180,3 @@ plot(wat.bod.crop, add=TRUE, col=riv.col, lty=0, axes=FALSE, frame=FALSE)
 points(x=ttab.nic$decimalLongitude, y=ttab.nic$decimalLatitude, col="grey10", bg="gold1", pch=24, lwd=0.5, cex=3)
 dev.off()
 #https://graphicdesign.stackexchange.com/questions/6419/increment-dynamic-offset-size
-
-
-
-
-
-
-
-
-
-###### OLD CODE
-require("rgbif")
-require("rjson")
-require("ggmap")
-require("celestial")
-require("dplyr")
-require("OpenStreetMap")
-require("maptools")
-require("rgdal")
-require("sp")
-require("raster")
-require("rasterVis")
-require("rgeos")
-require("spatial.tools")
-require("RColorBrewer")
-require("binr")
-require("ape")
-require("BioGeoBEARS")#?BioGeoBEARS
-
-# DL from GBIF
-gkey <- name_backbone(name='Pseudolithoxus')$genusKey
-max <- occ_count(taxonKey=gkey, georeferenced=TRUE, basisOfRecord="PRESERVED_SPECIMEN")
-gdat <- occ_search(taxonKey=gkey, hasCoordinate=TRUE, basisOfRecord="PRESERVED_SPECIMEN", return="data", fields="all", limit=max)
-# remove dups
-gdat <- gdat[grep("Nhamundá", gdat$locality, invert=TRUE), ]
-# rename the n. sp.
-gdat$specificEpithet[is.na(gdat$specificEpithet)] <- "n. sp."
-
-# load up the data and clean it removing non-Pseudos
-ttab <- read.table(file="../data/mol_samples.csv", header=TRUE, sep=",", stringsAsFactors=FALSE)
-ttab <- ttab[ttab$genus == "Pseudolithoxus", ]
-ttab$specificEpithet[which(ttab$identificationQualifier == "n. sp.")] <- "n. sp." 
-
-# set ccolumns in common
-common_cols <- c("institutionCode", "catalogNumber", "basisOfRecord", "order", "family", "genus", "specificEpithet", #
-"identificationQualifier", "locality", "country", "stateProvince", "decimalLatitude", "decimalLongitude", "otherCatalogNumbers")#"key", "collectionCode", "scientificName", "dateIdentified", "eventDate", "samplingProtocol", "recordedBy", 
-# select cols of interest
-ff <- rbind(subset(gdat, select=common_cols), subset(ttab, select=common_cols))
-
-
-# get a base map from google and plot it
-map1 <- ggmap(get_map(location=c(lon=-62, lat=3), source="stamen", maptype="terrain", color="color", zoom=6), extent="panel")#?get_map
-map1 + geom_point(data=ff, aes(x=decimalLongitude, y=decimalLatitude, colour=specificEpithet), shape=16, size=5, alpha=0.75, na.rm=TRUE) + labs(x=NULL, y=NULL)# + theme(legend.position="none")
-
-
-ggsave(file="image.svg", width=8, height=8, dpi=150)
-
-# ?openmap
-map <- openmap(upperLeft=c(0,-70), lowerRight=c(-6.0,-64.0), type="esri")
-m <- autoplot(map)
